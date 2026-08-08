@@ -22,7 +22,7 @@ use cpi_sortable qw(sortable);
 use cpi_db qw(dbadd dbarr dbdel dbget dbpop dbput dbread dbwrite);
 use cpi_cgi qw(CGIheader show_vars);
 use cpi_user qw(all_users in_group invite logout logout_select name_to_group);
-use cpi_file qw(files_in cleanup fatal read_file tempfile write_file);
+use cpi_file qw(files_in cleanup autopsy fatal read_file tempfile write_file);
 use cpi_translate qw(xlate xprint);
 
 
@@ -39,7 +39,7 @@ our %SEP		= ("REC"=>"-SEP0-","FIELD"=>"-SEP1-","DATA"=>"-SEP2-");
 our @QUOTES		= ( '"', "'" );
 
 &setup(
-	allow_anonymous		=> 1,
+	anonymous_user		=> "anonymous",
 	allow_account_creation	=> 1,
 	preset_language		=> "en",
 	stderr			=> "formcollector",
@@ -65,7 +65,7 @@ our $AGENT		= $ENV{HTTP_USER_AGENT};
 
 our $LIBDIR		= &mapfile( "$cpi_vars::BASEDIR/lib" );
 our $FORMS_DIR		= &mapfile( "$cpi_vars::BASEDIR/public" );
-our $PLUGINS		= &mapfile( "$cpi_vars::BASEDIR/plugins" );
+our $PLUGINS		= &mapfile( "$LIBDIR/plugins" );
 our $TRANSMITTERS	= &mapfile( "$PLUGINS/transmitters" );
 our $DUMPERS		= &mapfile( "$PLUGINS/dumpers" );
 our $GLUE		= &mapfile( "$cpi_vars::BASEDIR/glue.html" );
@@ -1730,7 +1730,7 @@ sub sort_order
 #########################################################################
 sub graph_report
     {
-    require &mapfile( "$cpi_vars::BASEDIR/graph.pl" );
+    require &mapfile( "$LIBDIR/graph.pl" );
     return &graph_report( @_ );		# This only looks like recursion
     }
 
@@ -2182,7 +2182,7 @@ sub anonymous_logic
     my($anonflag,$lockflag,$url,$xmitflag,@dumpxmits)
 	= split(/$SEP{REC}/,&DBFgetn("submission"));
 
-    &fatal("Cannot access $form_type form anonymously.")
+    &autopsy("Cannot access $form_type form anonymously for $cpi_vars::FORM{func}.")
         if( ! $anonflag );
 
     if( $cpi_vars::FORM{func} eq "cancel" )
@@ -2512,7 +2512,7 @@ EOF
 	$translations{"\"$thing_to_choose\":\"XL($thing_to_choose)\""} = 1;
 	my $choose_dir = "$PLUGINS/$thing_to_choose";
 	my @opts = ();
-	foreach $_ ( &readdir($choose_dir) )
+	foreach $_ ( &files_in($choose_dir) )
 	    {
 	    if( $_ ne "browser.pl" && /^([^\.].*)\.pl$/ &&
 		&in_group($cpi_vars::REALUSER,
