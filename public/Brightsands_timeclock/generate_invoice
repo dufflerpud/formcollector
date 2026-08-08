@@ -1,0 +1,34 @@
+#!/bin/sh
+
+Status=Billed
+Project=Linear_Air_Software
+
+TMP=/tmp/gi.$$
+
+url="
+    http://www.brightsands.com/~chris/formcollector.cgi
+    ?user=chris&password=ratcatcher
+    &form_type=Brightsands_timeclock
+    &thisrep=Invoice
+    &l4_Status=$Status&l4_Project=$Project
+    &show_Type_of_work=checked
+    &show_Comments=checked
+    &show_Billable_time=checked
+    &show_Cost=checked
+    &transmit_info=HTML-SEP1-browser&func=report"
+(
+wget -q -O - `echo "$url" | tr -d ' \n'` | \
+    sed -e 's+<input[^>]*>++g' -e '1,/width=50%/d' -e '/ records found/,$ d'
+) > $TMP.1
+
+if [ ! -s $TMP.1 ] ; then
+    echo "No work for invoice of $Project with status $Status."
+    exit 1
+fi
+
+(
+echo "<table><tr><td width=50%></td><td width=50%>"
+cat $TMP.1
+) > /tmp/foo.html
+
+exec rm $TMP.*

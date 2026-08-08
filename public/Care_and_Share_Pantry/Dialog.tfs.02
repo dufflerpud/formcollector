@@ -1,0 +1,133 @@
+{
+section "About Me"
+    {
+    datetime Information_entered_date_and_time "Information_entered date and time" default { now }
+	help "Should be in the format:  NN/NN/NNNN NN:NN";
+    text Last_name 30 must { checkexp(this,m/./) };
+    text First_name 30 must { checkexp(this,m/./) };
+    datetime DOB "Date of birth" before { Information_entered_date_and_time } just_date;
+    text Address0 "Address first line" 50 must { checkexp(this,m/./) };
+    text Address1 "Address second line" 50 must { checkexp(this,m/./) };
+    text City 40 must { checkexp(this,m/./) };
+    text County 30;
+    text State 2 must { checkexp(this,m/./) };
+    text Zipcode must { checkexp(this,m/^\d\d\d\d\d$/) };
+    oneof Gender checks [ Male, Female, Transgendered, Rather_not_say ];
+    text Email must { checkexp(this,m/^..*@..*$/) };
+    text Phone must { checkexp(this,m/^\d\d\d-\d\d\d-\d\d\d\d$/) };
+    anyof Language checks other [ English, Spanish, French, Arabic, Somali ];
+    }
+
+section "About my Situation"
+    {
+    oneof Housing other checks
+      [	Own_your_own_home,
+	    Private_rental,
+	    Transitional "Emergency shelter/Mission/Transitional",
+	    Youth_Home_Shelter,
+	    Evacuee,
+	    Public_housing,
+	    With_family_or_friends,
+	    Unhoused, Rather_not_say ];
+
+    anyof Who_referred_you other checks
+      [	Clients_or_friends_or_family,
+	Benefits_Social_Service "Benefits/Social Assistance",
+	Child_care_support,
+	Community_support_organization,
+	Emergency_shelter,
+	Employment_support_or_education,
+	Faith_based_organization,
+	Financial_support_education,
+	Health_care_organization,
+	Housing_support,
+	Immigration_services,
+	Media "Media/News/Outreach",
+	Legal_support,
+	Social_worker,
+	Utilities_support,
+	Other_food_bank ];
+
+    oneof Ethnicity other checks
+      [	White_Anglo "White/Anglo",
+	Asian,
+	Middle_Eastern_North_African "Middle Eastern/North African",
+	Black_African_American "Black/African American" ];
+
+    anyof Which_things_apply other checks
+      [	Breastfeeding, Postpartum, Pregnant, Veteran,
+	Disability, Evacuee, Refugee, History_of_homelessness,
+	Prefer_not_to_say ];
+
+    oneof Highest_education_completed checks
+      [	Grades_0_to_8 "Grades 0 to 8",
+	Grades_9_to_11 "Grades 9 to 11",
+	High_School_Diploma, GED,
+	Post_secondary_education "Post-Secondary Education (some)",
+	Trade_School "Trade School/Accreditation",
+	Two_year_degree "2 year degree",
+	Four_year_degree "4 year degree",
+	Masters_degree "Master's degree", PhD,
+	Prefer_not_to_say ];
+
+    anyof Employment_type other checks
+      [	Post_Secondary_Student "Post-Secondary Student",
+	Not_currently_employed,
+	Full_time "Full-time",
+	Part_time "Part-time",
+	Retired ];
+
+    anyof Monthly_income_sources other checks
+      [	Full_time_employment "Full-time employment",
+	Part_time_employment "Part-time employment",
+	Social_Security, Disability, No_income ];
+
+    text Monthly_income must { checkexp(this,m/^\d\d*/) };
+
+    anyof Social_services_received other checks
+      [	Elderly_Low_Cost_Drug_Program,
+	Elterly_Tax_and_Rent_Refund,
+	General_Assistance,
+	LIHEAP,
+	Medicaid_Mainecare "Medicaid/Mainecare",
+	Medicare,
+	School_Meals,
+	SNAP "SNAP - formerly food stamps",
+	SSDI,
+	SSI,
+	TANF,
+	WIC "Supplemental Assistance for Women, Infants and Children (WIC)",
+	Vets_Aid ];
+
+    anyof Dietary_considerations other checks
+      [	Diabetic, Vegan, Vegetarian, Gluten_free,
+	Egg, Fruit, Milk, Sesame, Soy, MSG, Peanut,
+	Pork, Seafood, Sulphite, Tree_nuts,
+	Wheat ];
+    }
+
+section "Other household members"
+    {
+    list with Other_household_member
+	{
+	oneof Relationship_to_me other checks
+	  [	Spouse, Sibling, Child, Parent,
+		Grandchild, Grandparent, Roommate,
+		Boyfriend_Girlfriend "Boyfriend/Girlfriend",
+		Friend, Partner, Ward, Prefer_not_to_say ];
+	text Last_name 30 must { checkexp(this,m/./) };
+	text First_name 30 must { checkexp(this,m/./) };
+	datetime DOB "Date of birth" before { Information_entered_date_and_time } just_date;
+	oneof Ethnicity other checks
+	  [	White_Anglo "White/Anglo",
+		Asian,
+		Middle_Eastern_North_African "Middle Eastern/North African",
+		Black_African_American "Black/African American" ];
+
+	anyof Which_things_apply other checks
+	  [	Breastfeeding, Postpartum, Pregnant, Veteran,
+		Disability, Evacuee, Refugee, History_of_homelessness,
+		Prefer_not_to_say ];
+	}
+    }
+}

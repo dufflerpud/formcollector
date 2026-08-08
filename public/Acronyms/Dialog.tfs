@@ -1,0 +1,193 @@
+var MUST_BE_RIGHT=5;
+var q_array = new Array();
+var cur_question = -1;
+
+var num_right = 0;
+var num_wrong = 0;
+
+function do_a_concept( concept_num )
+    {
+    switch( concept_num )
+        {
+	"0"	{
+		html " AGL - Above Ground Level<br> DME - Distance Measuring Equipment<br> FAA - Federal Aviation Administration<br> FAR - Federal Aviation Regulations<br> IFR - Instrument Flight Rules<br> IMC - Instrument Meterological Conditions<br> KIAS - Knots Indicated Air Speed<br> MSL - Mean Sea Level<br> NDB - Non Directional Beacon<br> NTSB - National Transportation Safety Board<br> PIC - Pilot in command<br> VFR - Visual Flight Rules<br> VOR - VHF Omnidirectional Range<br> ";
+		}
+
+	"1"	{
+		html " ";
+		}
+
+	}
+    }
+
+function right_wrong( answer, right_answer, concept_num )
+    {
+    if( answer )
+        {
+	if( answer == right_answer )
+	    {
+	    html "<center>Right!</center><hr>";
+	    cur_question = next_question();
+	    num_right++;
+	    }
+	else
+	    {
+	    html "<center>Wrong!</center><hr>";
+	    do_a_concept( concept_num );
+	    html "<hr>";
+	    num_wrong++;
+	    }
+	}
+    }
+
+function setup_questions()
+    {
+    for ( var question_ctr=13; question_ctr-->0; )
+        {
+	for( var i=0; i<MUST_BE_RIGHT; i++ )
+	    { q_array.push( question_ctr ); }
+	}
+    }
+
+function next_question()
+    {
+    var q_ind = Math.floor( Math.random() * q_array.length );
+    var ind = q_array[ q_ind ];
+    q_array[ q_ind ] = q_array.pop();
+    return ind;
+    }
+
+function redraw()
+    {
+    if( cur_question < 0 )
+        {
+	cur_question = next_question();
+	}
+    switch { cur_question }
+        {
+	"0"	{
+		right_wrong( FAA_stands_for, "Federal_Aviation_Administration", 0 );
+		FAA_stands_for="";
+		}
+
+	"1"	{
+		right_wrong( FAR_stands_for, "Federal_Aviation_Regulations", 0 );
+		FAR_stands_for="";
+		}
+
+	"2"	{
+		right_wrong( IMC_stands_for, "Instrument_Meterological_Conditions", 0 );
+		IMC_stands_for="";
+		}
+
+	"3"	{
+		right_wrong( IFR_stands_for, "Instrument_Flight_Rules", 0 );
+		IFR_stands_for="";
+		}
+
+	"4"	{
+		right_wrong( VFR_stands_for, "Visual_Flight_Rules", 0 );
+		VFR_stands_for="";
+		}
+
+	"5"	{
+		right_wrong( NDB_stands_for, "Non_Directional_Beacon", 0 );
+		NDB_stands_for="";
+		}
+
+	"6"	{
+		right_wrong( VOR_stands_for, "VHF_Omnidirectional_Range", 0 );
+		VOR_stands_for="";
+		}
+
+	"7"	{
+		right_wrong( DME_stands_for, "Distance_Measuring_Equipment", 0 );
+		DME_stands_for="";
+		}
+
+	"8"	{
+		right_wrong( NTSB_stands_for, "National_Transportation_Safety_Board", 0 );
+		NTSB_stands_for="";
+		}
+
+	"9"	{
+		right_wrong( PIC_stands_for, "Pilot_in_Command", 0 );
+		PIC_stands_for="";
+		}
+
+	"10"	{
+		right_wrong( KIAS_stands_for, "Knots_Indicated_Air_Speed", 0 );
+		KIAS_stands_for="";
+		}
+
+	"11"	{
+		right_wrong( AGL_stands_for, "Above_Ground_Level", 0 );
+		AGL_stands_for="";
+		}
+
+	"12"	{
+		right_wrong( MSL_stands_for, "Mean_Sea_Level", 0 );
+		MSL_stands_for="";
+		}
+
+	}
+    switch { cur_question }
+        {
+	"0"	{
+		oneof FAA_stands_for "\"FAA\" stands for:" [ Federal_Aviation_Administration "Federal Aviation Administration", Federal_Aviation_Association "Federal Aviation Association", Federal_Airplane_Administration "Federal Airplane Administration", Flying_Aviation_Administration "Flying Aviation Administration" ] random_order checks line_per;
+		}
+
+	"1"	{
+		oneof FAR_stands_for "\"FAR\" stands for:" [ Federal_Aviation_Regulations "Federal Aviation Regulations", Flying_Answers_and_Rules "Flying Answers and Rules", Federal_Aviation_Rules "Federal Aviation Rules", Flying_Aviation_Regulations "Flying Aviation Regulations" ] random_order checks line_per;
+		}
+
+	"2"	{
+		oneof IMC_stands_for "\"IMC\" stands for:" [ Instrument_Meterological_Conditions "Instrument Meterological Conditions", Instrument_Measured_Conditions "Instrument Measured Conditions", Infrared_Metered_Changes "Infrared Metered Changes", International_Measured_Conditions "International Measured Conditions" ] random_order checks line_per;
+		}
+
+	"3"	{
+		oneof IFR_stands_for "\"IFR\" stands for:" [ Instrument_Flight_Rules "Instrument Flight Rules", International_Flying_Regulations "International Flying Regulations", Internal_Flying_Rules "Internal Flying Rules", Instrument_Flight_Routes "Instrument Flight Routes" ] random_order checks line_per;
+		}
+
+	"4"	{
+		oneof VFR_stands_for "\"VFR\" stands for:" [ Visual_Flight_Rules "Visual Flight Rules", Virtual_Flying_Regulations "Virtual Flying Regulations", Varied_Flying_Rules "Varied Flying Rules", Valid_Flight_Routes "Valid Flight Routes" ] random_order checks line_per;
+		}
+
+	"5"	{
+		oneof NDB_stands_for "\"NDB\" stands for:" [ Non_Directional_Beacon "Non Directional Beacon", Node_Directed_Broadcast "Node Directed Broadcast", Nodal_Diverse_Beacon "Nodal Diverse Beacon", Non_Diverse_Broadcast "Non Diverse Broadcast" ] random_order checks line_per;
+		}
+
+	"6"	{
+		oneof VOR_stands_for "\"VOR\" stands for:" [ VHF_Omnidirectional_Range "VHF Omnidirectional Range", Vector_Oriented_Radio "Vector Oriented Radio", Vector_Offset_Radio "Vector Offset Radio", VHF_Offset_Radio "VHF Offset Radio" ] random_order checks line_per;
+		}
+
+	"7"	{
+		oneof DME_stands_for "\"DME\" stands for:" [ Distance_Measuring_Equipment "Distance Measuring Equipment", Distance_Monitored_Elapsed "Distance Monitored Elapsed", Data_Measured_Enroute "Data Measured Enroute", Data_Mileage_Equipment "Data Mileage Equipment" ] random_order checks line_per;
+		}
+
+	"8"	{
+		oneof NTSB_stands_for "\"NTSB\" stands for:" [ National_Transportation_Safety_Board "National Transportation Safety Board", Network_of_Transport_Safety_Boards "Network of Transport Safety Boards", National_Transcontinental_Safety_Board "National Transcontinental Safety Board", North_Atlantic_Transcontinental_Safety_Boards "North-Atlantic Transcontinental Safety Boards" ] random_order checks line_per;
+		}
+
+	"9"	{
+		oneof PIC_stands_for "\"PIC\" stands for:" [ Pilot_in_Command "Pilot in Command", Person_in_Control "Person in Control", Pilot_in_Control "Pilot in Control", Person_in_Command "Person in Command" ] random_order checks line_per;
+		}
+
+	"10"	{
+		oneof KIAS_stands_for "\"KIAS\" stands for:" [ Knots_Indicated_Air_Speed "Knots Indicated Air Speed", Known_Indexed_Altitude_Speed "Known Indexed Altitude/Speed", Known_Indicated_Altitude_Safety "Known Indicated Altitude Safety", Knots_Indexed_Air_Speed "Knots Indexed Air Speed" ] random_order checks line_per;
+		}
+
+	"11"	{
+		oneof AGL_stands_for "\"AGL\" stands for:" [ Above_Ground_Level "Above Ground Level", Around_Ground_Limit "Around Ground Limit", Above_Governance_Limit "Above Governance Limit", Around_Governance_Level "Around Governance Level" ] random_order checks line_per;
+		}
+
+	"12"	{
+		oneof MSL_stands_for "\"MSL\" stands for:" [ Mean_Sea_Level "Mean Sea Level", Mid_Sea_Limit "Mid Sea Limit", Mean_System_Limit "Mean System Limit", Mid_System_Level "Mid System Level" ] random_order checks line_per;
+		}
+
+	}
+    var s = "<center><table border=1><tr><td>Right:"+num_right+"</td><td>Wrong:"+num_wrong+"</td><td>Total:13</td></tr></table></center>";
+    html { s };
+    }
+
+setup_questions();

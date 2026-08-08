@@ -1,0 +1,37 @@
+{
+oneof Worker default { "chris" }
+    [
+    angie "Angie Moore",
+    bridget "Bridget Baye",
+    chris "Christopher Caldwell",
+    cnorth "Christopher North",
+    holly "Holly Schmidt",
+    pschmidt "Peter Schmidt"
+    ];
+oneof Project
+    [
+    Software_development,
+    Sales_engineering,
+    Sales,
+    Linear_Air_Software,
+    Test_project,
+    Baystate_Milling,
+    Dustin
+    ];
+oneof Type_of_work
+    [
+    NO "Normal on-site",
+    NR "Normal remote",
+    EO "Emergency on-site",
+    ER "Emergency remote",
+    UB "Unbillable"
+    ];
+datetime Stopped_working default { now };
+datetime Started_working before { Stopped_working };
+text Comments "Worked performed, notes and detail" 10 60;
+oneof Status [ New, Billed, Paid, Rejected ] default { "New" };
+if { Status == "Billed" || Status == "Paid" }
+    { datetime Billed_on; }
+if { Status == "Paid" }
+    { datetime Paid_on; }
+}

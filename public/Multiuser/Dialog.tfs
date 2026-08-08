@@ -1,0 +1,7 @@
+{
+    text Full_Name 50 must { checkexp(this,m/^\w.* \w.*$/) };
+    text Email 50 must { checkexp(this,m/^\w.*@\w[^,\s]*\.\w[^,\s]*\w*$/) };
+    text Username 10 must { checkexp(this,m/^[a-z][a-z0-9]*$/) };
+    text How_do_you_know_about_this_site 50;
+    text SSH_public_key 10 80 "If you have an SSH public key, cut and paste it here";
+}

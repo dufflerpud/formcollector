@@ -1,0 +1,1285 @@
+var MUST_BE_RIGHT=5;
+var q_array = new Array();
+var cur_question = -1;
+
+var num_right = 0;
+var num_wrong = 0;
+
+function do_a_concept( concept_num )
+    {
+    switch( concept_num )
+        {
+	"0"	{
+		html "<pre> 91.3  Responsibility and Authority of the Pilot in command<br> (a) The pilot in command of an aircraft is directly responsible for, and is the<br> final authority to the operation of that aircraft.<br> (b) In an emergency requiring immediate action, the pilot in command may<br> deviate from an rule of this subpart or of Subpart B to the extent required to<br> meet the emergency.<br> (c) Each pilot in command who deviates from a rule under paragraph (b) of this<br> section shall, upon the request of the administrator, send a written report of<br> that deviation to the administrator.<br> ";
+		}
+
+	"1"	{
+		html " ";
+		}
+
+	"2"	{
+		html "<pre> 91.5 Preflight Action.  Each pilot in command shall, before beginning a flight,<br> familarize himself with all available information concerning that flight.  This<br> information must include:<br> (a) For a flight under IFR or a flight not in the vicinity of an airport,<br> weather reports and forecasts, fuel requirements, alternatives available if<br> the planned flight cannot be completed, and any known traffic delays of which<br> he has been advised by ATC.<br> (b) For any flight, runway lengths at airports of intended use, and the<br> following takeoff and landing distance information:<br>     (1) For civil aircraft for which an approved airplane...flight manual<br>     containing takeoff and landing distance data is required, the takeoff and<br>     landing distance data contained therein; and<br>     (2) For civil aircraft other than those specified in subparagraph (1)<br>     of this paragraph, other reliable information appropriate to the aircraft,<br>     relating to aircraft performance under expected values of airport elevation<br>     and runway slope, aircraft gross weight, and wind and temperature<br> ";
+		}
+
+	"3"	{
+		html " ";
+		}
+
+	"4"	{
+		html "<pre> 91.22:  Fuel requirements for flight under VFR<br> (a)  No person may begin a flight in an airplane under VFR unless (considering<br> wind and forecast weather conditions) there is enough fuel to fly to the first<br> point of intended landing and, assuming normal cruising speed:<br>     (1) During the day, to fly after that for at least 30 minutes<br>     (2) During the night, to fly after that for at least 45 minutes<br> ";
+		}
+
+	"5"	{
+		html " ";
+		}
+
+	"6"	{
+		html "<pre> 91.11 Liquor and drugs.<br> (a) No person may act as a crewmember of a civil aircraft<br>     (1) within 8 hours after the consumption of any alcoholic beverage,<br>     (2) While under the influence of alcohol,<br>     (3) While using any drug that effects the person's faculties in any<br> 	way contrary to safety;<br>     (4) While having 0.04 percent by weight or more alcohol in the blood.<br> (b) Except in an emergency, no pilot of a civil aircraft may allow a person<br> who appears to be intoxicated or who demonstrates by manner or physical<br> indications that the individual is under the influence of drugs (except a<br> medical patient under proper care) to be carried in that aircraft.<br> ";
+		}
+
+	"7"	{
+		html " ";
+		}
+
+	"8"	{
+		html "<pre> (a) General.  No person may operate a civil aircraft of U.S. registry -<br>     (1) At cabin pressure altitudes above 12500 feet (MSL) up to and including<br> 	14000 feet (MSL), unless the required minimum flight crew is provided<br> 	with and uses supplemental oxygen for that part of the flight at those<br> 	altitudes that is of more than 30 minutes duration.<br>     (2) At cabin pressure altitudes above 14000 feet (MSL) unless the required<br> 	minimum flight crew is provided with and uses supplemental oxygen<br> 	during the entire flight time at those altitudes.<br>     (3) At cabin pressure altitudes above 15000 feet (MSL) unless each<br> 	occupant of the aircraft is provided with supplemental oxygen.<br> ";
+		}
+
+	"9"	{
+		html " ";
+		}
+
+	"10"	{
+		html "<pre> 91.14 Use of safety belts.<br> (a) Unless otherwise authorized by the Administrator:<br>     (1) No pilot may take off...unless the pilot in command of that aircraft<br> 	ensures that each person on board is briefed on how to fasten and<br> 	unfasten that person's safety belt and shoulder harness if installed<br>     (2) No pilot may take off or land...unless the pilot in command of that<br> 	aircraft ensures that each person on board has been notified to<br> 	fasten his safety belt and shoulder harness, if installed<br>     (3) During the takeoff and landing...each person on board that aircraft<br> 	must occupy a seat or berth with a safety belt and shoulder harness,<br> 	if installed, properly secured about him.<br> ";
+		}
+
+	"11"	{
+		html " ";
+		}
+
+	"12"	{
+		html "<pre> 91.15 Parachutes and Parachuting.<br> (c) Unless each occupant of the aircraft if wearing an approved parachute,<br> no pilot of a civil aircraft, carrying any person (other than a crewmember)<br> may execute any intentional maneuver that exceeds:<br>     (1) A bank of 60 degrees relative to the horizon<br>     (2) A nose-up or nose-down attitude of 30 degrees relative to the horizon<br> (d) Provides exceptions to this section<br> ";
+		}
+
+	"13"	{
+		html " ";
+		}
+
+	"14"	{
+		html "<pre> Emergency Locator Transmitters.  An Emergency Locator Transmitter (ELT) is<br> a small, self-contained radio transmitter which is activated automatically<br> by the impact force of a crash.  It is designed to transmit an immediate<br> electronic distress signal which can be used by other pilots and search and<br> rescure organizations to locate a downed airplane.<br>     ELTs of various types have been developed to provide a means of<br> locating downed aircraft and their occupants.  These electronic, battery<br> operated transmitters emit a distinctive downward swept audio town on<br> 121.5MHz and/or 243.0MHz.  The equipment is capable of providing continuous<br> operations for at least 48 hours at a wide range of ambient temperatures.<br>     FAR 91.52 requires that an approved ELT must be installed in most U.S.<br> registered airplanes.  There are certain exceptions to this regulation;<br> They are:  (1) Turbo airplanes, (2) Agricultural airplanes while dispensing<br> chemicals, (3) Scheduled airline operations not over water or uninhabited<br> areas, (4) Training airplanes operated within 50 miles of point of origin<br> of flight, and (5) aircraft equipped to carry not more than one person.<br> ";
+		}
+
+	"15"	{
+		html " ";
+		}
+
+	"16"	{
+		html "<pre> ELT battery replacement is required at 50 percent of the normal shelf life<br> as defined by the manufacturer, or after one cumulative hour of use.<br>     Purchased ELT batteries should be stamped with the date of the 50<br> percent battery life.  The new expiration date for the replacement (or<br> recharged) battery must be legibly marked on the outside of the transmitter<br> and entered in the aircraft maintenance record.  Failure to replace<br> batteries at the specified dates may not only limit the operating time, but<br> may cause damaging corrosion within the unit.<br> ";
+		}
+
+	"17"	{
+		html " ";
+		}
+
+	"18"	{
+		html "<pre> ELTs should be tested in accordance with the manufacturer's instructions,<br> preferably in shielded or screened room to prevent the broadcast of signals<br> which could trigger a false alert.  When this cannot be done, aircraft<br> operational testing is authorized on 121.5MHz and 243.0MHz only during the<br> first 5 minutes after any hour and should be limited to three audio sweeps.<br> If operational tests should be made outside of this time-frame, they should<br> be coordinated with the nearest FAA control tower or FSS.<br> ";
+		}
+
+	"19"	{
+		html " ";
+		}
+
+	"20"	{
+		html "<pre> Caution should be exercised to prevent the inadvertent activation of ELTs<br> in the air or while they are being handled on the ground.  Accidental or<br> unauthorized activation will generate an signal that cannot be<br> distinguished from the real thing, leading to expensive and frustrating<br> searches.  A false ELT signal could also intefere with genuine emergency<br> transmissions and hinder or prevent the timely location of crash sites.<br> Frequent false alarms could also result in complacency and decrease the<br> vigorous reaction that must be attached to all ELT signals.  Numerous cases<br> of inadvertent activation have occurred as a result of aerobatics, hard<br> landings, movement by ground crews and aircraft maintenance.  These false<br> alarms can be minimized by monitoring 121.5MHz and/or 243.0MHz as follows:<br>     (1) In flight when a receiver is available.<br>     (2) Prior to engine shut down at the end of each flight.<br>     (3) When the ELT is handled during installation or maintenance.<br>     (4) When maitenance is being performed in the vicinity of the ELT.<br>     (5) When the aircraft is moved by a ground crew.<br>     (6) If an ELT signal is heard, turn off the ELT to determine if it is<br> transmitting.  If it has been activated, maintenance might be required<br> before the unit is returned to the \"ARMED\" position.<br> ";
+		}
+
+	"21"	{
+		html " ";
+		}
+
+	"22"	{
+		html "<pre> 91.31 Civil Aircraft Operating Limitations and Marking Requirements.<br> (a) No person may operate a civil aircraft without compliance with the<br> operating limitations for that aircraft...<br> (b) No person may operate a U.S. registered civil aircraft-<br>     (1) For which an airplane...flight manual is required...unless there is<br> 	available in the aircraft a current approved Airplane...Flight<br> 	manual<br>     (2) For which an Airplane...Flight Manual is not required...unless<br> 	there is available in the aircraft a current approved<br> 	Airplane...Flight Manual, approved manual material, markings, and<br> 	placards, or any combination thereof...<br> (e) The Airplane...Flight Manual, or manual material, markings and placards<br> required by paragraph (b) of this section must contain each operating<br> limitation prescribed for that aircraft by the administrator, including the<br> following:<br>     (1) Powerplant<br>     (2) Airspeeds<br>     (3) Aircraft weight, center of gravity, and weight distribution,<br> 	including the composition of the useful load in those combinations<br> 	and ranges intended to ensure that the weight and center of gravity<br> 	position will remain within approved limits.<br>     (4) Minimum flight crew<br>     (5) Kinds of operation<br>     (6) Maximum operating altitude<br>     (7) Maneuvering flight load factors<br> ";
+		}
+
+	"23"	{
+		html " ";
+		}
+
+	"24"	{
+		html "<pre> 91.27 Civil Aircraft:  Certificates required.<br> (a) No person may operate a civil aircraft unless it has within the<br> following:<br>     (1) An appropriate and current airworthiness certificate.<br>     (2) A registration certificate issued to the owner.<br> (b) No person may operate a civil aircraft unless the airworthiness<br> certificate...is displayed the cabin or cockpit entrance so that it is<br> legible to passengers or crew.<br> Certificate of Aircraft Registration.  Before an aircraft can be legally<br> flown it must be registered with the FAA aircraft registry an dhave within<br> it a certificate of registration issued to the owner as evidence of the<br> registration.  An aircraft is eligible for registration only if it is not<br> registered under the laws of any foreign country.<br>     The certificate of Aircraft Registration will expire when:<br>     (1) The aircraft is registered under the laws of a foreign country.<br>     (2) The registration of the aircraft is cancelled at the written<br>     request of the owner.<br>     (3) The aircraft is totally destroyed or scrapped.<br>     (4) The ownership of the aircraft is transferred.<br>     (5) The holder of the certificate loses United States citizenship<br>     (6) Thirty days have elapsed since the death of the holder of the<br> 	certificate.<br> The FAA does not issue any certificate of ownership or endorse any<br> information with respect to ownership on a certificate of aircraft<br> registration.<br> <br> Airworthiness Certificate.  An Airworthiness Certificate is issued by the<br> FAA only after the aircraft has been inspected and it is found that it<br> meets the requirements of the FARs and is in a condition for safe<br> operation.  Under any circumstances, the aircraft must meet the<br> requirements of the original type certificate.  The certificate must be<br> displayed in the aircraft so that it is legible to passengers or crew<br> whenever the aircraft is operated.  The airworthiness certificate may be<br> transferred with the aircraft except when it is sold to a foreign<br> purchaser.<br> <br> The standard airworthiness certificate is issued for aircraft type<br> certificated in the normal, utility, arobatic and transport categories.<br> ";
+		}
+
+	"25"	{
+		html " ";
+		}
+
+	"26"	{
+		html "<pre> The FAA initially determines that the aircraft is in a condition for safe<br> operation and conforms to type design, then issues an airworthiness<br> certificate.  A standard airworthiness certificate remains in effect so<br> long as the aircraft receives the required maitenance and is properly<br> registered in the United States.  Flight safety relies in part on the<br> condition of the aircraft, which may be determined on inspection by<br> mechanics, approved repair stations, or manufacturers who meet specific<br> requirements of FAR.<br> ";
+		}
+
+	"27"	{
+		html " ";
+		}
+
+	"28"	{
+		html "<pre> Airworthiness standards.  The term \"category\" as used with respect to the<br> certification of aircraft, means a grouping of aircraft based upon intended<br> use or operating limitations.  Examples include:  Transport; normal;<br> utility; acrobatic; limited; restricted; and provisional.  The category of<br> each airplane can be readily identified by a placard in the cockpit or<br> document (Airworthiness certificate) which states the operational category<br> or categories in which the airplane is certified.<br> 91.39:  Restricted Category Civil Aircraft;  Operating limititions:<br> (d) No person may operate a restricteed category civil aircraft within the<br> United States-<br>     (1) Over a densely populated area;<br>     (2) In a congested airway; or<br>     (3) Near a busy airport where passenger transport operations are<br> 	conducted.<br> ";
+		}
+
+	"29"	{
+		html " ";
+		}
+
+	"30"	{
+		html "<pre> 91.29 Civil Aircraft Airworthiness.<br> (a) No person may operate a civil aircraft unless it is in an airworthy<br> condition.<br> (b) The pilot in command of a civil aircraft is responsible for determining<br> whether that aircraft is in condition for safe flight.  He shall<br> discontinue the flight when unairworthy mechanical or structural conditions<br> occur.<br> ";
+		}
+
+	"31"	{
+		html " ";
+		}
+
+	"32"	{
+		html "<pre> Inspections.  Far Part 91 places primary responsibility on the owner or<br> operator for maintaining an aircraft in an airworthy condition.  Certain<br> inspections must be performed on the aircraft and the owner must maintain<br> the airworthiness of the aircraft during the time between required<br> inspections by having any unsafe defects corrected.<br> ";
+		}
+
+	"33"	{
+		html " ";
+		}
+
+	"34"	{
+		html "<pre> Annual Inspection.  A reciprocating powered single-engine aircraft flown<br> for pleasure is required to be inspected at least annually by a<br> certificated airframe and powerplant mechanic holding an inspection<br> authorization, or by a certificated repair station that is appropriately<br> rated, or by the manufacturer of the aircraft.  The aircraft may not be<br> operated unless the annual inspection has been performed within the<br> preceding 12 calendar months.  A period of 12 calendar months extends from<br> any day of any month to the last day of the same month the following year.<br> However, an aircraft with the annual inspection overdue may be operated<br> under a special flight permit for the purpose of flying the aircraft to a<br> location where the annual inspection can be performed.<br> ";
+		}
+
+	"35"	{
+		html " ";
+		}
+
+	"36"	{
+		html "<pre> Repairs and Alterations.  All repairs and alterations are classed as either<br> major or minor.  Major repairs or alterations must be approved for return<br> to service by an appropriately rated certified repair satation, an airframe<br> and powerplant mechanic holding an inspection authorization, or a<br> representative of the administrator.  Minor repairs and alterations may be<br> approved for return to service by a certified airframe and powerplant<br> mechanic or an appropriately certified repair station.<br> Carrying persons other than crewmembers after repairs or alterations.<br> No person may carry any person (Other than crewmembers) in an aircraft that<br> has been repaired or altered in any manner that may have appreciably<br> changed its flight characteristics, or substantially affected it operatin<br> in flight, until it has been approved for return to service and an<br> appropriately rated pilot, with at least a private pilot's certificate,<br> flies the aircraft, makes an operation check of the repaired or altered<br> part, and logs the flight in the aircraft's records.<br> ";
+		}
+
+	"37"	{
+		html " ";
+		}
+
+	"38"	{
+		html "<pre> Maintenance Records.  Proper management of aircraft operation begins with a<br> good system of maintenance records.  A properly completed maitenance<br> record provides the information needed by the owner/operator and<br> maintenance personnel to determine when scheduled maintenance is to be<br> performed.  It is the owner's or operator's responsibility to make this<br> determination and to present the aircraft and records when maintenance is<br> to be performed.<br> <br> The information required to be kept in maintenance records is listed in<br> FAR 91.173.  A properly executed set of maintenence records will save the<br> owner/operator money since maintenance personnel will spend less time in<br> research to establish the status of the item to be worked on.  Good records<br> are also invaluable to maintenance personnel in trouble-shooting.  Only<br> that information required by FAR 91.173 should be included, since<br> irrelevant information tends to clutter up the records and hamper<br> maintenance research.  Carefully study this section and ensure that your<br> records comply.<br> ";
+		}
+
+	"39"	{
+		html " ";
+		}
+
+	"40"	{
+		html "<pre> 91.67: Right of way Rules; Except water operations.<br> (a) General.  When weather conditions permit, regardless of whether an<br> operation is conducted under instrument flight rules or visual flight<br> rules, vigilance shall be maintained by each person operating an aircraft<br> so as to see and avoid other aircraft in compliance with this section.<br> When a rule of this section gives another the right of way, he shall give<br> way to that aircraft and may not pass over, under, or ahead of it unless<br> well clear.<br> (b) In distress.  An aircraft in distress has the right of way over all<br> other air traffic.<br> (c) Converging.  When aircraft of the same category are converging at<br> approximately the same altidue (except head-on, or nearly so) the aircraft<br> to the other's right has the right of way.  If the aircraft are of<br> different categories -<br>     (1) A balloon has the right of way over any other category of aircraft.<br>     (2) A glider has the right of way over an airship airplane or<br> 	rotorcraft<br>     (3) An airship has the right of way over an airplane or rotorcraft.<br> However, an aircraft towing or refuel other aircraft has the right of way<br> over all other engine-driven aircraft.<br> (d) Approaching head-on.  When aircraft are approaching head-on, or nearly<br> so, each pilot of each aircraft shall alter course to the right.<br> (e) Overtaking.  Each aircraft that is being overtaken has the right of way<br> and each pilot of an overtaking aircraft shall alter course to the right to<br> pass well clear.<br> (f) Landing.  Aircraft, while on final approach to land, or while landing,<br> have the right of way over other aircraft in flight or operating on the<br> surface.  When two or more aircraft are approaching an airport for the<br> purpose of landing, the aircraft at the lower altitude has the right of<br> way, but it shall not take advantage of this rule to cut in front of<br> another which is on final approach to land, or to overtake that aircraft.<br> ";
+		}
+
+	"41"	{
+		html " ";
+		}
+
+	"42"	{
+		html "<pre> Airplane lighting and Equipment.  Federal Aviation regulations, Part 91,<br> specify certain minimum airplane equipment required for night flight.  This<br> equipment includes instruments, lights, electrical energy source and spare<br> fuses.<br> <br> An anticollision light system including a flashing or rotating beacon and<br> position lights, is required equipment.  Airplane position lights are<br> arranged similar to those of boats and ships.  A red light is positioned on<br> the left wingtip, a green light on the right wingtip, and a white light on<br> the tail.  This arrangement provides a mean by which pilots can determine<br> the direction of movement of other airplanes in flight.  For example:  If<br> both a red and green light of another airplane are observed, the airplane<br> would be flying in a general direction toward the pilot seeing the lights<br> and could be on a collision course.  For example:  If only a red light is<br> seen, the airplane is traveling from right to left in relationto the<br> observing pilot.  On the other hand, if only a green light is observed, the<br> airplane is traveling from left to right.<br> <br> 91.73:  Aircraft lights.  No person may, during the period from sunset to<br> sunrise operate an aircraft unless it has lighted position lights.<br> ";
+		}
+
+	"43"	{
+		html " ";
+		}
+
+	"44"	{
+		html "<pre> 91.89 Operation at airports without control towers.  Each person operating<br> an aircraft to or from an airport without an operating control tower shall<br> (a) In the case of an airplane approaching to land, make all turns of that<br> airplane to the left unless the airport displays approved light signals or<br> visual markings indicating that turns should be made to the right, in which<br> case the pilot shall make all turns to the right.<br> (b) In the case of an aircraft departing the airport, comply with any FAA<br> traffic pattern for that airport.<br> ";
+		}
+
+	"45"	{
+		html " ";
+		}
+
+	"46"	{
+		html "<pre> Preparatory to landing at an airport without a control tower, or when the<br> control tower, or when the control towner is not in operating, the pilot<br> should concern himself with the indicator for the approach end of the<br> runway to be used.  When approaching for landing, all turns must be made to<br> the left unless a traffic pattern indicator indicates that all turns should<br> be made to the right.  If the pilot will mentally enlarge the indicator for<br> the runway to be used, the base and final approach legs of the traffic<br> pattern to be flown immediately become apparent.  Similar treatment of the<br> indicator at the departure end of the runway will clearly indicate the<br> direction of the turn after takeoff.<br> <br> \"Airport traffic area\" means that airspace within a horizontal radious of 5<br> statute miles from the geographical center of any airport at which a<br> control tower is operating, extending from the surface to, but not<br> including, an altitude of 3000 feet above the elevation of the airport.<br> ";
+		}
+
+	"47"	{
+		html " ";
+		}
+
+	"48"	{
+		html "<pre> The boundaries are not depicted on aeronautic charts, but the presense of<br> an airport traffic area is indicated when tower frequencies are shown in<br> the airport data box (Letters CT appear on sectional charts)  While this<br> area is not designated as \"controlled airspace\", the radio communications<br> and operating requirements affect all flights taking off and landing at<br> airports with operating control towers.<br> ";
+		}
+
+	"49"	{
+		html " ";
+		}
+
+	"50"	{
+		html "<pre> When operating at an airport where traffic control is being exercised by a<br> federally operated control tower, pilots are required to maintain two-way<br> radio communication with thower while within the airport traffic area,<br> unless tower authorizes otherwise.  Through this communication the pilot<br> requests permission from the tower operator to taxi, take off, or land and<br> receives a specific clearance along with pertinent information about the<br> traffic pattern.<br> ";
+		}
+
+	"51"	{
+		html " ";
+		}
+
+	"52"	{
+		html "<pre> Radio Communications Breakdown (VFR).  Procedures in which light-gun<br> signals are used apply only when the aircraft using the particular airport<br> is not equipped with two-radio, or when radio contact cannot be established<br> or maintained.  ATC personnel use a directive traffic control signal which<br> emits an intense narrow light beam of a selected color (Either red, white<br> or green) when controlling traffic by light signals.<br> 91.77: ATC light signals have the meaning shown below:<br> Signal			Meaning while on ground		Meaning in flight<br> -----------------------------------------------------------------------------<br> Steady green		Cleared for take-off		Cleared for landing<br> Flashing green		Cleared for taxiing		Return for landing<br> Steady red		Stop				Continue circling<br> Flashing red		Taxi clear of landing area	Airport unsafe (go away)<br> Flashing white		Return to staring point		Bomb Steve Alonso's<br> Alternating green &amp; red	Exercise extreme caution	Exercise extreme caution<br> ";
+		}
+
+	"53"	{
+		html " ";
+		}
+
+	"54"	{
+		html "<pre> If you have reason to believe your radio is inoperative, remain outside or<br> above the traffic area until the direction and flow of traffic has been<br> determined, then join the airport traffic pattern and maintain visual<br> contact with the tower to receive light signals.  During hours of daylight,<br> acknowledge light signals by rocking your wings.  At night, acknowledge by<br> blinking the landing or navigation lights.<br> ";
+		}
+
+	"55"	{
+		html " ";
+		}
+
+	"56"	{
+		html "<pre> ATC Clearances.  A clearance issued by ATC is predicated on known traffic<br> and known physical airport conditions.  An ATC clearance means an<br> authorization by ATC for the purpose of preventing collision between known<br> aircraft, for an aircraft to proceed under specified conditions within<br> controlled airspace.  It is not authorization for a pilot to deviate from<br> any rule, regulation, or minimum altitude, nor to conduct unsafe operation<br> of his aircraft.<br> ";
+		}
+
+	"57"	{
+		html " ";
+		}
+
+	"58"	{
+		html "<pre> Whether operating VFR or IFR, a pilot must not deviate from the air traffic<br> clearance without obtaining an amended clearance.  If the pilot cannot<br> comply with any provision of the clearance, ATC should be informed<br> immediately giving a brief reason, and normally ATC will issue an ammended<br> clearance.  In the event of emergency deviation from the provisions of an<br> ATC clearance, the pilot must notify ATC as soon as possible and get an<br> amended clearance.<br> 91.75 Compliance with ATC Clearances and Instructions.<br> (a) When an ATC clearance has been obtained, no pilot in command may<br> deviate from that clearance, except in an emergency, unless he obtains an<br> amended clearance...If a pilot is uncertain of the meaning of an ATC<br> clearance, he shall immediately request clarification from ATC.<br> (b) Except in an emergency, no person may, in an area in which air traffic<br> control is exercised, operate an aircraft contrary to an ATC instruction.<br> (c) Each pilot in command who deviates, in an emergency, from an ATC<br> clearance or instruction shall notify ATC of that deviation as soon as<br> possible.<br> (d) Each pilot in command who (Though not deviating from a rule of this<br> subpart) is given priority by ATC in an emergency, shall, if requested by<br> ATC, submit a detailed report of that emergency within 48 hours to the<br> chief of that ATC facility.<br> ";
+		}
+
+	"59"	{
+		html " ";
+		}
+
+	"60"	{
+		html "<pre> Understanding and complying with air traffic clearances also speeds up<br> traffic movement on an airport.  Before starting to taxi, the pilot should<br> always call for a taxi clearance from the tower.  (At many airports, this<br> is done on a special radio frequency assigned to ground control)  Then,<br> when cleared to a particular runway, the pilot may taxi close to, but not<br> onto the specified runway.  A clearance to move onto the runway and to take<br> off, must be obtained on the regular control tower frequency.<br> ";
+		}
+
+	"61"	{
+		html " ";
+		}
+
+	"62"	{
+		html "<pre> After landing, unless otherwise instructed by the control tower, aircraft<br> should continue to taxi in the landing direction, proceed to the nearest<br> turnoff and exit the runway without delay.  Do not turn on to another<br> runway or make a 180 degree turn to taxi back on an active runway or change<br> to ground control frequency while on the active runway without<br> authorization from the tower.<br> ";
+		}
+
+	"63"	{
+		html " ";
+		}
+
+	"64"	{
+		html "<pre> Controlled Airspace.  Just as there are traffic laws and restrictions<br> regulating the operation of automobiles in certain areas or zones, there<br> are regulations governing the operation of aircraft within designated<br> airspace.  However, unlike streets and highways where automobile operation<br> is restricted, airspace with special flight restrictions has no posted<br> signs or markers.  Consequently, in locating controlled airspace, you must<br> visualize it by correlating the chart symbols with ground reference points.<br> Although each airspace has its individual boundaries and rules, you should<br> remember that frequently one overlaps or is collocated with another, as in<br> the case of an airport having an airport traffic area within a control<br> zone.<br> <br> \"Controlled airspace\" means airspace designated as a \"Continental Control<br> Area\", \"Control area\", \"Control zone\", \"Terminal Control Area\", or<br> \"Transition area\", within which some or all aircraft may be subject to air<br> traffic control.<br> <br> \"Positive Control Area\" consists of controlled airspace within which there<br> is positive control of aircraft i.e, control of all air traffic by air<br> traffic control.  This area includes, in general, airspace within the<br> conterminous U.S. from 18000 feet MSL to and including FL600.<br> <br> 91.97: Positive Control Areas<br> (a) ...No person may operate an aircraft within a positive control area...<br> unless that aircraft is:<br>     (1) Operated under IFR at a specific flight level assigned by ATC,<br>     (2) Equipped with instruments and equipment required for IFR<br>     operations,<br>     (3) Flown by a pilot rated for instrument flight,<br>     (4) Equipped when in a positive control area with:<br> 	(i) The applicable equipment specified in FAR 91.24 I.E., a<br> 	transponder with altitude reporting capability,<br> 	(ii) A radio providing direct pilot controller communication on the<br> 	frequency specified by ATC for the area concerned.<br> ";
+		}
+
+	"65"	{
+		html " ";
+		}
+
+	"66"	{
+		html "<pre> Continental Control Area - Consists of the airspace of the 48 contiguous<br> states at and above 14500 feet MSL, but does not include<br> (a) The airspace less than 1500 feet AGL and<br> (b) Certain prohibited and restricted areas<br></pre>";
+		}
+
+	"67"	{
+		html " ";
+		}
+
+	"68"	{
+		html "<pre> Continental Area is designated airspace starting at 700 feet above ground<br> level (unless a higher altitude is specified) and extending upward to the<br> base of the overlying Continental Control Area (14500 Feet MSL).  The<br> lateral limits, normally identical to Federal Airways, but frequently<br> including far-reaching extensions are shown on sectional charts with<br> colored boundaries.  Those areas bounded by magenta tint start at 700 feet<br> AGL, while those bounded by blue tint start at 1200 feet AGL (unless a<br> higher altitude is specified).  The dark edges of tinted borders indicate<br> the outer boundary of the airspace.  VFR flights within Control Areas<br> require certain weather minimums which vary according to the altitude<br> flown.  The table in Figure 1-15 contains these weather minimums as well as<br> the minimums for flight outside of controlled airspace.<br></pre>";
+		}
+
+	"69"	{
+		html " ";
+		}
+
+	"70"	{
+		html "<pre> Federal Airway - each airway is based on a center line that extens from one<br> navigational aide or intersection to another navigational aide specified<br> for that airway.  The centerline is shown on aero-nautical charts, and the<br> airway identity are indicated.  Each airway includes airspace within<br> parallel boundary lines normally 4 nautical miles each side of the<br> centerline, and extends from 1200 feet above the surface (unless a higher<br> altitude is indicated) upward to, but not including 18000 feet MSL.<br> Inasmuch as a Federal Airway is controlled airspace divided at 10000 feet<br> MSL, VFR flight within the airway requires distinct weather minimums above<br> and below 10000 feet.<br> ";
+		}
+
+	"71"	{
+		html " ";
+		}
+
+	"72"	{
+		html "<pre> Control Zone - Airspace that is normally a circular area with a 5-mile radius<br> and extensions as necessary for instrument approach and departure paths at<br> certain airports.  (A control tower may or may not be located with the control<br> zone.)  It starts at the surface, and extends up to the base of the continental<br> control area.  The lateral limits are shown on aeronautical charts by a dashed<br> line.  Specific weather minimums are required for VFR flight within this zone,<br> and an ATC clearance is required when the weather is less than VFR minimums.<br> Certain other flight restrictions are also in effect within this airspace.<br> ";
+		}
+
+	"73"	{
+		html " ";
+		}
+
+	"74"	{
+		html "<pre> 91.105 Basic VFR weather minimums:<br> (c) ...No person may operate an aircraft, under VFR within a control zone<br> beneath the ceiling when the ceiling is less than 1000 feet.<br> (d) ...No person may take off or land an aircraft or enter the traffic pattern<br> of an airport under VFR with a control zone:<br>     (1) Unless ground visibility at that airport is at least three statute miles<br>     (2) If ground visibility is not reported, flight visibility is at least<br> 	three statute miles<br> Note: \"Ceiling\" means the height above the earth's surface of the lowest layer<br> of clouds or obscuring phenomena that is reported as \"broken,\" \"overcast,\"<br> or \"obscuration,\" and not classified as \"thin\" or \"partial.\"<br> ";
+		}
+
+	"75"	{
+		html " ";
+		}
+
+	"76"	{
+		html "<pre> 91.107 Special VFR Weather Minimums<br> (a) ... When a person has received an appropriate ATC clearance, the special<br> weather minimums of this section instead of those contained in part 91.105<br> apply to the operation of an aircraft by that person in a Control Zone<br> under VFR.<br> (b) No person may operate an aircraft...in a control zone under VFR except<br> clear of clouds.<br> (c) No person may operate an aircraft...in a control zone under VFR unless<br> flight visibility is at least one statute mile.<br> (d) No person may take off or land an aircraft ... at any airport in a<br> control zone under VFR:<br>     (1) Unless ground visibility is at least one statute mile or<br>     (2) If ground visibility is not reported at that airport, unless flight<br> 	visibility during landing or takeoff is at least one statute mile.<br> ";
+		}
+
+	"77"	{
+		html " ";
+		}
+
+	"78"	{
+		html "<pre> 91.107(e)  No person may operate an aircraft...in a control zone under the<br> special weather minimums of this section between sunset and sunrise unless:<br> (1) That person meets the applicable requirements for instrument flight<br> under part 61 of this chapter (i.e. instrument rating) and<br> (2) The aircraft is equipped as required in part 91.33 (i.e. instrument and<br> equipment required for IFR flight).<br> ";
+		}
+
+	"79"	{
+		html " ";
+		}
+
+	"80"	{
+		html "<pre> An ATC clearance must be obtained prior to operating within a control zone<br> when the weather is less than that required for VFR flight.  A VFR pilot<br> may request and be given a clearance to enter, leave or operate within most<br> control zones in special VFR conditions, traffic permitting, and providing<br> such flight will not delay IFR operations.  When a control tower is located<br> within the control zone, requests for clearances should be to the tower.<br> If no tower is located within the control zone, a clearance may be obtained<br> from the nearest tower, FSS or center.<br> Note:  Special VFR operations by fixed-wing aircraft are prohibited in some<br> control zones due to the volume of IFR traffic.  A list of these control<br> zones is contained in FAR 93.113.  They are also depicted on sectional<br> aeronautical charts with the following simple:    T T T T T<br> ";
+		}
+
+	"81"	{
+		html " ";
+		}
+
+	"82"	{
+		html "<pre> Terminal Control Area.  The FAA has adopted additional air traffic rules<br> for the control or segregation of all aircraft within airspace designated<br> as \"Terminal Control Areas\" (TCAs) surrounding some of the nation's busiest<br> airports.  The major problem inherent in a terminal airspace operation is<br> the mixture of controlled and noncontrolled air traffic.<br> <br> To increase safety and to reduce the risk of midair collisions, a system<br> has been developed to segretate air traffic operating to or from the<br> airports within the designated Terminal Control Area (TCA) from other<br> traffic operating near that terminal area.  All traffic operating within<br> the terminal control area is separated and controlled by ATC.  This<br> requires that aircraft operating within this type designated airspace have<br> certain communication and navigation equipment.  Appropriate authorization<br> from ATC must be received prior to operating within the Terminal Control<br> Area.<br> ";
+		}
+
+	"83"	{
+		html " ";
+		}
+
+	"84"	{
+		html "<pre> Horizontal and vertical boundaries of each terminal control area vary<br> according to (1) the types of aircraft normally using the area and the<br> nature of air operations in that area; (2) the facilities at the airports<br> and the navigational aids available; (3) the air traffic capabilities to<br> meet the needs of the terminal control concept.  Although the configuration<br> of each TCA is tailored to individual needs of the area, the general<br> appearance is circular in nature with layers as in an upside-down wedding<br> cake.  The altitudes and distances outlining the TCA are shown on the<br> aeronautical sectional charts for individual terminals.  These are<br> available for purchase at many airports.<br> <br> The terminal control areas are classed as Group I, or Group II depending on<br> the number of aircraft operations and passengers they service.  To operate<br> within either group, an airplane must be equipped with an operable VOR or<br> TACAN receiver, two-way radio capable of communicating with ATC on<br> appropriate frequencies and, with certain exceptions, an approved<br> transponder.  A 4096 code transponder with MODE C automatic altitude<br> reporting equipment is required for a group I TCA.  Group II TCAs require a<br> 4096 code transponder, except for IFR flights operating to or from an<br> airport outside of but in close proximity to tghe TCA when the commonly<br> used transition, approach, or departure procedures to such airport require<br> flight within the TCA.  In addition, the pilot in command must have at<br> least a private pilot certificate to land or take off at an airport within<br> a group I terminal control area.<br> <br> Note:  ATC may, upon notification, immediately authorize a deviation from<br> the altitude reporting equipment requirement (Group I TCAs); however,<br> request for a deviation from the 4096 transponder equipment requirement<br> must be submitted to the controlling ATC facility at least 1 hour before<br> the proposed operation.<br> <br> Note:  In addition to the ATC transponder and altitude reporting equipment<br> requirements for operation in a terminal control area and positive control<br> area, FAR 91.24 requires this same equipment for operation in all<br> controlled airspace of the 48 contiguous states and the District of<br> Columbia, above 12500 feet MSL, excluding the airspace at and below 2500<br> feet MSL.<br> ";
+		}
+
+	"85"	{
+		html " ";
+		}
+
+	"86"	{
+		html "<pre> Altimeter settings.  Federal Aviation Regulations require that you maintain<br> specific cruising altitudes by reference to an altimeter.  The altimeter<br> should be set to the current reported altimeter setting of a station along<br> the route of flight (Flight Service Stations, control towers, etc.).  If<br> your aircraft is not equipped with a radio, you should obtain an altimeter<br> setting prior to departure if one is available, or you should adjust the<br> altimeter to the elevation of the departure airport.<br> 91.81 Altimeter settings.<br> (a) Each person operating an aircraft shall maintain the cruising altitude<br> or flight level of that aircraft, as the case may be, by reference to an<br> altimeter that is set, when operating:<br> (1) Below 18000 feet MSL, to -<br>     (i) The current reported altimeter setting of a station along the route<br>     and within 100 nautical miles of the aircraft;\\<br>     (ii) If there is no station within the area prescribed in subdivision<br>     (i) of this subparagraph, the current reported altimeter setting of an<br>     appropriate available station; or<br>     (iii) In the case of an aircraft not equipped with a radio, the<br>     elevation of the departure airport or an appropriate altimeter setting<br>     available before departure; or<br> (2) At or above 18000 feet MSL, to 29.92\" Hg.<br> ";
+		}
+
+	"87"	{
+		html " ";
+		}
+
+	"88"	{
+		html "<pre> VFR cruising altitudes.  Cruising altitude is a level above mean sea level<br> (MSL), but the rules pertaining to the selection of a cruising altitude<br> approprate to the flight's magnetic course are applicable only when flying<br> more than 3000 feet above the ground.<br> 91.109 VFR cruising altitude or flight level.<br> ...Each person operating an aircraft under VFR in level-cruising flight more<br> than 3000 feet above the surface shall maintain the appropriate altitude or<br> flight level prescribed below:<br> (a) When operating below 18000 feet MSL and -<br>     (1) On a magnetic course of 0 degrees through 179 degrees, any odd thousand<br>     feet MSL altitude plus 500 feet (Such as 3500, 5500 or 7500 foot); or<br>     (2) On a magnetic course of 180 degrees through 359 degrees, any even<br>     thousand foot MSL altitude plus 500 feet (Such as 4500, 6500 or 8500).<br> Adhering to the VFR altitude/flight level rule appropriate for the<br> direction of flight plays an important role in the avoidance of mid-air<br> collisions.  The rule is specifically designed to provide altitude<br> separation, and applies to local as well as cross-country flights.<br> <br> When an aircraft is operated in VFR level cruising flight at more thatn<br> 3000 feet above the surface up to flight level 390 (39000 feet) inclusive,<br> the cruising altitudes shall be observed in accordance with the magnetic<br> course being flown.<br> <br> Note:  \"Magnetic course\" is true course corrected for variation.  Do not<br> confuse this with:  True course, compass course, magnetic heading, true<br> heading or compass heading.<br> ";
+		}
+
+	"89"	{
+		html " ";
+		}
+
+	"90"	{
+		html "<pre> 91.70 Aircraft speed.<br> (a) Unless otherwise authorized by the administrator, no person may operate<br> an aircraft below 10000 feet MSL and an indicated airspeed of more than 250<br> kts (288 Mph)<br> (b) Unless otherwise authorized or required by ATC, no person may operate<br> an aircraft within an airport traffic area at an indicated airspeed of more<br> than<br>     (1) In the case of reciprocating engine aircraft, 156kts (180MPH); or...<br> Paragraph (b) does not apply to any operations within a Terminal Control<br> Area.  Such operations shall comply with paragraph (a) of this section, 250<br> kts (288MPH).<br> (c) No person may operate an aircraft in the airspace underlying a terminal<br> control area, or in a VFR corridor designated through a terminal control<br> area at an indicated airspeed of more than 200 kts (230MPH).<br> ";
+		}
+
+	"91"	{
+		html " ";
+		}
+
+	"92"	{
+		html "<pre> 91.79 Minimum safe altitudes; General.  Except when necessary for takeoff<br> or landing, no person may operate an aircraft below the following<br> altitudes:<br> (a) Anywhere.  An altitude allowing, if a power unit fails, an emergency<br> landing without undue hazard to persons or property on the surface.<br> (b) Over congested areas.  Over any congested area of a city, town, or<br> settlement, or over any open air assembly of persons, an altitude of 1000<br> feet above the highest obstacle within a horizontal radious of 2000 feet of<br> the aircraft.<br> (c) Over other than congested areas. An altitude of 500 feet above the<br> surface, except over open water or sparsely populated areas.  In that case,<br> the aircraft may not be operated closer than 500 feet to any person,<br> vessel, vehicle, or structure.<br> ";
+		}
+
+	"93"	{
+		html " ";
+		}
+
+	"94"	{
+		html "<pre> 91.71:  Acrobatic flight.  No person may operate an aircraft in acrobatic<br> flight:<br> (a) Over any congested area of a city, town, or settlement;<br> (b) Over an open air assembly of persons;<br> (c) within a control zone or Federal airway<br> (d) Below an altitude of 1500 feet above the surface or<br> (e) When visibility is less than three miles.<br> For the purposes of this section, acrobatic flight means an intentional<br> maneuver involving an abrupt change in an aircraft's attitude, an abnormal<br> attitude, or abnormal acceleration, not necessary for normal flight.<br> ";
+		}
+
+	}
+    }
+
+function right_wrong( answer, right_answer, concept_num )
+    {
+    if( answer )
+        {
+	if( answer == right_answer )
+	    {
+	    html "<center>Right!</center><hr>";
+	    cur_question = next_question();
+	    num_right++;
+	    }
+	else
+	    {
+	    html "<center>Wrong!</center><hr>";
+	    do_a_concept( concept_num );
+	    html "<hr>";
+	    num_wrong++;
+	    }
+	}
+    }
+
+function setup_questions()
+    {
+    for ( var question_ctr=93; question_ctr-->0; )
+        {
+	for( var i=0; i<MUST_BE_RIGHT; i++ )
+	    { q_array.push( question_ctr ); }
+	}
+    }
+
+function next_question()
+    {
+    var q_ind = Math.floor( Math.random() * q_array.length );
+    var ind = q_array[ q_ind ];
+    q_array[ q_ind ] = q_array.pop();
+    return ind;
+    }
+
+function redraw()
+    {
+    if( cur_question < 0 )
+        {
+	cur_question = next_question();
+	}
+    switch { cur_question }
+        {
+	"0"	{
+		right_wrong( _16_The_final_authority_as_to_the_operation_of_an_aircraft_is_the, "Pilot_in_command", 0 );
+		_16_The_final_authority_as_to_the_operation_of_an_aircraft_is_the="";
+		}
+
+	"1"	{
+		right_wrong( _17_If_an_in_flight_emergency_requires_immediate_action_a_pilot_in_command_may, "Deviate_from_FAR_s_to_the_extent_required_to_meet_that_emergency", 0 );
+		_17_If_an_in_flight_emergency_requires_immediate_action_a_pilot_in_command_may="";
+		}
+
+	"2"	{
+		right_wrong( _18_Prior_to_each_flight_the_pilot_in_command_must, "Become_familar_with_all_available_information_concerning_that_flight", 2 );
+		_18_Prior_to_each_flight_the_pilot_in_command_must="";
+		}
+
+	"3"	{
+		right_wrong( _19_Preflight_action_as_required_by_regulations_for_all_flights_away_from_br_the_vicinity_of_an_airport_shall_include_a_study_of_the_weather_taking_into_br_consideration_fuel_requirements_and, "An_alternate_course_of_action_if_the_flight_cannot_be_completed_as_planned", 2 );
+		_19_Preflight_action_as_required_by_regulations_for_all_flights_away_from_br_the_vicinity_of_an_airport_shall_include_a_study_of_the_weather_taking_into_br_consideration_fuel_requirements_and="";
+		}
+
+	"4"	{
+		right_wrong( _20_Which_preflight_action_is_required_for_every_flight, "Determine_runway_length_of_airports_of_intended_use", 2 );
+		_20_Which_preflight_action_is_required_for_every_flight="";
+		}
+
+	"5"	{
+		right_wrong( _21_In_addition_to_other_preflight_actions_for_a_VFR_flight_away_from_the_br_vicinity_of_the_departure_airport_regulations_require_the_pilot_in_command_to, "Determine_runway_lengths_of_airports_of_intended_use_and_the_airplane_s_takeoff_and_landing_distance_data_br", 2 );
+		_21_In_addition_to_other_preflight_actions_for_a_VFR_flight_away_from_the_br_vicinity_of_the_departure_airport_regulations_require_the_pilot_in_command_to="";
+		}
+
+	"6"	{
+		right_wrong( _22_What_is_the_fuel_requirement_for_flight_under_VFR_during_daylight_hours, "Enough_to_fly_to_the_first_point_of_intended_landing_and_to_fly_after_that_for_30_minutes_at_normal_cruising_speed_br", 4 );
+		_22_What_is_the_fuel_requirement_for_flight_under_VFR_during_daylight_hours="";
+		}
+
+	"7"	{
+		right_wrong( _23_What_is_the_fuel_requirement_for_flight_under_VFR_at_night, "Enough_to_fly_to_the_first_point_of_intended_landing_and_to_fly_after_that_for_45_minutes_at_normal_cruising_speed_br", 4 );
+		_23_What_is_the_fuel_requirement_for_flight_under_VFR_at_night="";
+		}
+
+	"8"	{
+		right_wrong( _24_A_person_may_not_act_as_a_crewmember_of_a_civil_aircraft_if_alcholic_br_beverages_have_been_consumed_by_that_person_within_the_preceding, "_8_hours", 6 );
+		_24_A_person_may_not_act_as_a_crewmember_of_a_civil_aircraft_if_alcholic_br_beverages_have_been_consumed_by_that_person_within_the_preceding="";
+		}
+
+	"9"	{
+		right_wrong( _25_Under_what_condition_if_any_may_a_pilot_allow_a_person_who_is_obviously_br_under_the_influence_of_intoxicating_liquors_or_drugs_to_be_carried_aboard_br_an_aircraft, "Only_if_the_person_is_a_medical_patient_under_proper_care_or_in_an_emergency", 6 );
+		_25_Under_what_condition_if_any_may_a_pilot_allow_a_person_who_is_obviously_br_under_the_influence_of_intoxicating_liquors_or_drugs_to_be_carried_aboard_br_an_aircraft="";
+		}
+
+	"10"	{
+		right_wrong( _26_Unless_each_occupant_is_provided_with_supplemental_oxygen_no_person_may_br_operate_a_civil_aircraft_of_U_S_registry_above_a_cabin_pressure_altitude_br_of, "_15000_feet_MSL", 8 );
+		_26_Unless_each_occupant_is_provided_with_supplemental_oxygen_no_person_may_br_operate_a_civil_aircraft_of_U_S_registry_above_a_cabin_pressure_altitude_br_of="";
+		}
+
+	"11"	{
+		right_wrong( _27_What_obligation_does_a_pilot_in_command_have_concerning_the_use_of_br_seatbelts, "The_pilot_in_command_must_brief_the_passengers_on_the_use_of_seatbelts_and_notify_them_to_fasten_the_seatbelts_during_takeoff_and_landing_br", 10 );
+		_27_What_obligation_does_a_pilot_in_command_have_concerning_the_use_of_br_seatbelts="";
+		}
+
+	"12"	{
+		right_wrong( _28_Regulations_require_that_seatbelts_in_an_airplane_be_properly_secured_about_br_the, "Occupants_during_takeoffs_and_landings", 10 );
+		_28_Regulations_require_that_seatbelts_in_an_airplane_be_properly_secured_about_br_the="";
+		}
+
+	"13"	{
+		right_wrong( _29_When_must_each_occupant_of_an_aircraft_wear_an_approved_parachute, "When_an_intentional_bank_that_exceeds_60_degrees_is_made", 12 );
+		_29_When_must_each_occupant_of_an_aircraft_wear_an_approved_parachute="";
+		}
+
+	"14"	{
+		right_wrong( _30_When_activated_an_ELT_transmits_on, "_121_5_and_243_0_MHz", 14 );
+		_30_When_activated_an_ELT_transmits_on="";
+		}
+
+	"15"	{
+		right_wrong( _31_When_are_non_rechargeable_batteries_of_an_ELT_Emergency_Locator_br_Transmitter_required_to_be_replaced, "When_50_percent_of_their_useful_life_expires_or_they_were_in_use_for_a_cumulative_period_of_1_hour_br", 16 );
+		_31_When_are_non_rechargeable_batteries_of_an_ELT_Emergency_Locator_br_Transmitter_required_to_be_replaced="";
+		}
+
+	"16"	{
+		right_wrong( _32_Operational_tests_of_the_ELT_should_be_made_only, "During_the_first_5_minutes_of_the_hour", 18 );
+		_32_Operational_tests_of_the_ELT_should_be_made_only="";
+		}
+
+	"17"	{
+		right_wrong( _33_Which_procedure_is_recommended_to_ensure_that_the_ELT_has_not_been_br_activated, "Monitor_121_5_before_engine_shut_down", 20 );
+		_33_Which_procedure_is_recommended_to_ensure_that_the_ELT_has_not_been_br_activated="";
+		}
+
+	"18"	{
+		right_wrong( _34_An_aircraft_s_operating_limitations_may_be_found, "In_the_airplane_flight_manual_approved_manual_material_markings_and_placards_or_any_combination_thereof_br", 22 );
+		_34_An_aircraft_s_operating_limitations_may_be_found="";
+		}
+
+	"19"	{
+		right_wrong( _35_No_person_may_operate_a_civil_aircraft_unless_the_airworthiness_br_certificate_or_special_flight_permit_or_authorization_required_by_br_regulations_is, "Displayed_at_the_cabin_or_cockpit_entrance_so_that_it_is_legible_to_passengers_or_crewmembers_br", 24 );
+		_35_No_person_may_operate_a_civil_aircraft_unless_the_airworthiness_br_certificate_or_special_flight_permit_or_authorization_required_by_br_regulations_is="";
+		}
+
+	"20"	{
+		right_wrong( _36_What_documents_or_records_must_be_aboard_an_aircraft_during_flight, "Operating_limitations_a_registration_certificate_and_an_appropriate_current_and_properly_displayed_airworthiness_certificate_br", 24 );
+		_36_What_documents_or_records_must_be_aboard_an_aircraft_during_flight="";
+		}
+
+	"21"	{
+		right_wrong( _37_An_airworthiness_certificate_remains_valid, "Provided_the_aircraft_is_maintained_and_operated_according_to_FAR_s", 26 );
+		_37_An_airworthiness_certificate_remains_valid="";
+		}
+
+	"22"	{
+		right_wrong( _38_How_long_does_the_airworthiness_certificate_of_an_an_airplane_remain_br_valid, "As_long_as_the_airplane_is_maintained_and_operated_as_required_by_FAR_s", 26 );
+		_38_How_long_does_the_airworthiness_certificate_of_an_an_airplane_remain_br_valid="";
+		}
+
+	"23"	{
+		right_wrong( _39_Which_is_normally_prohibited_when_operating_a_restricted_category_civil_br_aircraft, "Flight_over_a_densely_populated_area", 28 );
+		_39_Which_is_normally_prohibited_when_operating_a_restricted_category_civil_br_aircraft="";
+		}
+
+	"24"	{
+		right_wrong( _40_Who_is_responsible_for_determining_if_an_aircraft_is_in_condition_for_br_safe_flight, "The_pilot_in_command", 30 );
+		_40_Who_is_responsible_for_determining_if_an_aircraft_is_in_condition_for_br_safe_flight="";
+		}
+
+	"25"	{
+		right_wrong( _41_The_responsibility_for_ensuring_that_an_aircraft_is_maintained_in_an_br_airworthy_condition_is_primarily_that_of_the, "Owner_or_operator_of_the_aircraft", 32 );
+		_41_The_responsibility_for_ensuring_that_an_aircraft_is_maintained_in_an_br_airworthy_condition_is_primarily_that_of_the="";
+		}
+
+	"26"	{
+		right_wrong( _42_An_aircraft_s_last_annual_inspection_was_performed_on_July_12_this_year_br_The_next_annual_inspection_will_be_due_no_later_than, "July_31_next_year", 34 );
+		_42_An_aircraft_s_last_annual_inspection_was_performed_on_July_12_this_year_br_The_next_annual_inspection_will_be_due_no_later_than="";
+		}
+
+	"27"	{
+		right_wrong( _43_If_an_alteration_or_repair_substantially_affects_an_aircraft_s_br_operation_in_flight_that_aircraft_must_be_test_flown_by_an_appropriately_br_rated_pilot_and_approved_for_return_to_service_prior_to_being_operated, "With_passengers_aboard", 36 );
+		_43_If_an_alteration_or_repair_substantially_affects_an_aircraft_s_br_operation_in_flight_that_aircraft_must_be_test_flown_by_an_appropriately_br_rated_pilot_and_approved_for_return_to_service_prior_to_being_operated="";
+		}
+
+	"28"	{
+		right_wrong( _44_Before_passengers_can_be_carried_in_an_aircraft_that_has_been_altered_br_in_a_manner_that_may_have_appreciably_changed_its_flight_characteristics_br_it_must_be_flight_tested_by_an_appropriately_rated_pilot_with_at_least_a, "Private_pilot_certificate", 36 );
+		_44_Before_passengers_can_be_carried_in_an_aircraft_that_has_been_altered_br_in_a_manner_that_may_have_appreciably_changed_its_flight_characteristics_br_it_must_be_flight_tested_by_an_appropriately_rated_pilot_with_at_least_a="";
+		}
+
+	"29"	{
+		right_wrong( _45_Completion_of_an_annual_inspection_and_the_return_of_the_aircraft_to_br_service_should_always_be_indicated_by, "An_appropriate_notation_in_the_aircraft_maintenance_records", 38 );
+		_45_Completion_of_an_annual_inspection_and_the_return_of_the_aircraft_to_br_service_should_always_be_indicated_by="";
+		}
+
+	"30"	{
+		right_wrong( _46_To_determine_the_expiration_date_of_the_last_annual_aircraft_br_inspection_a_person_should_refer_to_the, "Aircraft_maintenance_records", 38 );
+		_46_To_determine_the_expiration_date_of_the_last_annual_aircraft_br_inspection_a_person_should_refer_to_the="";
+		}
+
+	"31"	{
+		right_wrong( _47_Which_record_or_documents_shall_the_owner_or_operator_of_an_aircraft_keep_br_to_show_compliance_with_an_applicable_airworthiness_directive, "The_aircraft_maintenance_records", 38 );
+		_47_Which_record_or_documents_shall_the_owner_or_operator_of_an_aircraft_keep_br_to_show_compliance_with_an_applicable_airworthiness_directive="";
+		}
+
+	"32"	{
+		right_wrong( _48_Which_aircraft_has_the_right_of_way_over_all_other_air_traffic, "An_aircraft_in_distress", 40 );
+		_48_Which_aircraft_has_the_right_of_way_over_all_other_air_traffic="";
+		}
+
+	"33"	{
+		right_wrong( _49_What_action_is_required_when_two_aircraft_converge_at_the_same_br_altitude_but_not_head_on, "The_aircraft_on_the_left_shall_give_way", 40 );
+		_49_What_action_is_required_when_two_aircraft_converge_at_the_same_br_altitude_but_not_head_on="";
+		}
+
+	"34"	{
+		right_wrong( _50_Which_aircraft_has_the_right_of_way_over_all_other_air_traffic, "Balloon", 40 );
+		_50_Which_aircraft_has_the_right_of_way_over_all_other_air_traffic="";
+		}
+
+	"35"	{
+		right_wrong( _51_An_airplane_and_an_airship_are_converging_If_the_airship_is_left_of_br_the_airplane_s_position_which_aircraft_has_the_right_of_way, "The_airship_has_the_right_of_way", 40 );
+		_51_An_airplane_and_an_airship_are_converging_If_the_airship_is_left_of_br_the_airplane_s_position_which_aircraft_has_the_right_of_way="";
+		}
+
+	"36"	{
+		right_wrong( _52_What_action_should_be_taken_if_a_glider_and_an_airplane_approach_each_br_other_at_the_same_altitude_and_on_a_head_on_collision_course, "Both_should_give_way_to_the_right", 40 );
+		_52_What_action_should_be_taken_if_a_glider_and_an_airplane_approach_each_br_other_at_the_same_altitude_and_on_a_head_on_collision_course="";
+		}
+
+	"37"	{
+		right_wrong( _53_When_two_or_more_airplanes_are_approaching_an_airport_for_the_purpose_of_br_landing_the_right_of_way_belongs_to_the_airplane, "At_the_lower_altitude_but_it_shall_not_take_advantage_of_this_rule_to_cut_in_front_of_or_to_overtake_another_br", 40 );
+		_53_When_two_or_more_airplanes_are_approaching_an_airport_for_the_purpose_of_br_landing_the_right_of_way_belongs_to_the_airplane="";
+		}
+
+	"38"	{
+		right_wrong( _54_During_what_time_period_should_lighted_position_lights_be_displayed_on_br_an_aircraft, "Sunset_to_sunrise", 42 );
+		_54_During_what_time_period_should_lighted_position_lights_be_displayed_on_br_an_aircraft="";
+		}
+
+	"39"	{
+		right_wrong( _55_When_an_aircraft_is_being_operated_at_night_it_must_display_lighted_br_position_lights_during_the_period_from, "sunset_to_sunrise", 42 );
+		_55_When_an_aircraft_is_being_operated_at_night_it_must_display_lighted_br_position_lights_during_the_period_from="";
+		}
+
+	"40"	{
+		right_wrong( _56_What_is_the_general_direction_of_movement_of_the_other_aircraft_if_during_a_br_night_flight_you_observe_steady_red_and_green_lights_ahead_and_at_the_same_br_altitude, "The_other_aircraft_is_approaching_head_on", 42 );
+		_56_What_is_the_general_direction_of_movement_of_the_other_aircraft_if_during_a_br_night_flight_you_observe_steady_red_and_green_lights_ahead_and_at_the_same_br_altitude="";
+		}
+
+	"41"	{
+		right_wrong( _57_What_is_the_general_direction_of_the_other_aircraft_if_during_a_night_br_flight_you_observe_a_steady_white_light_and_a_flashing_red_light_ahead_and_br_at_the_same_altitude, "The_other_aircraft_is_headed_away_from_you", 42 );
+		_57_What_is_the_general_direction_of_the_other_aircraft_if_during_a_night_br_flight_you_observe_a_steady_white_light_and_a_flashing_red_light_ahead_and_br_at_the_same_altitude="";
+		}
+
+	"42"	{
+		right_wrong( _58_What_is_the_general_direction_of_movement_of_the_other_aircraft_br_during_a_night_flight_if_you_observe_a_steady_red_light_and_a_flashing_red_br_light_ahead_and_at_the_same_altitude, "The_other_aircraft_is_crossing_to_the_left", 42 );
+		_58_What_is_the_general_direction_of_movement_of_the_other_aircraft_br_during_a_night_flight_if_you_observe_a_steady_red_light_and_a_flashing_red_br_light_ahead_and_at_the_same_altitude="";
+		}
+
+	"43"	{
+		right_wrong( _59_What_action_should_be_taken_if_during_a_night_flight_a_pilot_observes_br_a_steady_green_light_and_a_flashing_red_light_on_another_aircraft_at_the_br_same_altitude, "Be_alert_the_other_aircraft_should_give_way", 42 );
+		_59_What_action_should_be_taken_if_during_a_night_flight_a_pilot_observes_br_a_steady_green_light_and_a_flashing_red_light_on_another_aircraft_at_the_br_same_altitude="";
+		}
+
+	"44"	{
+		right_wrong( _60_Which_is_the_correct_traffic_pattern_departure_procedure_to_use_at_a_br_noncontrolled_airport, "Comply_with_any_FAA_traffic_pattern_established_for_the_airport", 44 );
+		_60_Which_is_the_correct_traffic_pattern_departure_procedure_to_use_at_a_br_noncontrolled_airport="";
+		}
+
+	"45"	{
+		right_wrong( _61_What_are_the_horizontal_limits_of_an_airport_traffic_area, "_5_Statute_Miles_from_the_geographic_center", 46 );
+		_61_What_are_the_horizontal_limits_of_an_airport_traffic_area="";
+		}
+
+	"46"	{
+		right_wrong( _62_The_vertical_limit_of_an_airport_traffic_area_is_from_the_surface_up_to, "but_not_including_3000_ft", 46 );
+		_62_The_vertical_limit_of_an_airport_traffic_area_is_from_the_surface_up_to="";
+		}
+
+	"47"	{
+		right_wrong( _63_An_airport_traffic_area_is_automatically_in_effect_when, "Its_associated_control_tower_is_in_operation", 48 );
+		_63_An_airport_traffic_area_is_automatically_in_effect_when="";
+		}
+
+	"48"	{
+		right_wrong( _64_When_is_an_airport_traffic_area_in_effect, "When_the_associated_control_tower_is_in_operation", 48 );
+		_64_When_is_an_airport_traffic_area_in_effect="";
+		}
+
+	"49"	{
+		right_wrong( _65_What_is_the_purpose_of_an_airport_traffic_area, "To_provide_for_the_control_of_aircraft_landing_and_taking_off_from_an_airport_with_an_operating_control_tower_br", 50 );
+		_65_What_is_the_purpose_of_an_airport_traffic_area="";
+		}
+
+	"50"	{
+		right_wrong( _66_Unless_otherwise_authorized_two_way_radio_communications_with_air_traffic_br_tonrol_are_required_for_landings_or_takeoffs, "At_all_tower_controlled_airports_regardless_of_the_weather_conditions", 50 );
+		_66_Unless_otherwise_authorized_two_way_radio_communications_with_air_traffic_br_tonrol_are_required_for_landings_or_takeoffs="";
+		}
+
+	"51"	{
+		right_wrong( _67_A_flashing_white_light_signal_from_the_control_tower_to_an_aircraft_taxiing_br_in_an_indication, "To_return_to_the_starting_point_on_the_airport", 52 );
+		_67_A_flashing_white_light_signal_from_the_control_tower_to_an_aircraft_taxiing_br_in_an_indication="";
+		}
+
+	"52"	{
+		right_wrong( _68_A_steady_green_air_traffic_control_light_signal_directed_to_an_aircraft_in_br_flight_is_a_signal_that_the_pilot, "Is_cleared_to_land", 52 );
+		_68_A_steady_green_air_traffic_control_light_signal_directed_to_an_aircraft_in_br_flight_is_a_signal_that_the_pilot="";
+		}
+
+	"53"	{
+		right_wrong( _69_What_is_the_difference_between_a_steady_red_and_a_flashing_red_light_br_signal_from_the_tower_to_an_aircraft_approaching_to_land, "A_steady_red_light_signals_to_continue_circling_and_a_flashing_red_light_signals_that_the_airport_is_unsafe_for_landing_br", 52 );
+		_69_What_is_the_difference_between_a_steady_red_and_a_flashing_red_light_br_signal_from_the_tower_to_an_aircraft_approaching_to_land="";
+		}
+
+	"54"	{
+		right_wrong( _70_While_on_the_final_approach_for_landing_an_alternating_green_and_red_br_light_followed_by_a_flashing_red_light_is_received_from_the_control_tower_br_Under_these_circumstances_the_pilot_should, "Abandon_the_approach_realizing_the_airport_is_unsafe_for_landing", 52 );
+		_70_While_on_the_final_approach_for_landing_an_alternating_green_and_red_br_light_followed_by_a_flashing_red_light_is_received_from_the_control_tower_br_Under_these_circumstances_the_pilot_should="";
+		}
+
+	"55"	{
+		right_wrong( _71_If_the_aircraft_s_radio_fails_what_is_the_recommended_procedure_when_br_landing_at_a_controlled_airport, "Observe_the_traffic_flow_enter_the_pattern_and_look_for_a_light_signal_from_the_tower_br", 54 );
+		_71_If_the_aircraft_s_radio_fails_what_is_the_recommended_procedure_when_br_landing_at_a_controlled_airport="";
+		}
+
+	"56"	{
+		right_wrong( _72_An_air_traffic_control_clearance_provides, "Authorization_to_proceed_under_specified_traffic_conditions_in_controlled_airspace_br", 56 );
+		_72_An_air_traffic_control_clearance_provides="";
+		}
+
+	"57"	{
+		right_wrong( _73_What_action_should_be_taken_if_a_pilot_receives_a_clearance_that_will_br_cause_a_deviation_from_a_rule, "Refuse_the_clearance_as_stated_and_request_it_be_amended", 58 );
+		_73_What_action_should_be_taken_if_a_pilot_receives_a_clearance_that_will_br_cause_a_deviation_from_a_rule="";
+		}
+
+	"58"	{
+		right_wrong( _74_When_may_air_traffic_control_request_a_detailed_report_of_an_emergency_br_even_though_a_rule_has_not_been_violated, "When_priority_has_been_given", 58 );
+		_74_When_may_air_traffic_control_request_a_detailed_report_of_an_emergency_br_even_though_a_rule_has_not_been_violated="";
+		}
+
+	"59"	{
+		right_wrong( _75_What_action_if_any_is_appropriate_if_the_pilot_deviates_from_an_air_br_traffic_control_instruction_during_an_emergency_and_is_given_priority, "If_requested_file_a_detailed_report_within_48_hours_to_the_chief_of_the_air_traffic_control_facility_br", 58 );
+		_75_What_action_if_any_is_appropriate_if_the_pilot_deviates_from_an_air_br_traffic_control_instruction_during_an_emergency_and_is_given_priority="";
+		}
+
+	"60"	{
+		right_wrong( _76_If_instructed_by_ground_control_to_taxi_to_Runway_9_the_pilot_may_br_proceed, "Via_taxiways_and_across_runways_to_but_not_onto_Runway_9", 60 );
+		_76_If_instructed_by_ground_control_to_taxi_to_Runway_9_the_pilot_may_br_proceed="";
+		}
+
+	"61"	{
+		right_wrong( _77_After_landing_at_a_tower_controlled_airport_when_should_the_pilot_contact_br_ground_control, "When_advised_by_the_tower_to_do_so", 62 );
+		_77_After_landing_at_a_tower_controlled_airport_when_should_the_pilot_contact_br_ground_control="";
+		}
+
+	"62"	{
+		right_wrong( _78_In_which_type_of_airspace_are_VFR_flights_prohibited, "Positive_control_area", 64 );
+		_78_In_which_type_of_airspace_are_VFR_flights_prohibited="";
+		}
+
+	"63"	{
+		right_wrong( _81_Unless_otherwise_specified_Federal_airways_extend_from, "Uncontrolled_airspace_surface_to_1200_feet_AGL_control_area_1200_feet_AGL_to_14500_feet_MSL_br", 70 );
+		_81_Unless_otherwise_specified_Federal_airways_extend_from="";
+		}
+
+	"64"	{
+		right_wrong( _95_Within_the_contiguous_United_States_a_control_zone_extends_from_the_br_surface_upward_to_the_base_of, "_1200_feet_AGL_to_7500_feet_MSL", 72 );
+		_95_Within_the_contiguous_United_States_a_control_zone_extends_from_the_br_surface_upward_to_the_base_of="";
+		}
+
+	"65"	{
+		right_wrong( _96_The_basic_VFR_weather_minimums_for_operating_an_aircraft_beneath_the_br_ceiling_within_a_control_zone_are, "_1000_foot_ceiling_and_3_mile_visibility", 74 );
+		_96_The_basic_VFR_weather_minimums_for_operating_an_aircraft_beneath_the_br_ceiling_within_a_control_zone_are="";
+		}
+
+	"66"	{
+		right_wrong( _97_What_minimum_condition_must_exist_to_operate_within_a_control_zone_br_special_VFR, "_1_mile_flight_visibility", 76 );
+		_97_What_minimum_condition_must_exist_to_operate_within_a_control_zone_br_special_VFR="";
+		}
+
+	"67"	{
+		right_wrong( _98_What_is_the_minimum_weather_condition_required_for_airplanes_operating_br_under_special_VFR_in_a_control_zone, "_1_mile_flight_visibility", 76 );
+		_98_What_is_the_minimum_weather_condition_required_for_airplanes_operating_br_under_special_VFR_in_a_control_zone="";
+		}
+
+	"68"	{
+		right_wrong( _99_Except_for_a_helicopter_a_special_VFR_clearance_authorizes_the_pilot_br_of_an_aircraft_to_operate_VFR_while_within_a_control_zone, "If_clear_of_clouds_and_the_visibility_is_at_least_1_mile", 76 );
+		_99_Except_for_a_helicopter_a_special_VFR_clearance_authorizes_the_pilot_br_of_an_aircraft_to_operate_VFR_while_within_a_control_zone="";
+		}
+
+	"69"	{
+		right_wrong( _100_What_are_the_minimum_requirements_for_airplane_operations_under_br_special_VFR_in_a_control_zone_at_night, "The_pilot_must_be_instrument_rated_and_the_airplane_must_be_IFR_equipped", 78 );
+		_100_What_are_the_minimum_requirements_for_airplane_operations_under_br_special_VFR_in_a_control_zone_at_night="";
+		}
+
+	"70"	{
+		right_wrong( _101_No_person_may_operate_an_airplane_within_a_control_zone_at_night_under_br_special_VFR_unless, "The_airplane_is_equipped_for_instrument_flight", 78 );
+		_101_No_person_may_operate_an_airplane_within_a_control_zone_at_night_under_br_special_VFR_unless="";
+		}
+
+	"71"	{
+		right_wrong( _102_Who_should_the_pilot_contact_to_receive_a_special_VFR_clearance_in_a_br_control_zone_collocated_with_an_airport_traffic_area, "Airport_control_tower", 80 );
+		_102_Who_should_the_pilot_contact_to_receive_a_special_VFR_clearance_in_a_br_control_zone_collocated_with_an_airport_traffic_area="";
+		}
+
+	"72"	{
+		right_wrong( _103_Regardless_of_weather_conditions_air_traffic_control_authorization_br_is_required_prior_to_operating_an_aircraft_wihin_a, "Terminal_control_area", 82 );
+		_103_Regardless_of_weather_conditions_air_traffic_control_authorization_br_is_required_prior_to_operating_an_aircraft_wihin_a="";
+		}
+
+	"73"	{
+		right_wrong( _104_What_minimum_pilot_certification_is_required_for_takeoff_or_landing_br_operations_in_a_group_I_terminal_control_are, "Private_pilot_certificate", 84 );
+		_104_What_minimum_pilot_certification_is_required_for_takeoff_or_landing_br_operations_in_a_group_I_terminal_control_are="";
+		}
+
+	"74"	{
+		right_wrong( _105_What_equipment_is_required_when_operating_an_airplane_within_a_group_br_II_terminal_control_area, "A_4096_code_transponder_with_Mode_C_capability", 84 );
+		_105_What_equipment_is_required_when_operating_an_airplane_within_a_group_br_II_terminal_control_area="";
+		}
+
+	"75"	{
+		right_wrong( _106_An_operable_transponder_is_required_in_which_airspaces, "Group_I_TCA_s_Group_II_TCA_s_and_positive_control_areas", 84 );
+		_106_An_operable_transponder_is_required_in_which_airspaces="";
+		}
+
+	"76"	{
+		right_wrong( _107_Prior_to_takeoff_the_altimeter_should_be_set_to, "The_current_local_altimeter_setting_if_available_or_the_departure_airport_elevation_br", 86 );
+		_107_Prior_to_takeoff_the_altimeter_should_be_set_to="";
+		}
+
+	"77"	{
+		right_wrong( _108_If_an_altimeter_setting_is_not_available_before_flight_to_which_br_altitude_or_setting_should_the_pilot_adjust_the_altimeter, "The_elevation_of_the_departure_area", 86 );
+		_108_If_an_altimeter_setting_is_not_available_before_flight_to_which_br_altitude_or_setting_should_the_pilot_adjust_the_altimeter="";
+		}
+
+	"78"	{
+		right_wrong( _109_When_is_it_first_required_that_the_altimeter_be_set_to_29_92_Hg_when_br_climbing_to_cruising_altitude_or_flight_level, "_18000_Feet_MSL", 86 );
+		_109_When_is_it_first_required_that_the_altimeter_be_set_to_29_92_Hg_when_br_climbing_to_cruising_altitude_or_flight_level="";
+		}
+
+	"79"	{
+		right_wrong( _110_Each_person_operating_an_aircraft_under_VFR_in_level_cruising_flight_br_at_an_altitude_of_more_than_3000_feet_above_the_surface_and_below_18000_br_feet_MSL_shall_maintain_an_odd_thousand_plus_500_foot_altitude_while_on_a, "magnetic_course_of_0_through_179", 88 );
+		_110_Each_person_operating_an_aircraft_under_VFR_in_level_cruising_flight_br_at_an_altitude_of_more_than_3000_feet_above_the_surface_and_below_18000_br_feet_MSL_shall_maintain_an_odd_thousand_plus_500_foot_altitude_while_on_a="";
+		}
+
+	"80"	{
+		right_wrong( _111_Which_VFR_cruising_altitude_is_acceptable_for_a_flight_on_a_victor_br_airway_with_a_magnetic_course_of_175_The_terrain_is_less_than_1000_feet, "_5500_feet_MSL", 88 );
+		_111_Which_VFR_cruising_altitude_is_acceptable_for_a_flight_on_a_victor_br_airway_with_a_magnetic_course_of_175_The_terrain_is_less_than_1000_feet="";
+		}
+
+	"81"	{
+		right_wrong( _112_Which_VFR_cruising_altitude_is_acceptable_for_a_flight_on_a_Victor_br_airway_with_a_magnetic_course_of_185_The_terrain_is_less_than_1000_feet, "_4500_feet_MSL", 88 );
+		_112_Which_VFR_cruising_altitude_is_acceptable_for_a_flight_on_a_Victor_br_airway_with_a_magnetic_course_of_185_The_terrain_is_less_than_1000_feet="";
+		}
+
+	"82"	{
+		right_wrong( _114_Unless_otherwise_authorized_or_required_by_air_traffic_control_what_br_is_the_maximum_indicated_airspeed_at_which_a_person_may_operate_an_aircraft_br_below_10000_feet_MSL, "_6500_feet_MSL", 90 );
+		_114_Unless_otherwise_authorized_or_required_by_air_traffic_control_what_br_is_the_maximum_indicated_airspeed_at_which_a_person_may_operate_an_aircraft_br_below_10000_feet_MSL="";
+		}
+
+	"83"	{
+		right_wrong( _115_Unless_otherwise_authorized_or_required_by_air_traffic_control_the_br_maximum_indicated_airspeed_at_which_a_reciprocating_engine_equipped_br_aircraft_should_be_flown_within_an_airport_traffic_area_is, "_156_kts", 90 );
+		_115_Unless_otherwise_authorized_or_required_by_air_traffic_control_the_br_maximum_indicated_airspeed_at_which_a_reciprocating_engine_equipped_br_aircraft_should_be_flown_within_an_airport_traffic_area_is="";
+		}
+
+	"84"	{
+		right_wrong( _116_When_flying_beneath_the_lateral_limits_of_a_Terminal_Control_Area_br_the_maximum_speed_authorized_is, "_200_kts", 90 );
+		_116_When_flying_beneath_the_lateral_limits_of_a_Terminal_Control_Area_br_the_maximum_speed_authorized_is="";
+		}
+
+	"85"	{
+		right_wrong( _117_Except_when_necessary_for_takeoff_or_landing_what_is_the_minimum_br_safe_altitude_for_a_pilot_to_operate_an_aircraft_anywhere, "An_altitude_allowing_if_a_power_unit_fails_an_emergency_landing_without_undue_hazard_to_persons_or_property_on_the_surface_br", 92 );
+		_117_Except_when_necessary_for_takeoff_or_landing_what_is_the_minimum_br_safe_altitude_for_a_pilot_to_operate_an_aircraft_anywhere="";
+		}
+
+	"86"	{
+		right_wrong( _118_Except_when_necessary_for_takeoff_or_landing_what_is_the_minimum_br_safe_altitude_required_for_a_pilot_to_operate_an_aircraft_over_congested_br_areas, "An_altitude_of_1000_feet_above_the_highest_obstacle_within_a_horizontal_radius_of_2000_feet_br", 92 );
+		_118_Except_when_necessary_for_takeoff_or_landing_what_is_the_minimum_br_safe_altitude_required_for_a_pilot_to_operate_an_aircraft_over_congested_br_areas="";
+		}
+
+	"87"	{
+		right_wrong( _119_Except_when_necessary_for_takeoff_or_landing_an_aircraft_may_not_be_br_operated_closer_than_what_distance_from_any_person_vehicle_or_structure, "_500_feet", 92 );
+		_119_Except_when_necessary_for_takeoff_or_landing_an_aircraft_may_not_be_br_operated_closer_than_what_distance_from_any_person_vehicle_or_structure="";
+		}
+
+	"88"	{
+		right_wrong( _120_Except_when_necessary_for_takeoff_or_landing_what_is_the_minimum_br_safe_altitude_for_a_pilot_to_operate_an_airplane_over_other_than_a_br_congested_area, "An_altitude_of_500_feet_AGL_except_over_opean_water_or_a_sparsely_populated_area_which_requires_500_feet_from_any_person_vessel_vehicle_or_br_structure_br", 92 );
+		_120_Except_when_necessary_for_takeoff_or_landing_what_is_the_minimum_br_safe_altitude_for_a_pilot_to_operate_an_airplane_over_other_than_a_br_congested_area="";
+		}
+
+	"89"	{
+		right_wrong( _121_According_to_regulations_no_person_may_operate_an_aircraft_in_br_acrobatic_flight, "Over_any_congested_area_of_a_city_town_or_settlement", 94 );
+		_121_According_to_regulations_no_person_may_operate_an_aircraft_in_br_acrobatic_flight="";
+		}
+
+	"90"	{
+		right_wrong( _122_In_which_controlled_airspace_is_acrobatic_flight_prohibited, "Control_zones_and_federal_airways", 94 );
+		_122_In_which_controlled_airspace_is_acrobatic_flight_prohibited="";
+		}
+
+	"91"	{
+		right_wrong( _123_What_is_the_altitude_permitted_for_acrobatic_flight, "_1500_feet_AGL", 94 );
+		_123_What_is_the_altitude_permitted_for_acrobatic_flight="";
+		}
+
+	"92"	{
+		right_wrong( _124_No_person_may_operate_an_aircraft_in_acrobatic_flight_when_the_flight_br_visibility_is_less_than, "_3_miles", 94 );
+		_124_No_person_may_operate_an_aircraft_in_acrobatic_flight_when_the_flight_br_visibility_is_less_than="";
+		}
+
+	}
+    switch { cur_question }
+        {
+	"0"	{
+		oneof _16_The_final_authority_as_to_the_operation_of_an_aircraft_is_the "16: The final authority as to the operation of an aircraft is the:" [ Pilot_in_command "Pilot in command", FAA "FAA", Owner_or_operator_of_the_aircraft "Owner or operator of the aircraft", Inspector_who_performs_the_periodic_check "Inspector who performs the periodic check" ] random_order checks line_per;
+		}
+
+	"1"	{
+		oneof _17_If_an_in_flight_emergency_requires_immediate_action_a_pilot_in_command_may "17: If an in-flight emergency requires immediate action, a pilot in command may" [ Deviate_from_FAR_s_to_the_extent_required_to_meet_that_emergency "Deviate from FAR's to the extent required to meet that emergency.", Deviate_from_FAR_s_to_the_extent_required_to_meet_the_emergency_but_must_submit_a_written_report_to_the_administrator_within_24_hours_br "Deviate from FAR's to the extent required to meet the emergency, but must  submit a written report to the administrator within 24 hours<br>", Not_deviate_from_FAR_s_unless_prior_to_the_deviation_approval_is_granted_by_the_administrator_br "Not deviate from FAR's unless prior to the deviation approval is granted by the administrator<br>", Not_deviate_from_FAR_s_unless_permission_is_obtained_from_air_traffic_control_br_pre "Not deviate from FAR's unless permission is obtained from air traffic control.<br></pre>" ] random_order checks line_per;
+		}
+
+	"2"	{
+		oneof _18_Prior_to_each_flight_the_pilot_in_command_must "18: Prior to each flight, the pilot in command must" [ Become_familar_with_all_available_information_concerning_that_flight "Become familar with all available information concerning that flight", Check_the_personal_logbook_for_appropriate_recent_experience "Check the personal logbook for appropriate recent experience", Calculate_the_weight_and_balance_of_the_aircraft_to_determine_if_the_CG_is_within_limits_br "Calculate the weight and balance of the aircraft to determine if the CG is within limits.<br>", Check_with_ATC_for_the_latest_traffic_advisories_and_any_possible_delays "Check with ATC for the latest traffic advisories and any possible delays." ] random_order checks line_per;
+		}
+
+	"3"	{
+		oneof _19_Preflight_action_as_required_by_regulations_for_all_flights_away_from_br_the_vicinity_of_an_airport_shall_include_a_study_of_the_weather_taking_into_br_consideration_fuel_requirements_and "19: Preflight action, as required by regulations for all flights away from<br> the vicinity of an airport, shall include a study of the weather, taking into<br> consideration fuel requirements and" [ An_alternate_course_of_action_if_the_flight_cannot_be_completed_as_planned "An alternate course of action if the flight cannot be completed as planned.", An_operation_check_of_the_navigation_radios "An operation check of the navigation radios", The_designation_of_an_alternate_airport "The designation of an alternate airport", The_filing_of_a_flight_plan "The filing of a flight plan" ] random_order checks line_per;
+		}
+
+	"4"	{
+		oneof _20_Which_preflight_action_is_required_for_every_flight "20: Which preflight action is required for every flight:" [ Determine_runway_length_of_airports_of_intended_use "Determine runway length of airports of intended use.", Check_weather_reports_and_forecasts "Check weather reports and forecasts.", Determine_alternatives_if_the_flight_cannot_be_completed "Determine alternatives if the flight cannot be completed.", Check_for_any_known_traffic_delays "Check for any known traffic delays." ] random_order checks line_per;
+		}
+
+	"5"	{
+		oneof _21_In_addition_to_other_preflight_actions_for_a_VFR_flight_away_from_the_br_vicinity_of_the_departure_airport_regulations_require_the_pilot_in_command_to "21: In addition to other preflight actions for a VFR flight away from the<br> vicinity of the departure airport, regulations require the pilot in command to:" [ Determine_runway_lengths_of_airports_of_intended_use_and_the_airplane_s_takeoff_and_landing_distance_data_br "Determine runway lengths of airports of intended use and the airplane's takeoff and landing distance data.<br>", File_a_flight_plan "File a flight plan", Check_each_fuel_tank_visually_to_ensure_that_it_is_full "Check each fuel tank visually to ensure that it is full", Check_the_accuracy_of_the_omnivigation_equipment_and_the_emergency_locator_transmitter_br_pre "Check the accuracy of the omnivigation equipment and the emergency locator transmitter<br></pre>" ] random_order checks line_per;
+		}
+
+	"6"	{
+		oneof _22_What_is_the_fuel_requirement_for_flight_under_VFR_during_daylight_hours "22: What is the fuel requirement for flight under VFR during daylight hours?" [ Enough_to_fly_to_the_first_point_of_intended_landing_and_to_fly_after_that_for_30_minutes_at_normal_cruising_speed_br "Enough to fly to the first point of intended landing and to fly after that for 30 minutes at normal cruising speed.<br>", Full_fuel_tanks "Full fuel tanks", Enough_to_complete_the_flight_at_normal_cruising_flight_with_adverse_wind_conditions_br "Enough to complete the flight at normal cruising flight with adverse wind conditions.<br>", Enough_to_fly_to_the_first_point_of_intended_landing_and_to_fly_after_that_for_45_minutes_at_normal_cruising_speed_br "Enough to fly to the first point of intended landing and to fly after that for 45 minutes at normal cruising speed.<br>" ] random_order checks line_per;
+		}
+
+	"7"	{
+		oneof _23_What_is_the_fuel_requirement_for_flight_under_VFR_at_night "23: What is the fuel requirement for flight under VFR at night?" [ Enough_to_fly_to_the_first_point_of_intended_landing_and_to_fly_after_that_for_45_minutes_at_normal_cruising_speed_br "Enough to fly to the first point of intended landing and to fly after that for 45 minutes at normal cruising speed.<br>", Full_fuel_tanks "Full fuel tanks", Enough_to_complete_the_flight_at_normal_cruising_flight_with_adverse_wind_conditions_br "Enough to complete the flight at normal cruising flight with adverse wind conditions.<br>", Enough_to_fly_to_the_first_point_of_intended_landing_and_to_fly_after_that_for_30_minutes_at_normal_cruising_speed_br_pre "Enough to fly to the first point of intended landing and to fly after that for 30 minutes at normal cruising speed.<br></pre>" ] random_order checks line_per;
+		}
+
+	"8"	{
+		oneof _24_A_person_may_not_act_as_a_crewmember_of_a_civil_aircraft_if_alcholic_br_beverages_have_been_consumed_by_that_person_within_the_preceding "24: A person may not act as a crewmember of a civil aircraft if alcholic<br> beverages have been consumed by that person within the preceding" [ _8_hours "8 hours", _16_hours "16 hours", _24_hours "24 hours", _48_hours "48 hours" ] random_order checks line_per;
+		}
+
+	"9"	{
+		oneof _25_Under_what_condition_if_any_may_a_pilot_allow_a_person_who_is_obviously_br_under_the_influence_of_intoxicating_liquors_or_drugs_to_be_carried_aboard_br_an_aircraft "25: Under what condition, if any, may a pilot allow a person who is obviously<br> under the influence of intoxicating liquors or drugs to be carried aboard<br> an aircraft." [ Only_if_the_person_is_a_medical_patient_under_proper_care_or_in_an_emergency "Only if the person is a medical patient under proper care or in an emergency", Under_no_condition "Under no condition", Only_if_the_person_does_not_have_access_to_the_cockpit_or_pilot_s_compartment "Only if the person does not have access to the cockpit or pilot's compartment", Only_if_a_second_pilot_is_aboard_pre "Only if a second pilot is aboard</pre>" ] random_order checks line_per;
+		}
+
+	"10"	{
+		oneof _26_Unless_each_occupant_is_provided_with_supplemental_oxygen_no_person_may_br_operate_a_civil_aircraft_of_U_S_registry_above_a_cabin_pressure_altitude_br_of "26: Unless each occupant is provided with supplemental oxygen, no person may<br> operate a civil aircraft of U.S. registry above a cabin pressure altitude<br> of:" [ _15000_feet_MSL "15000 feet MSL", _14000_feet_MSL "14000 feet MSL", _12500_feet_MSL "12500 feet MSL", _10000_feet_MSL_pre "10000 feet MSL</pre>" ] random_order checks line_per;
+		}
+
+	"11"	{
+		oneof _27_What_obligation_does_a_pilot_in_command_have_concerning_the_use_of_br_seatbelts "27: What obligation does a pilot in command have concerning the use of<br> seatbelts?" [ The_pilot_in_command_must_brief_the_passengers_on_the_use_of_seatbelts_and_notify_them_to_fasten_the_seatbelts_during_takeoff_and_landing_br "The pilot in command must brief the passengers on the use of seatbelts and notify them to fasten the seatbelts during takeoff and landing.<br>", The_pilot_in_command_s_seatbelt_must_be_fastened_during_the_entire_flight "The pilot in command's seatbelt must be fastened during the entire flight.", The_pilot_in_command_must_instruct_the_passengers_to_keep_seatbelts_fastened_for_the_entire_flight_except_for_brief_rest_periods_br "The pilot in command must instruct the passengers to keep seatbelts fastened for the entire flight except for brief rest periods.<br>", The_pilot_in_command_must_instruct_the_passengers_on_the_use_of_seatbelts_but_does_not_have_the_authority_to_require_their_use_except_during_a_br_emergency_br "The pilot in command must instruct the passengers on the use of seatbelts, but does not have the authority to require their use, except during a<br> emergency.<br>" ] random_order checks line_per;
+		}
+
+	"12"	{
+		oneof _28_Regulations_require_that_seatbelts_in_an_airplane_be_properly_secured_about_br_the "28: Regulations require that seatbelts in an airplane be properly secured about<br> the:" [ Occupants_during_takeoffs_and_landings "Occupants during takeoffs and landings.", Crewmembers_only_during_takeoffs_and_landings "Crewmembers only, during takeoffs and landings.", Occupants_during_flight_in_moderate_or_severe_turbulence_only "Occupants during flight in moderate or severe turbulence only.", Passengers_and_crewmembers_during_the_entire_flight_pre "Passengers and crewmembers during the entire flight.</pre>" ] random_order checks line_per;
+		}
+
+	"13"	{
+		oneof _29_When_must_each_occupant_of_an_aircraft_wear_an_approved_parachute "29: When must each occupant of an aircraft wear an approved parachute?" [ When_an_intentional_bank_that_exceeds_60_degrees_is_made "When an intentional bank that exceeds 60 degrees is made", When_an_aircraft_is_being_tested_after_major_repair "When an aircraft is being tested after major repair", When_flying_over_water_beyond_gliding_distance_to_the_shore "When flying over water beyond gliding distance to the shore", When_a_door_is_removed_from_the_aircraft_to_facilitate_parachute_jumpers_pre "When a door is removed from the aircraft to facilitate parachute jumpers</pre>" ] random_order checks line_per;
+		}
+
+	"14"	{
+		oneof _30_When_activated_an_ELT_transmits_on "30:  When activated, an ELT transmits on:" [ _121_5_and_243_0_MHz "121.5 and 243.0 MHz", _122_3_and_122_8_MHz "122.3 and 122.8 MHz", _123_0_and_119_0_MHz "123.0 and 119.0 MHz", _118_0_and_118_8_MHz_pre "118.0 and 118.8 MHz</pre>" ] random_order checks line_per;
+		}
+
+	"15"	{
+		oneof _31_When_are_non_rechargeable_batteries_of_an_ELT_Emergency_Locator_br_Transmitter_required_to_be_replaced "31: When are non-rechargeable batteries of an ELT (Emergency Locator<br> Transmitter) required to be replaced?" [ When_50_percent_of_their_useful_life_expires_or_they_were_in_use_for_a_cumulative_period_of_1_hour_br "When 50 percent of their useful life expires or they were in use for a cumulative period of 1 hour.<br>", Every_24_Months "Every 24 Months.", At_the_time_of_each_100_hour_or_annual_inspection "At the time of each 100-hour or annual inspection.", Annually_pre "Annually.</pre>" ] random_order checks line_per;
+		}
+
+	"16"	{
+		oneof _32_Operational_tests_of_the_ELT_should_be_made_only "32: Operational tests of the ELT should be made only:" [ During_the_first_5_minutes_of_the_hour "During the first 5 minutes of the hour.", During_the_annual_inspection "During the annual inspection.", After_one_half_the_shelf_life_of_the_battery "After one-half the shelf life of the battery.", Upon_replacing_the_battery_pre "Upon replacing the battery.</pre>" ] random_order checks line_per;
+		}
+
+	"17"	{
+		oneof _33_Which_procedure_is_recommended_to_ensure_that_the_ELT_has_not_been_br_activated "33: Which procedure is recommended to ensure that the ELT has not been<br> activated?" [ Monitor_121_5_before_engine_shut_down "Monitor 121.5 before engine shut down.", Turn_off_the_aircraft_ELT_after_landing "Turn off the aircraft ELT after landing.", Ask_the_airport_tower_if_they_are_receiving_an_ELT_signal "Ask the airport tower if they are receiving an ELT signal.", Have_a_certified_repair_station_inspect_the_ELT_pre "Have a certified repair station inspect the ELT.</pre>" ] random_order checks line_per;
+		}
+
+	"18"	{
+		oneof _34_An_aircraft_s_operating_limitations_may_be_found "34: An aircraft's operating limitations may be found:" [ In_the_airplane_flight_manual_approved_manual_material_markings_and_placards_or_any_combination_thereof_br "In the airplane flight manual, approved manual material, markings, and placards or any combination thereof<br>", On_the_airworthiness_certificate "On the airworthiness certificate", Only_in_the_FAA_approved_airplane_flight_manual "Only in the FAA approved airplane flight manual", Only_in_the_owner_s_handbook_published_by_the_aircraft_manufacturer_pre "Only in the owner's handbook published by the aircraft manufacturer</pre>" ] random_order checks line_per;
+		}
+
+	"19"	{
+		oneof _35_No_person_may_operate_a_civil_aircraft_unless_the_airworthiness_br_certificate_or_special_flight_permit_or_authorization_required_by_br_regulations_is "35: No person may operate a civil aircraft unless the airworthiness<br> certificate, or special flight permit or authorization required by<br> regulations is:" [ Displayed_at_the_cabin_or_cockpit_entrance_so_that_it_is_legible_to_passengers_or_crewmembers_br "Displayed at the cabin or cockpit entrance so that it is legible to passengers or crewmembers.<br>", On_file_in_the_owner_s_operation_office_where_the_aircraft_is_based "On file in the owner's operation office where the aircraft is based.", Filed_with_the_other_required_certificates_or_documents_within_the_aircraft_to_be_flown_br "Filed with the other required certificates or documents within the aircraft to be flown.<br>", Included_in_the_approved_logbooks_for_the_aircraft_to_be_flown "Included in the approved logbooks for the aircraft to be flown." ] random_order checks line_per;
+		}
+
+	"20"	{
+		oneof _36_What_documents_or_records_must_be_aboard_an_aircraft_during_flight "36: What documents or records must be aboard an aircraft during flight?" [ Operating_limitations_a_registration_certificate_and_an_appropriate_current_and_properly_displayed_airworthiness_certificate_br "Operating limitations; a registration certificate; and an appropriate, current, and properly displayed airworthiness certificate<br>", Operating_limitations_and_an_aircraft_use_and_inspection_report "Operating limitations and an aircraft use and inspection report", Repair_and_alteration_forms_and_a_registration_certificate "Repair and alteration forms and a registration certificate", Aircraft_and_engine_logbooks_and_a_registration_certificate_pre "Aircraft and engine logbooks and a registration certificate.</pre>" ] random_order checks line_per;
+		}
+
+	"21"	{
+		oneof _37_An_airworthiness_certificate_remains_valid "37: An airworthiness certificate remains valid" [ Provided_the_aircraft_is_maintained_and_operated_according_to_FAR_s "Provided the aircraft is maintained and operated according to FAR's.", Until_ownership_is_transferred "Until ownership is transferred", Provided_the_aircraft_has_not_had_major_damage "Provided the aircraft has not had major damage", Until_surrendered_suspended_or_revoked "Until surrendered, suspended, or revoked." ] random_order checks line_per;
+		}
+
+	"22"	{
+		oneof _38_How_long_does_the_airworthiness_certificate_of_an_an_airplane_remain_br_valid "38: How long does the airworthiness certificate of an an airplane remain<br> valid?" [ As_long_as_the_airplane_is_maintained_and_operated_as_required_by_FAR_s "As long as the airplane is maintained and operated as required by FAR's.", As_long_as_the_aircraft_has_a_current_registration_certificate "As long as the aircraft has a current registration certificate.", Indefinitely_unless_the_aircraft_suffers_major_damage "Indefinitely, unless the aircraft suffers major damage.", Indefinitely_unless_the_prescribed_operating_limitations_are_exceeded_pre "Indefinitely, unless the prescribed operating limitations are exceeded.</pre>" ] random_order checks line_per;
+		}
+
+	"23"	{
+		oneof _39_Which_is_normally_prohibited_when_operating_a_restricted_category_civil_br_aircraft "39: Which is normally prohibited when operating a restricted category civil<br> aircraft?" [ Flight_over_a_densely_populated_area "Flight over a densely populated area.", Flight_under_instrument_flight_rules "Flight under instrument flight rules.", Flight_within_a_control_zone "Flight within a control zone.", Flight_within_the_Continental_Control_Area_pre "Flight within the Continental Control Area.</pre>" ] random_order checks line_per;
+		}
+
+	"24"	{
+		oneof _40_Who_is_responsible_for_determining_if_an_aircraft_is_in_condition_for_br_safe_flight "40: Who is responsible for determining if an aircraft is in condition for<br> safe flight?" [ The_pilot_in_command "The pilot in command", A_certificated_aircraft_mechanic "A certificated aircraft mechanic", A_certificated_aircraft_maintenance_inspector "A certificated aircraft maintenance inspector", The_owner_or_operator_pre "The owner or operator</pre>" ] random_order checks line_per;
+		}
+
+	"25"	{
+		oneof _41_The_responsibility_for_ensuring_that_an_aircraft_is_maintained_in_an_br_airworthy_condition_is_primarily_that_of_the "41: The responsibility for ensuring that an aircraft is maintained in an<br> airworthy condition is primarily that of the" [ Owner_or_operator_of_the_aircraft "Owner or operator of the aircraft", Pilot_in_command_of_the_aircraft "Pilot in command of the aircraft", Maintenance_shop "Maintenance shop", Certified_mechanic_who_signs_the_aircraft_maintenance_records_pre "Certified mechanic who signs the aircraft maintenance records.</pre>" ] random_order checks line_per;
+		}
+
+	"26"	{
+		oneof _42_An_aircraft_s_last_annual_inspection_was_performed_on_July_12_this_year_br_The_next_annual_inspection_will_be_due_no_later_than "42: An aircraft's last annual inspection was performed on July 12, this year.<br> The next annual inspection will be due no later than:" [ July_31_next_year "July 31, next year", July_13_next_year "July 13, next year.", _100_flight_hours_following_the_last_annual_inspection "100 flight hours following the last annual inspection", _12_calendar_months_after_the_date_shown_on_the_airworthiness_certificate_pre "12 calendar months after the date shown on the airworthiness certificate.</pre>" ] random_order checks line_per;
+		}
+
+	"27"	{
+		oneof _43_If_an_alteration_or_repair_substantially_affects_an_aircraft_s_br_operation_in_flight_that_aircraft_must_be_test_flown_by_an_appropriately_br_rated_pilot_and_approved_for_return_to_service_prior_to_being_operated "43: If an alteration or repair substantially affects an aircraft's<br> operation in flight, that aircraft must be test flown by an appropriately<br> rated pilot and approved for return to service prior to being operated" [ With_passengers_aboard "With passengers aboard", By_any_private_pilot "By any private pilot", For_compensation_or_hire "For compensation or hire", Away_from_the_vicinity_of_the_airport "Away from the vicinity of the airport" ] random_order checks line_per;
+		}
+
+	"28"	{
+		oneof _44_Before_passengers_can_be_carried_in_an_aircraft_that_has_been_altered_br_in_a_manner_that_may_have_appreciably_changed_its_flight_characteristics_br_it_must_be_flight_tested_by_an_appropriately_rated_pilot_with_at_least_a "44: Before passengers can be carried in an aircraft that has been altered<br> in a manner that may have appreciably changed its flight characteristics,<br> it must be flight tested by an appropriately rated pilot with at least a:" [ Private_pilot_certificate "Private pilot certificate.", Commercial_pilot_certificate_and_an_instrument_rating "Commercial pilot certificate and an instrument rating.", Commercial_pilot_certificate_and_a_mechanic_s_certificate "Commercial pilot certificate and a mechanic's certificate.", Commercial_pilot_certificate_pre "Commercial pilot certificate.</pre>" ] random_order checks line_per;
+		}
+
+	"29"	{
+		oneof _45_Completion_of_an_annual_inspection_and_the_return_of_the_aircraft_to_br_service_should_always_be_indicated_by "45: Completion of an annual inspection and the return of the aircraft to<br> service should always be indicated by:" [ An_appropriate_notation_in_the_aircraft_maintenance_records "An appropriate notation in the aircraft maintenance records.", The_relicensing_date_on_teh_registration_certificate "The relicensing date on teh registration certificate.", An_inspection_sticker_placed_on_the_instrument_panel_that_lists_the_annual_inspection_completion_date_br "An inspection sticker placed on the instrument panel that lists the annual inspection completion date.<br>", The_issuance_date_of_the_airworthiness_certificate "The issuance date of the airworthiness certificate." ] random_order checks line_per;
+		}
+
+	"30"	{
+		oneof _46_To_determine_the_expiration_date_of_the_last_annual_aircraft_br_inspection_a_person_should_refer_to_the "46: To determine the expiration date of the last annual aircraft<br> inspection, a person should refer to the" [ Aircraft_maintenance_records "Aircraft maintenance records", Airworthiness_certificate "Airworthiness certificate", registration_certificate "registration certificate", Owner_Operator_manual "Owner/Operator manual" ] random_order checks line_per;
+		}
+
+	"31"	{
+		oneof _47_Which_record_or_documents_shall_the_owner_or_operator_of_an_aircraft_keep_br_to_show_compliance_with_an_applicable_airworthiness_directive "47: Which record or documents shall the owner or operator of an aircraft keep<br> to show compliance with an applicable airworthiness directive?" [ The_aircraft_maintenance_records "The aircraft maintenance records.", Airworthiness_certificate_and_owner_s_handbook "Airworthiness certificate and owner's handbook.", Airworthiness_and_registration_certificates "Airworthiness and registration certificates.", Aircraft_flight_manual_and_owner_s_handbook_pre "Aircraft flight manual and owner's handbook.</pre>" ] random_order checks line_per;
+		}
+
+	"32"	{
+		oneof _48_Which_aircraft_has_the_right_of_way_over_all_other_air_traffic "48: Which aircraft has the right-of-way over all other air traffic?" [ An_aircraft_in_distress "An aircraft in distress.", A_balloon "A balloon.", An_aircraft_on_final_approach_to_land "An aircraft on final approach to land.", An_aircraft_towing_or_refueling_another_aircraft "An aircraft towing or refueling another aircraft." ] random_order checks line_per;
+		}
+
+	"33"	{
+		oneof _49_What_action_is_required_when_two_aircraft_converge_at_the_same_br_altitude_but_not_head_on "49: What action is required when two aircraft converge at the same<br> altitude, but not head on?" [ The_aircraft_on_the_left_shall_give_way "The aircraft on the left shall give way.", The_more_maneuverable_aircraft_shall_give_way "The more maneuverable aircraft shall give way.", The_faster_aircraft_shall_give_way "The faster aircraft shall give way.", Each_aircraft_shall_give_way_to_the_right "Each aircraft shall give way to the right." ] random_order checks line_per;
+		}
+
+	"34"	{
+		oneof _50_Which_aircraft_has_the_right_of_way_over_all_other_air_traffic "50: Which aircraft has the right of way over all other air traffic?" [ Balloon "Balloon", Airship "Airship", Experimental_aircraft "Experimental aircraft", Restricted_aircraft "Restricted aircraft" ] random_order checks line_per;
+		}
+
+	"35"	{
+		oneof _51_An_airplane_and_an_airship_are_converging_If_the_airship_is_left_of_br_the_airplane_s_position_which_aircraft_has_the_right_of_way "51: An airplane and an airship are converging.  If the airship is left of<br> the airplane's position, which aircraft has the right of way?" [ The_airship_has_the_right_of_way "The airship has the right of way.", The_pilot_of_the_airplane_should_give_way_the_airship_is_to_the_left "The pilot of the airplane should give way; the airship is to the left.", Each_pilot_should_alter_course_to_the_right "Each pilot should alter course to the right.", The_airplane_has_the_right_of_way_it_is_more_maneuverable "The airplane has the right of way; it is more maneuverable." ] random_order checks line_per;
+		}
+
+	"36"	{
+		oneof _52_What_action_should_be_taken_if_a_glider_and_an_airplane_approach_each_br_other_at_the_same_altitude_and_on_a_head_on_collision_course "52: What action should be taken if a glider and an airplane approach each<br> other at the same altitude and on a head-on collision course?" [ Both_should_give_way_to_the_right "Both should give way to the right.", The_airplane_should_give_way_because_the_glider_has_the_right_of_way "The airplane should give way because the glider has the right of way.", The_airplane_should_give_way_because_it_is_more_maneuverable "The airplane should give way because it is more maneuverable.", The_airplane_should_clib_and_the_glider_should_decend_so_as_to_pass_each_other_by_at_least_500_feet_br "The airplane should clib and the glider should decend so as to pass each other by at least 500 feet.<br>" ] random_order checks line_per;
+		}
+
+	"37"	{
+		oneof _53_When_two_or_more_airplanes_are_approaching_an_airport_for_the_purpose_of_br_landing_the_right_of_way_belongs_to_the_airplane "53: When two or more airplanes are approaching an airport for the purpose of<br> landing, the right-of-way belongs to the airplane:" [ At_the_lower_altitude_but_it_shall_not_take_advantage_of_this_rule_to_cut_in_front_of_or_to_overtake_another_br "At the lower altitude, but it shall not take advantage of this rule to cut in front of or to overtake another.<br>", That_has_the_other_to_its_right "That has the other to its right", That_is_the_least_maneuverable "That is the least maneuverable", That_is_either_ahead_of_or_to_the_other_s_right_regardless_of_altitude_pre "That is either ahead of or to the other's right regardless of altitude</pre>" ] random_order checks line_per;
+		}
+
+	"38"	{
+		oneof _54_During_what_time_period_should_lighted_position_lights_be_displayed_on_br_an_aircraft "54: During what time period should lighted position lights be displayed on<br> an aircraft?" [ Sunset_to_sunrise "Sunset to sunrise", _30_Minutes_before_sunset_to_30_minutes_after_sunrise "30 Minutes before sunset to 30 minutes after sunrise", _1_hour_before_sunset_to_1_hour_after_sunrise "1 hour before sunset to 1 hour after sunrise", _1_hour_before_sunset_to_1_hour_before_sunrise "1 hour before sunset to 1 hour before sunrise" ] random_order checks line_per;
+		}
+
+	"39"	{
+		oneof _55_When_an_aircraft_is_being_operated_at_night_it_must_display_lighted_br_position_lights_during_the_period_from "55: When an aircraft is being operated at night, it must display lighted<br> position lights during the period from:" [ sunset_to_sunrise "sunset to sunrise", _1_hour_before_sunset_to_1_hour_after_sunrise "1 hour before sunset to 1 hour after sunrise", _30_minutes_after_sunset_to_30_minutes_after_sunrise "30 minutes after sunset to 30 minutes after sunrise", _30_minutes_before_sunset_to_30_minutes_after_sunrise "30 minutes before sunset to 30 minutes after sunrise" ] random_order checks line_per;
+		}
+
+	"40"	{
+		oneof _56_What_is_the_general_direction_of_movement_of_the_other_aircraft_if_during_a_br_night_flight_you_observe_steady_red_and_green_lights_ahead_and_at_the_same_br_altitude "56: What is the general direction of movement of the other aircraft if during a<br> night flight you observe steady red and green lights ahead and at the same<br> altitude?" [ The_other_aircraft_is_approaching_head_on "The other aircraft is approaching head-on.", The_other_aircraft_is_crossing_to_the_left "The other aircraft is crossing to the left.", The_other_aircraft_is_crossing_to_the_right "The other aircraft is crossing to the right.", The_other_aircraft_is_headed_away_from_you "The other aircraft is headed away from you." ] random_order checks line_per;
+		}
+
+	"41"	{
+		oneof _57_What_is_the_general_direction_of_the_other_aircraft_if_during_a_night_br_flight_you_observe_a_steady_white_light_and_a_flashing_red_light_ahead_and_br_at_the_same_altitude "57: What is the general direction of the other aircraft if during a night<br> flight you observe a steady white light and a flashing red light ahead and<br> at the same altitude?" [ The_other_aircraft_is_headed_away_from_you "The other aircraft is headed away from you.", The_other_aircraft_is_crossing_to_the_left "The other aircraft is crossing to the left.", The_other_aircraft_is_crossing_to_the_right "The other aircraft is crossing to the right.", The_other_aircraft_is_approaching_head_on "The other aircraft is approaching head-on." ] random_order checks line_per;
+		}
+
+	"42"	{
+		oneof _58_What_is_the_general_direction_of_movement_of_the_other_aircraft_br_during_a_night_flight_if_you_observe_a_steady_red_light_and_a_flashing_red_br_light_ahead_and_at_the_same_altitude "58: What is the general direction of movement of the other aircraft<br> during a night flight if you observe a steady red light and a flashing red<br> light ahead and at the same altitude?" [ The_other_aircraft_is_crossing_to_the_left "The other aircraft is crossing to the left.", The_other_aircraft_is_crossing_to_the_right "The other aircraft is crossing to the right.", The_other_aircraft_is_approaching_head_on "The other aircraft is approaching head-on.", The_other_aircraft_is_headed_away_from_you "The other aircraft is headed away from you." ] random_order checks line_per;
+		}
+
+	"43"	{
+		oneof _59_What_action_should_be_taken_if_during_a_night_flight_a_pilot_observes_br_a_steady_green_light_and_a_flashing_red_light_on_another_aircraft_at_the_br_same_altitude "59: What action should be taken, if during a night flight, a pilot observes<br> a steady green light and a flashing red light on another aircraft at the<br> same altitude?" [ Be_alert_the_other_aircraft_should_give_way "Be alert, the other aircraft should give way.", Exercise_extreme_caution_the_other_aircraft_is_in_distress "Exercise extreme caution, the other aircraft is in distress.", Give_way_to_the_right_the_other_aircraft_is_approaching_head_on "Give way to the right, the other aircraft is approaching head on.", Give_way_to_the_left_the_other_aircraft_is_passing_to_the_right_pre "Give way to the left, the other aircraft is passing to the right.</pre>" ] random_order checks line_per;
+		}
+
+	"44"	{
+		oneof _60_Which_is_the_correct_traffic_pattern_departure_procedure_to_use_at_a_br_noncontrolled_airport "60: Which is the correct traffic pattern departure procedure to use at a<br> noncontrolled airport?" [ Comply_with_any_FAA_traffic_pattern_established_for_the_airport "Comply with any FAA traffic pattern established for the airport.", Depart_in_any_direction_consistent_with_safety_after_crossing_the_airport_boundry_br "Depart in any direction consistent with safety, after crossing the airport boundry.<br>", Make_all_turns_to_the_left "Make all turns to the left.", Depart_as_prearranged_with_other_pilots_using_the_airport_pre "Depart as prearranged with other pilots using the airport.</pre>" ] random_order checks line_per;
+		}
+
+	"45"	{
+		oneof _61_What_are_the_horizontal_limits_of_an_airport_traffic_area "61: What are the horizontal limits of an airport traffic area?" [ _5_Statute_Miles_from_the_geographic_center "5 Statute Miles from the geographic center", _3_Statute_Miles_from_the_airport_boundry "3 Statute Miles from the airport boundry", _5_Statute_Miles_from_the_airport_boundry "5 Statute Miles from the airport boundry", _3_Statute_Miles_from_the_geographic_center "3 Statute Miles from the geographic center" ] random_order checks line_per;
+		}
+
+	"46"	{
+		oneof _62_The_vertical_limit_of_an_airport_traffic_area_is_from_the_surface_up_to "62: The vertical limit of an airport traffic area is from the surface up to:" [ but_not_including_3000_ft "but not including 3000 ft", and_including_1500_ft "and including 1500 ft", and_including_2000_ft "and including 2000 ft", the_base_of_the_overlying_control_area_pre "the base of the overlying control area</pre>" ] random_order checks line_per;
+		}
+
+	"47"	{
+		oneof _63_An_airport_traffic_area_is_automatically_in_effect_when "63: An airport traffic area is automatically in effect when" [ Its_associated_control_tower_is_in_operation "Its associated control tower is in operation.", The_weather_is_below_VFR_minimums "The weather is below VFR minimums", Nighttime_hours_exist "Nighttime hours exist", Radar_services_is_available "Radar services is available" ] random_order checks line_per;
+		}
+
+	"48"	{
+		oneof _64_When_is_an_airport_traffic_area_in_effect "64: When is an airport traffic area in effect?" [ When_the_associated_control_tower_is_in_operation "When the associated control tower is in operation.", From_1_hour_before_sunrise_to_1_hour_after_sunset "From 1 hour before sunrise to 1 hour after sunset.", When_the_associated_FSS_is_in_operation "When the associated FSS is in operation.", From_sunrise_to_sunset_pre "From sunrise to sunset.</pre>" ] random_order checks line_per;
+		}
+
+	"49"	{
+		oneof _65_What_is_the_purpose_of_an_airport_traffic_area "65: What is the purpose of an airport traffic area?" [ To_provide_for_the_control_of_aircraft_landing_and_taking_off_from_an_airport_with_an_operating_control_tower_br "To provide for the control of aircraft landing and taking off from an airport with an operating control tower.<br>", To_provide_for_the_control_of_all_aircraft_operating_in_the_vicinity_of_an_airport_with_an_operating_control_tower_br "To provide for the control of all aircraft operating in the vicinity of an airport with an operating control tower.<br>", To_provide_for_the_control_of_air_traffic_within_a_control_sone_that_has_an_operating_control_tower_br "To provide for the control of air traffic within a control sone that has an operating control tower.<br>", To_restrict_aircraft_without_radios_from_operating_in_the_vicinity_of_an_airport_with_an_operating_control_tower_br "To restrict aircraft without radios from operating in the vicinity of an airport with an operating control tower.<br>" ] random_order checks line_per;
+		}
+
+	"50"	{
+		oneof _66_Unless_otherwise_authorized_two_way_radio_communications_with_air_traffic_br_tonrol_are_required_for_landings_or_takeoffs "66: Unless otherwise authorized, two-way radio communications with air traffic<br> tonrol are required for landings or takeoffs" [ At_all_tower_controlled_airports_regardless_of_the_weather_conditions "At all tower controlled airports regardless of the weather conditions", Within_control_zones_regardless_of_the_weather_conditions "Within control zones regardless of the weather conditions", At_all_tower_controlled_airports_only_when_weather_conditions_are_less_than_VFR_br "At all tower controlled airports only when weather conditions are less than VFR<br>", At_tower_controlled_airports_within_control_zones_only_when_weather_conditions_are_less_than_VFR_br_pre "At tower controlled airports within control zones only when weather conditions are less than VFR<br></pre>" ] random_order checks line_per;
+		}
+
+	"51"	{
+		oneof _67_A_flashing_white_light_signal_from_the_control_tower_to_an_aircraft_taxiing_br_in_an_indication "67: A flashing white light signal from the control tower to an aircraft taxiing<br> in an indication:" [ To_return_to_the_starting_point_on_the_airport "To return to the starting point on the airport.", To_taxi_at_a_faster_speed "To taxi at a faster speed.", To_taxi_only_on_taxiways_and_not_cross_runways "To taxi only on taxiways and not cross runways", That_instrument_conditions_exist "That instrument conditions exist." ] random_order checks line_per;
+		}
+
+	"52"	{
+		oneof _68_A_steady_green_air_traffic_control_light_signal_directed_to_an_aircraft_in_br_flight_is_a_signal_that_the_pilot "68: A steady green air traffic control light signal directed to an aircraft in<br> flight is a signal that the pilot:" [ Is_cleared_to_land "Is cleared to land", Should_give_way_to_other_aircraft_and_continue_circling "Should give way to other aircraft and continue circling", Should_return_for_landing "Should return for landing", Should_exercise_extreme_caution "Should exercise extreme caution" ] random_order checks line_per;
+		}
+
+	"53"	{
+		oneof _69_What_is_the_difference_between_a_steady_red_and_a_flashing_red_light_br_signal_from_the_tower_to_an_aircraft_approaching_to_land "69: What is the difference between a steady red and a flashing red light<br> signal from the tower to an aircraft approaching to land?" [ A_steady_red_light_signals_to_continue_circling_and_a_flashing_red_light_signals_that_the_airport_is_unsafe_for_landing_br "A steady red light signals to continue circling and a flashing red light signals that the airport is unsafe for landing.<br>", Both_light_signals_mean_the_same_except_the_flashing_light_requires_a_more_urgent_reaction_br "Both light signals mean the same except the flashing light requires a more urgent reaction.<br>", A_steady_red_light_signals_to_continue_circling_and_a_flashing_light_signals_to_continue_but_exercise_extreme_caution_br "A steady red light signals to continue circling and a flashing light signals to continue, but exercise extreme caution.<br>", A_steady_red_light_signals_that_the_airport_is_unsafe_and_a_flashing_red_light_signals_to_use_a_different_runway_br "A steady red light signals that the airport is unsafe and a flashing red light signals to use a different runway.<br>" ] random_order checks line_per;
+		}
+
+	"54"	{
+		oneof _70_While_on_the_final_approach_for_landing_an_alternating_green_and_red_br_light_followed_by_a_flashing_red_light_is_received_from_the_control_tower_br_Under_these_circumstances_the_pilot_should "70: While on the final approach for landing, an alternating green and red<br> light followed by a flashing red light is received from the control tower.<br> Under these circumstances, the pilot should:" [ Abandon_the_approach_realizing_the_airport_is_unsafe_for_landing "Abandon the approach, realizing the airport is unsafe for landing.", Land_and_clear_the_runway_in_use_as_safely_and_quickly_as_possible "Land and clear the runway in use as safely and quickly as possible.", Discontinue_the_approach_fly_the_same_traffic_pattern_and_approach_again_and_land_br "Discontinue the approach, fly the same traffic pattern and approach again, and land.<br>", Abandon_the_approach_circle_the_airport_to_the_right_and_expect_a_flashing_white_light_when_the_airport_is_safe_for_landing_br_pre "Abandon the approach, circle the airport to the right, and expect a flashing white light when the airport is safe for landing.<br></pre>" ] random_order checks line_per;
+		}
+
+	"55"	{
+		oneof _71_If_the_aircraft_s_radio_fails_what_is_the_recommended_procedure_when_br_landing_at_a_controlled_airport "71: If the aircraft's radio fails, what is the recommended procedure when<br> landing at a controlled airport?" [ Observe_the_traffic_flow_enter_the_pattern_and_look_for_a_light_signal_from_the_tower_br "Observe the traffic flow, enter the pattern, and look for a light signal from the tower.<br>", Enter_a_crosswind_leg_and_rock_the_wings "Enter a crosswind leg and rock the wings.", Flash_the_landing_lights_and_cycle_the_landing_gear_while_circling_the_airport_br "Flash the landing lights and cycle the landing gear while circling the airport.<br>", Select_7700_on_the_transponder_and_fly_a_normal_traffic_pattern_pre "Select 7700 on the transponder and fly a normal traffic pattern.</pre>" ] random_order checks line_per;
+		}
+
+	"56"	{
+		oneof _72_An_air_traffic_control_clearance_provides "72: An air traffic control clearance provides:" [ Authorization_to_proceed_under_specified_traffic_conditions_in_controlled_airspace_br "Authorization to proceed under specified traffic conditions in controlled airspace.<br>", Authorization_for_flight_in_uncontrolled_airspace "Authorization for flight in uncontrolled airspace.", Priority_over_all_other_traffic "Priority over all other traffic.", Adequate_separation_from_all_traffic_pre "Adequate separation from all traffic.</pre>" ] random_order checks line_per;
+		}
+
+	"57"	{
+		oneof _73_What_action_should_be_taken_if_a_pilot_receives_a_clearance_that_will_br_cause_a_deviation_from_a_rule "73: What action should be taken if a pilot receives a clearance that will<br> cause a deviation from a rule?" [ Refuse_the_clearance_as_stated_and_request_it_be_amended "Refuse the clearance as stated and request it be amended.", Accept_the_clearance_because_the_pilot_is_not_responsible_for_the_deviation_br "Accept the clearance, because the pilot is not responsible for the deviation.<br>", Accept_the_clearance_and_advise_air_traffic_control_when_deviation_occurs "Accept the clearance and advise air traffic control when deviation occurs.", Accept_the_clearance_and_advise_air_traffic_control_that_you_believe_a_rule_deviation_will_occur_br "Accept the clearance and advise air traffic control that you believe a rule deviation will occur.<br>" ] random_order checks line_per;
+		}
+
+	"58"	{
+		oneof _74_When_may_air_traffic_control_request_a_detailed_report_of_an_emergency_br_even_though_a_rule_has_not_been_violated "74: When may air traffic control request a detailed report of an emergency<br> even though a rule has not been violated?" [ When_priority_has_been_given "When priority has been given.", Anytime_an_emergency_occurs "Anytime an emergency occurs.", When_the_emergency_occurs_in_controlled_airspace "When the emergency occurs in controlled airspace.", Only_when_an_accident_results_from_the_emergency "Only when an accident results from the emergency." ] random_order checks line_per;
+		}
+
+	"59"	{
+		oneof _75_What_action_if_any_is_appropriate_if_the_pilot_deviates_from_an_air_br_traffic_control_instruction_during_an_emergency_and_is_given_priority "75: What action, if any, is appropriate if the pilot deviates from an air<br> traffic control instruction during an emergency and is given priority?" [ If_requested_file_a_detailed_report_within_48_hours_to_the_chief_of_the_air_traffic_control_facility_br "If requested, file a detailed report within 48 hours to the chief of the air traffic control facility.<br>", Take_no_special_action_since_you_are_pilot_in_command "Take no special action since you are pilot in command.", File_a_report_to_the_FAA_Administrator_within_48_hours "File a report to the FAA Administrator within 48 hours.", File_a_report_to_the_chief_of_that_air_traffic_control_facility_within_24_hours_br_pre "File a report to the chief of that air traffic control facility within 24 hours.<br></pre>" ] random_order checks line_per;
+		}
+
+	"60"	{
+		oneof _76_If_instructed_by_ground_control_to_taxi_to_Runway_9_the_pilot_may_br_proceed "76: If instructed by ground control to taxi to Runway 9, the pilot may<br> proceed:" [ Via_taxiways_and_across_runways_to_but_not_onto_Runway_9 "Via taxiways and across runways to, but not onto, Runway 9.", To_the_next_intersecting_runway_where_further_clearance_is_required "To the next intersecting runway where further clearance is required.", Via_taxiways_and_across_runways_to_Runway_9_where_an_immediate_take_off_may_be_made_br "Via taxiways and across runways to Runway 9, where an immediate take off may be made.<br>", Via_any_route_at_the_pilot_s_discretion_onto_Runway_9_and_hold_until_cleared_for_takeoff_br_pre "Via any route at the pilot's discretion onto Runway 9 and hold until cleared for takeoff.<br></pre>" ] random_order checks line_per;
+		}
+
+	"61"	{
+		oneof _77_After_landing_at_a_tower_controlled_airport_when_should_the_pilot_contact_br_ground_control "77: After landing at a tower-controlled airport, when should the pilot contact<br> ground control?" [ When_advised_by_the_tower_to_do_so "When advised by the tower to do so.", Prior_to_turning_off_the_runway "Prior to turning off the runway.", After_reaching_a_taxiway_that_leads_directly_to_the_parking_area "After reaching a taxiway that leads directly to the parking area.", After_leaving_the_runway_and_crossing_the_runway_holding_lines_pre "After leaving the runway and crossing the runway holding lines.</pre>" ] random_order checks line_per;
+		}
+
+	"62"	{
+		oneof _78_In_which_type_of_airspace_are_VFR_flights_prohibited "78: In which type of airspace are VFR flights prohibited?" [ Positive_control_area "Positive control area", Terminal_control_areas "Terminal control areas", Continental_control_areas "Continental control areas", Control_zone_pre "Control zone</pre>" ] random_order checks line_per;
+		}
+
+	"63"	{
+		oneof _81_Unless_otherwise_specified_Federal_airways_extend_from "81:  Unless otherwise specified, Federal airways extend from:" [ Uncontrolled_airspace_surface_to_1200_feet_AGL_control_area_1200_feet_AGL_to_14500_feet_MSL_br "Uncontrolled airspace - surface to 1200 feet AGL, control area 1200 feet AGL to 14500 feet MSL<br>", Uncontrolled_airspace_surface_to_14500_feet "Uncontrolled airspace, surface to 14500 feet", Uncontrolled_airspace_surface_to_700_feet_AGL_control_area_700_feet_AGL_to_14500_feet_MSL_br "Uncontrolled airspace, surface to 700 feet AGL, control area - 700 feet AGL to 14500 feet MSL<br>", Control_area_surface_to_14500_feet_MSL "Control area surface to 14500 feet MSL", An_airport_traffic_area_from_the_surface_to_3000_feet_AGL "An airport traffic area from the surface to 3000 feet AGL", A_control_zone_from_the_surface_to_14500_feet_MSL "A control zone from the surface to 14500 feet MSL", Uncontrolled_airspace_from_the_surface_to_700_feet_AGL "Uncontrolled airspace from the surface to 700 feet AGL", Special_use_airspace_from_the_surface_to_overlying_area "Special use airspace from the surface to overlying area.", _1200_feet_above_the_surface_upward_to_14500_feet_MSL_and_are_16_NM_wide "1200 feet above the surface upward to 14500 feet MSL and are 16 NM wide", _700_feet_above_the_surface_upward_to_the_continental_control_area_and_are_10_NM_wide_br "700 feet above the surface upward to the continental control area and are 10 NM wide.<br>", _1200_feet_above_the_surface_upward_to_18000_feet_MSL_and_are_8_NM_wide "1200 feet above the surface upward to 18000 feet MSL and are 8 NM wide", The_surface_upward_to_18000_feet_MSL_and_are_4_NM_wide_pre "The surface upward to 18000 feet MSL and are 4 NM wide</pre>" ] random_order checks line_per;
+		}
+
+	"64"	{
+		oneof _95_Within_the_contiguous_United_States_a_control_zone_extends_from_the_br_surface_upward_to_the_base_of "95: Within the contiguous United States, a control zone extends from the<br> surface upward to the base of:" [ _1200_feet_AGL_to_7500_feet_MSL "1200 feet AGL to 7500 feet MSL", _700_feet_AGL_to_7500_feet_MSL "700 feet AGL to 7500 feet MSL", _7500_feet_MSL_to_12500_feet_MSL "7500 feet MSL to 12500 feet MSL", _7500_feet_MSL_to_18000_feet_MSL "7500 feet MSL to 18000 feet MSL", An_airport_traffic_area "An airport traffic area.", The_Continental_Control_Area "The Continental Control Area.", A_transition_area "A transition area.", A_Terminal_Control_Area_pre "A Terminal Control Area.</pre>" ] random_order checks line_per;
+		}
+
+	"65"	{
+		oneof _96_The_basic_VFR_weather_minimums_for_operating_an_aircraft_beneath_the_br_ceiling_within_a_control_zone_are "96: The basic VFR weather minimums for operating an aircraft beneath the<br> ceiling within a control zone are:" [ _1000_foot_ceiling_and_3_mile_visibility "1000 foot ceiling and 3 mile visibility.", _500_foot_ceiling_and_1_mile_visibility "500 foot ceiling and 1 mile visibility.", clear_of_clouds_and_2_miles_visibility "clear of clouds and 2 miles visibility.", _2000_foot_ceiling_and_1_mile_visibility_pre "2000 foot ceiling and 1 mile visibility.</pre>" ] random_order checks line_per;
+		}
+
+	"66"	{
+		oneof _97_What_minimum_condition_must_exist_to_operate_within_a_control_zone_br_special_VFR "97: What minimum condition must exist to operate within a control zone<br> special VFR?" [ _1_mile_flight_visibility "1 mile flight visibility.", _2400_RVR "2400 RVR.", _500_feet_below_clouds "500 feet below clouds.", _1000_feet_above_clouds "1000 feet above clouds." ] random_order checks line_per;
+		}
+
+	"67"	{
+		oneof _98_What_is_the_minimum_weather_condition_required_for_airplanes_operating_br_under_special_VFR_in_a_control_zone "98: What is the minimum weather condition required for airplanes operating<br> under special VFR in a control zone?" [ _1_mile_flight_visibility "1 mile flight visibility", _1_mile_flight_visibility_and_1000_foot_ceilings "1 mile flight visibility and 1000 foot ceilings", _3_miles_flight_visibility_and_1000_foot_ceilings "3 miles flight visibility and 1000 foot ceilings", _3_miles_flight_visibility "3 miles flight visibility" ] random_order checks line_per;
+		}
+
+	"68"	{
+		oneof _99_Except_for_a_helicopter_a_special_VFR_clearance_authorizes_the_pilot_br_of_an_aircraft_to_operate_VFR_while_within_a_control_zone "99: Except for a helicopter, a special VFR clearance authorizes the pilot<br> of an aircraft to operate VFR while within a control zone:" [ If_clear_of_clouds_and_the_visibility_is_at_least_1_mile "If clear of clouds and the visibility is at least 1 mile", When_the_ceiling_is_less_than_1000_feet_and_the_visibility_less_than_1_mile_if_the_aircraft_does_not_exceed_maneuvering_speed_br "When the ceiling is less than 1000 feet and the visibility less than 1 mile if the aircraft does not exceed maneuvering speed.<br>", With_no_minimum_visibility_requirements_if_clear_of_the_clouds "With no minimum visibility requirements if clear of the clouds", At_or_below_cloud_base_with_a_flight_visibility_of_1_mile_or_less_provided_the_aircraft_remains_below_1000_feet_above_the_surface_br_pre "At or below cloud base with a flight visibility of 1 mile or less, provided the aircraft remains below 1000 feet above the surface.<br></pre>" ] random_order checks line_per;
+		}
+
+	"69"	{
+		oneof _100_What_are_the_minimum_requirements_for_airplane_operations_under_br_special_VFR_in_a_control_zone_at_night "100: What are the minimum requirements for airplane operations under<br> special VFR in a control zone at night?" [ The_pilot_must_be_instrument_rated_and_the_airplane_must_be_IFR_equipped "The pilot must be instrument rated and the airplane must be IFR equipped.", The_minimum_visibility_is_3_miles_and_the_airplane_must_operate_clear_of_clouds_br "The minimum visibility is 3 miles and the airplane must operate clear of clouds.<br>", The_airplane_must_be_under_radar_surveillance_at_all_times_while_in_the_control_zone_br "The airplane must be under radar surveillance at all times while in the control zone.<br>", The_airplane_must_be_equipped_for_IFR_and_with_an_altitude_reporting_transponder_br "The airplane must be equipped for IFR and with an altitude reporting transponder.<br>" ] random_order checks line_per;
+		}
+
+	"70"	{
+		oneof _101_No_person_may_operate_an_airplane_within_a_control_zone_at_night_under_br_special_VFR_unless "101: No person may operate an airplane within a control zone at night under<br> special VFR unless:" [ The_airplane_is_equipped_for_instrument_flight "The airplane is equipped for instrument flight.", The_flight_can_be_conducted_500_feet_below_the_clouds "The flight can be conducted 500 feet below the clouds.", An_instructor_is_aboard "An instructor is aboard.", The_flight_visibility_is_at_least_3_miles_pre "The flight visibility is at least 3 miles.</pre>" ] random_order checks line_per;
+		}
+
+	"71"	{
+		oneof _102_Who_should_the_pilot_contact_to_receive_a_special_VFR_clearance_in_a_br_control_zone_collocated_with_an_airport_traffic_area "102:  Who should the pilot contact to receive a special VFR clearance in a<br> control zone collocated with an airport traffic area?" [ Airport_control_tower "Airport control tower.", FSS "FSS.", Air_route_traffic_control_center "Air route traffic control center.", Approach_control_pre "Approach control.</pre>" ] random_order checks line_per;
+		}
+
+	"72"	{
+		oneof _103_Regardless_of_weather_conditions_air_traffic_control_authorization_br_is_required_prior_to_operating_an_aircraft_wihin_a "103:  Regardless of weather conditions, air traffic control authorization<br> is required prior to operating an aircraft wihin a:" [ Terminal_control_area "Terminal control area.", Control_zone "Control zone.", Terminal_Radar_Service_area "Terminal Radar Service area.", Transition_area_pre "Transition area.</pre>" ] random_order checks line_per;
+		}
+
+	"73"	{
+		oneof _104_What_minimum_pilot_certification_is_required_for_takeoff_or_landing_br_operations_in_a_group_I_terminal_control_are "104: What minimum pilot certification is required for takeoff or landing<br> operations in a group I terminal control are?" [ Private_pilot_certificate "Private pilot certificate.", Student_pilot_certificate_with_appropraiate_log_book_endorsements "Student pilot certificate with appropraiate log book endorsements.", Private_pilot_certificate_with_an_instrument_rating "Private pilot certificate with an instrument rating.", Commercial_pilot_certificate "Commercial pilot certificate." ] random_order checks line_per;
+		}
+
+	"74"	{
+		oneof _105_What_equipment_is_required_when_operating_an_airplane_within_a_group_br_II_terminal_control_area "105: What equipment is required when operating an airplane within a group<br> II terminal control area." [ A_4096_code_transponder_with_Mode_C_capability "A 4096 code transponder with Mode C capability.", A_4096_code_transponder "A 4096 code transponder.", A_VOR_receiver_with_distance_measuring_equipment "A VOR receiver with distance measuring equipment.", An_automatic_direction_finder "An automatic direction finder." ] random_order checks line_per;
+		}
+
+	"75"	{
+		oneof _106_An_operable_transponder_is_required_in_which_airspaces "106: An operable transponder is required in which airspaces?" [ Group_I_TCA_s_Group_II_TCA_s_and_positive_control_areas "Group I TCA's, Group II TCA's, and positive control areas.", Group_I_TCA_s_ADIZ_and_positive_control_areas "Group I TCA's, ADIZ and positive control areas.", Group_I_and_Group_II_TCA_s_only "Group I and Group II TCA's only.", High_density_airport_traffic_areas_and_Group_I_TCA_s_pre "High density airport traffic areas and Group I TCA's</pre>" ] random_order checks line_per;
+		}
+
+	"76"	{
+		oneof _107_Prior_to_takeoff_the_altimeter_should_be_set_to "107:  Prior to takeoff, the altimeter should be set to:" [ The_current_local_altimeter_setting_if_available_or_the_departure_airport_elevation_br "The current local altimeter setting, if available, or the departure airport elevation.<br>", The_corrected_density_altitude_of_the_departure_airport "The corrected density altitude of the departure airport.", The_corrected_pressure_altitude_for_the_departure_airport "The corrected pressure altitude for the departure airport.", _29_92_Hg "29.92\"Hg." ] random_order checks line_per;
+		}
+
+	"77"	{
+		oneof _108_If_an_altimeter_setting_is_not_available_before_flight_to_which_br_altitude_or_setting_should_the_pilot_adjust_the_altimeter "108:  If an altimeter setting is not available before flight, to which<br> altitude or setting should the pilot adjust the altimeter?" [ The_elevation_of_the_departure_area "The elevation of the departure area.", To_29_92_Hg_for_flight_above_18000_feet_MSL "To 29.92\"Hg for flight above 18000 feet MSL.", The_elevation_of_the_nearest_airport_corrected_to_mean_sea_level "The elevation of the nearest airport corrected to mean sea level.", Pressure_altitude_corrected_for_nonstandard_temperature "Pressure altitude corrected for nonstandard temperature." ] random_order checks line_per;
+		}
+
+	"78"	{
+		oneof _109_When_is_it_first_required_that_the_altimeter_be_set_to_29_92_Hg_when_br_climbing_to_cruising_altitude_or_flight_level "109:  When is it first required that the altimeter be set to 29.92\"Hg, when<br> climbing to cruising altitude or flight level?" [ _18000_Feet_MSL "18000 Feet MSL", _12500_Feet_MSL "12500 Feet MSL", _14500_Feet_MSL "14500 Feet MSL", _24000_Feet_MSL_pre "24000 Feet MSL</pre>" ] random_order checks line_per;
+		}
+
+	"79"	{
+		oneof _110_Each_person_operating_an_aircraft_under_VFR_in_level_cruising_flight_br_at_an_altitude_of_more_than_3000_feet_above_the_surface_and_below_18000_br_feet_MSL_shall_maintain_an_odd_thousand_plus_500_foot_altitude_while_on_a "110:  Each person operating an aircraft under VFR in level cruising flight<br> at an altitude of more than 3000 feet above the surface, and below 18000<br> feet MSL shall maintain an odd-thousand plus 500 foot altitude while on a:" [ magnetic_course_of_0_through_179 "magnetic course of 0\" through 179\".", magnetic_heading_of_180_through_359 "magnetic heading of 180\" through 359\".", true_course_of_180_through_359 "true course of 180\" through 359\".", true_course_of_0_through_179 "true course of 0\" through 179\"." ] random_order checks line_per;
+		}
+
+	"80"	{
+		oneof _111_Which_VFR_cruising_altitude_is_acceptable_for_a_flight_on_a_victor_br_airway_with_a_magnetic_course_of_175_The_terrain_is_less_than_1000_feet "111:  Which VFR cruising altitude is acceptable for a flight on a victor<br> airway with a magnetic course of 175\"?  The terrain is less than 1000 feet." [ _5500_feet_MSL "5500 feet MSL", _4000_feet_MSL "4000 feet MSL", _4500_feet_MSL "4500 feet MSL", _5000_feet_MSL "5000 feet MSL" ] random_order checks line_per;
+		}
+
+	"81"	{
+		oneof _112_Which_VFR_cruising_altitude_is_acceptable_for_a_flight_on_a_Victor_br_airway_with_a_magnetic_course_of_185_The_terrain_is_less_than_1000_feet "112:  Which VFR cruising altitude is acceptable for a flight on a Victor<br> airway with a magnetic course of 185\"?  The terrain is less than 1000 feet." [ _4500_feet_MSL "4500 feet MSL", _4000_feet_MSL "4000 feet MSL", _5000_feet_MSL "5000 feet MSL", _5500_feet_MSL_pre "5500 feet MSL</pre>" ] random_order checks line_per;
+		}
+
+	"82"	{
+		oneof _114_Unless_otherwise_authorized_or_required_by_air_traffic_control_what_br_is_the_maximum_indicated_airspeed_at_which_a_person_may_operate_an_aircraft_br_below_10000_feet_MSL "114:  Unless otherwise authorized or required by air traffic control, what<br> is the maximum indicated airspeed at which a person may operate an aircraft<br> below 10000 feet MSL:" [ _6500_feet_MSL "6500 feet MSL", _4000_feet_MSL "4000 feet MSL", _4500_feet_MSL "4500 feet MSL", _5500_feet_MSL "5500 feet MSL", _156_kts "156 kts", _180_kts "180 kts", _200_kts "200 kts", _250_kts "250 kts" ] random_order checks line_per;
+		}
+
+	"83"	{
+		oneof _115_Unless_otherwise_authorized_or_required_by_air_traffic_control_the_br_maximum_indicated_airspeed_at_which_a_reciprocating_engine_equipped_br_aircraft_should_be_flown_within_an_airport_traffic_area_is "115:  Unless otherwise authorized or required by air traffic control, the<br> maximum indicated airspeed at which a reciprocating engine equipped<br> aircraft should be flown within an airport traffic area is:" [ _156_kts "156 kts", _180_kts "180 kts", _200_kts "200 kts", _288_kts "288 kts" ] random_order checks line_per;
+		}
+
+	"84"	{
+		oneof _116_When_flying_beneath_the_lateral_limits_of_a_Terminal_Control_Area_br_the_maximum_speed_authorized_is "116:  When flying beneath the lateral limits of a Terminal Control Area,<br> the maximum speed authorized is:" [ _200_kts "200 kts", _250_kts "250 kts", _180_kts "180 kts", _156_kts_pre "156 kts</pre>" ] random_order checks line_per;
+		}
+
+	"85"	{
+		oneof _117_Except_when_necessary_for_takeoff_or_landing_what_is_the_minimum_br_safe_altitude_for_a_pilot_to_operate_an_aircraft_anywhere "117:  Except when necessary for takeoff or landing, what is the minimum<br> safe altitude for a pilot to operate an aircraft anywhere?" [ An_altitude_allowing_if_a_power_unit_fails_an_emergency_landing_without_undue_hazard_to_persons_or_property_on_the_surface_br "An altitude allowing, if a power unit fails, an emergency landing without undue hazard to persons or property on the surface.<br>", An_altitude_of_500_feet_above_the_surface_and_no_closer_tna_500_feet_to_any_person_vessel_vehicle_or_structure_br "An altitude of 500 feet above the surface, and no closer tna 500 feet to any person, vessel, vehicle, or structure.<br>", An_altitude_of_500_feet_above_the_highest_obstacle_within_a_horizontal_radius_of_1000_feet_br "An altitude of 500 feet above the highest obstacle within a horizontal radius of 1000 feet.<br>", An_altitude_of_1000_feet_above_the_highest_obstacle_within_a_horizontal_radius_of_2000_feet_br "An altitude of 1000 feet above the highest obstacle within a horizontal radius of 2000 feet.<br>" ] random_order checks line_per;
+		}
+
+	"86"	{
+		oneof _118_Except_when_necessary_for_takeoff_or_landing_what_is_the_minimum_br_safe_altitude_required_for_a_pilot_to_operate_an_aircraft_over_congested_br_areas "118:  Except when necessary for takeoff or landing, what is the minimum<br> safe altitude required for a pilot to operate an aircraft over congested<br> areas?" [ An_altitude_of_1000_feet_above_the_highest_obstacle_within_a_horizontal_radius_of_2000_feet_br "An altitude of 1000 feet above the highest obstacle within a horizontal radius of 2000 feet.<br>", An_altitude_allowing_if_a_power_unit_fails_an_emergency_landing_without_undue_hazard_to_persons_or_property_on_the_surface_br "An altitude allowing, if a power unit fails, an emergency landing without undue hazard to persons or property on the surface.<br>", An_altitude_of_500_feet_above_the_surface_and_no_closer_than_500_feet_to_any_person_vessel_vehicle_or_structure_br "An altitude of 500 feet above the surface and no closer than 500 feet to any person, vessel, vehicle or structure<br>", An_altitude_of_500_feet_above_the_highest_obstacle_within_a_horizontal_radious_of_1000_feet_br "An altitude of 500 feet above the highest obstacle within a horizontal radious of 1000 feet.<br>" ] random_order checks line_per;
+		}
+
+	"87"	{
+		oneof _119_Except_when_necessary_for_takeoff_or_landing_an_aircraft_may_not_be_br_operated_closer_than_what_distance_from_any_person_vehicle_or_structure "119:  Except when necessary for takeoff or landing, an aircraft may not be<br> operated closer than what distance from any person vehicle or structure?" [ _500_feet "500 feet", _2000_feet "2000 feet", _1500_feet "1500 feet", _1000_feet "1000 feet" ] random_order checks line_per;
+		}
+
+	"88"	{
+		oneof _120_Except_when_necessary_for_takeoff_or_landing_what_is_the_minimum_br_safe_altitude_for_a_pilot_to_operate_an_airplane_over_other_than_a_br_congested_area "120:  Except when necessary for takeoff or landing, what is the minimum<br> safe altitude for a pilot to operate an airplane over other than a<br> congested area?" [ An_altitude_of_500_feet_AGL_except_over_opean_water_or_a_sparsely_populated_area_which_requires_500_feet_from_any_person_vessel_vehicle_or_br_structure_br "An altitude of 500 feet AGL except over opean water or a sparsely populated area which requires 500 feet from any person, vessel, vehicle or<br> structure.<br>", An_altitude_allowing_if_a_power_unit_fails_an_emergency_landing_without_undue_hazard_to_persons_or_property_on_the_surface_br "An altitude allowing, if a power unit fails, an emergency landing without undue hazard to persons or property on the surface.<br>", An_altitude_of_500_feet_above_the_highest_obstacle_within_a_horizontal_radious_of_1000_feet_br "An altitude of 500 feet above the highest obstacle within a horizontal radious of 1000 feet.<br>", An_altutide_of_1000_feet_above_the_highest_obstacle_within_a_horizontal_radious_of_2000_feet_br_pre "An altutide of 1000 feet above the highest obstacle within a horizontal radious of 2000 feet.<br></pre>" ] random_order checks line_per;
+		}
+
+	"89"	{
+		oneof _121_According_to_regulations_no_person_may_operate_an_aircraft_in_br_acrobatic_flight "121:  According to regulations, no person may operate an aircraft in<br> acrobatic flight:" [ Over_any_congested_area_of_a_city_town_or_settlement "Over any congested area of a city, town, or settlement.", Within_5_miles_of_a_federal_airway "Within 5 miles of a federal airway.", Below_an_altitude_of_2000_feet_above_the_surface "Below an altitude of 2000 feet above the surface.", when_flight_visibility_is_less_than_5_miles "when flight visibility is less than 5 miles." ] random_order checks line_per;
+		}
+
+	"90"	{
+		oneof _122_In_which_controlled_airspace_is_acrobatic_flight_prohibited "122:  In which controlled airspace is acrobatic flight prohibited?" [ Control_zones_and_federal_airways "Control zones and federal airways.", All_controlled_airspace "All controlled airspace.", Control_zones_federal_airways_and_control_areas "Control zones, federal airways and control areas.", Control_zones_federal_airways_control_areas_and_traffic_control_areas "Control zones, federal airways, control areas, and traffic control areas." ] random_order checks line_per;
+		}
+
+	"91"	{
+		oneof _123_What_is_the_altitude_permitted_for_acrobatic_flight "123:  What is the altitude permitted for acrobatic flight?" [ _1500_feet_AGL "1500 feet AGL", _1000_feet_AGL "1000 feet AGL", _1000_feet_above_the_highest_obstacle_within_5_miles "1000 feet above the highest obstacle within 5 miles", _1500_feet_above_the_highest_obstacle_within_5_miles "1500 feet above the highest obstacle within 5 miles" ] random_order checks line_per;
+		}
+
+	"92"	{
+		oneof _124_No_person_may_operate_an_aircraft_in_acrobatic_flight_when_the_flight_br_visibility_is_less_than "124:  No person may operate an aircraft in acrobatic flight when the flight<br> visibility is less than:" [ _3_miles "3 miles", _5_miles "5 miles", _7_miles "7 miles", _10_miles "10 miles" ] random_order checks line_per;
+		}
+
+	}
+    var s = "<center><table border=1><tr><td>Right:"+num_right+"</td><td>Wrong:"+num_wrong+"</td><td>Total:93</td></tr></table></center>";
+    html { s };
+    }
+
+setup_questions();

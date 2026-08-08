@@ -1,0 +1,4 @@
+{
+section "A" { text A_text 10; } 
+section "B" { text B_text 10; }
+}

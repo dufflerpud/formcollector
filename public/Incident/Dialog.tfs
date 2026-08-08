@@ -1,0 +1,142 @@
+{
+section "Incident"
+    {
+    datetime Information_entered_date_and_time "Date/time Reported" default { now }
+	help "Should be in the format:  NN/NN/NNNN NN:NN";
+    datetime Report_date_and_time "Date/time of report" default { now }
+	help "Should be in the format:  NN/NN/NNNN NN:NN";
+    oneof Status [No_Crime_Involved,Crime_Involved];
+    anyof Involves [Sex_Crimes, Juveniles];
+    text Reporting_Officer 50 must { checkexp(this,m/./) };
+    signature Reporting_Signature;
+    text Approving_Officer 50 must { checkexp(this,m/./) };
+    signature Approving_Signature;
+    }
+
+section "Involved"
+    {
+    text Involved_Last "Last name" 30 must { checkexp(this,m/./) };
+    text Involved_First "First name" 30 must { checkexp(this,m/./) };
+    text Involved_Middle "Middle name" 30 must { checkexp(this,m/./) };
+    oneof Involved_Sex "Sex" [M,F];
+    oneof Involved_Race "Race" [White,Hispanic,Black];
+    text Involved_Address0 "Address" 50 must { checkexp(this,m/./) };
+    text Involved_Address1 "Address" 50 must { checkexp(this,m/./) };
+    text Involved_City "City" 40 must { checkexp(this,m/./) };
+    text Involved_County "County"30;
+    text Involved_State "State" 2 must { checkexp(this,m/./) };
+    text Involved_Zipcode "Zipcode" 5 must { checkexp(this,m/^\d\d\d\d\d$/) };
+    text Involved_Employer "Employer" 30 must { checkexp(this,m/./) };
+    datetime Involved_DOB "Date of birth" before { Information_entered_date_and_time } just_date;
+    text Involved_SSN "SSN" must { checkexp(this,m/^\d\d\d-\d\d-\d\d\d\d$/) };
+    text Involved_Phone0 "Phone" 12 must { checkexp(this,m/^\d\d\d-\d\d\d-\d\d\d\d$/) };
+    text Involved_Phone1 "Phone" 12 must { checkexp(this,m/^\d\d\d-\d\d\d-\d\d\d\d$/) };
+    text Involved_Phone2 "Phone" 12 must { checkexp(this,m/^\d\d\d-\d\d\d-\d\d\d\d$/) };
+    text Involved_Work_Phone0 "Work Phone" 12 must { checkexp(this,m/^\d\d\d-\d\d\d-\d\d\d\d$/) };
+    text Involved_Call_Back0 "Callback Phone" 12 must { checkexp(this,m/^\d\d\d-\d\d\d-\d\d\d\d$/) };
+    text Involved_Call_Back1 "Callback Phone" 12 must { checkexp(this,m/^\d\d\d-\d\d\d-\d\d\d\d$/) };
+    text Involved_State_License "State of License" 2 must { checkexp(this,m/./) };
+    text Involved_License "License number" 8 must { checkexp(this,m/./) };
+    oneof Involved_Military "Military" [Active,Inactive,Civilian];
+    oneof Involved_Complexion "Complexion" [Light,Dark,Mixed];
+    anyof Involved_Language "Language" other [ English, Spanish, French, Arabic, Somali ];
+    text Victim_Place_of_Birth "Place of birth" 60 must { checkexp(this,m/./) };
+    }
+
+section "Event"
+    {
+    oneof Zone [East_Side,North_Side,West_Side,East_Side];
+    text Location 5 40;
+    }
+
+section "Victim"
+    {
+    list with "Victim"
+	{
+	text Victim_Last "Last name" 30 must { checkexp(this,m/./) };
+	text Victim_First "First name" 30 must { checkexp(this,m/./) };
+	text Victim_Middle "Middle name" 30 must { checkexp(this,m/./) };
+	oneof Victim_Sex "Sex" [M,F];
+	oneof Victim_Race "Race" [White,Hispanic,Black];
+	text Victim_Address0 "Address" 50 must { checkexp(this,m/./) };
+	text Victim_Address1 "Address" 50 must { checkexp(this,m/./) };
+	text Victim_City "City" 40 must { checkexp(this,m/./) };
+	text Victim_County "County"30;
+	text Victim_State 2 "State" must { checkexp(this,m/./) };
+	text Victim_Zipcode "Zipcode" 5 must { checkexp(this,m/^\d\d\d\d\d$/) };
+	text Involved_Employer "Employer" 30 must { checkexp(this,m/./) };
+	datetime Victim_DOB "Date of birth" before { Information_entered_date_and_time } just_date;
+	#text Victim_SSN "SSN" must { checkexp(this,m/^\d\d\d-\d\d-\d\d\d\d$/) };
+	text Victim_Phone0 "Phone" 12 must { checkexp(this,m/^\d\d\d-\d\d\d-\d\d\d\d$/) };
+	#text Victim_Phone1 "Phone" 12 must { checkexp(this,m/^\d\d\d-\d\d\d-\d\d\d\d$/) };
+	#text Victim_Phone2 "Phone" 12 must { checkexp(this,m/^\d\d\d-\d\d\d-\d\d\d\d$/) };
+	text Victim_Work_Phone0 "Work Phone" 12 must { checkexp(this,m/^\d\d\d-\d\d\d-\d\d\d\d$/) };
+	text Victim_Call_Back0 "Callback Phone" 12 must { checkexp(this,m/^\d\d\d-\d\d\d-\d\d\d\d$/) };
+	#text Victim_Call_Back1 "Callback Phone" 12 must { checkexp(this,m/^\d\d\d-\d\d\d-\d\d\d\d$/) };
+	#text Victim_State_License "State of License" 2 must { checkexp(this,m/./) };
+	#text Victim_License "License number" 8 must { checkexp(this,m/./) };
+	oneof Victim_Military "Military" [Active,Inactive,Civilian];
+	#oneof Victim_Complexion "Complexion" [Light,Dark,Mixed];
+	anyof Victim_Language "Language" other [ English, Spanish, French, Arabic, Somali ];
+	#text Victim_Place_of_Birth "Place of birth" 60 must { checkexp(this,m/./) };
+	}
+    }
+
+section "People"
+    {
+    list with "People"
+	{
+	text People_Last "Last name" 30 must { checkexp(this,m/./) };
+	text People_First "First name" 30 must { checkexp(this,m/./) };
+	text People_Middle "Middle name" 30 must { checkexp(this,m/./) };
+	oneof People_Sex "Sex" [M,F];
+	oneof People_Race "Race" [White,Hispanic,Black];
+	text People_Address0 "Address" 50 must { checkexp(this,m/./) };
+	text People_Address1 "Address" 50 must { checkexp(this,m/./) };
+	text People_City "City" 40 must { checkexp(this,m/./) };
+	text People_County "County"30;
+	text People_State 2 "State" must { checkexp(this,m/./) };
+	text People_Zipcode "Zipcode" 5 must { checkexp(this,m/^\d\d\d\d\d$/) };
+	text Involved_Employer "Employer" 30 must { checkexp(this,m/./) };
+	datetime People_DOB "Date of birth" before { Information_entered_date_and_time } just_date;
+	#text People_SSN "SSN" must { checkexp(this,m/^\d\d\d-\d\d-\d\d\d\d$/) };
+	text People_Phone0 "Phone" 12 must { checkexp(this,m/^\d\d\d-\d\d\d-\d\d\d\d$/) };
+	#text People_Phone1 "Phone" 12 must { checkexp(this,m/^\d\d\d-\d\d\d-\d\d\d\d$/) };
+	#text People_Phone2 "Phone" 12 must { checkexp(this,m/^\d\d\d-\d\d\d-\d\d\d\d$/) };
+	text People_Work_Phone0 "Work Phone" 12 must { checkexp(this,m/^\d\d\d-\d\d\d-\d\d\d\d$/) };
+	text People_Call_Back0 "Callback Phone" 12 must { checkexp(this,m/^\d\d\d-\d\d\d-\d\d\d\d$/) };
+	#text People_Call_Back1 "Callback Phone" 12 must { checkexp(this,m/^\d\d\d-\d\d\d-\d\d\d\d$/) };
+	#text People_State_License "State of License" 2 must { checkexp(this,m/./) };
+	#text People_License "License number" 8 must { checkexp(this,m/./) };
+	oneof People_Military "Military" [Active,Inactive,Civilian];
+	#oneof People_Complexion "Complexion" [Light,Dark,Mixed];
+	anyof People_Language "Language" other [ English, Spanish, French, Arabic, Somali ];
+	#text People_Place_of_Birth "Place of birth" 60 must { checkexp(this,m/./) };
+	}
+    }
+
+section "Properties"
+    {
+    list with "Properties"
+        {
+	text Property_Name 30 must { checkexp(this,m/./) };
+	text Property_Number 30 must { checkexp(this,m/./) };
+	oneof Property_Status 30 must { checkexp(this,m/./) };
+	text Property_Quantity 3 must { checkexp(this,m/^\d\d*$/) };
+	oneof Property_Status 30 must { checkexp(this,m/./) };
+        datetime Property_date_and_time "Date/time Reported" default { now }
+	    help "Should be in the format:  NN/NN/NNNN NN:NN";
+	}
+    }
+
+section "Log entries"
+    {
+    list with "Entry"
+        {
+	text Entry_Entered_by "Entered by" 30 { checkexp(this,m/./) };
+        datetime Entry_date_and_time "Date/time Entered" default { now }
+	    help "Should be in the format:  NN/NN/NNNN NN:NN";
+	text Entry_text 30 60;
+	}
+    }
+}

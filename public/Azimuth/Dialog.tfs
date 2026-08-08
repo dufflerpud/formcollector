@@ -1,0 +1,220 @@
+var MUST_BE_RIGHT=5;
+var q_array = new Array();
+var cur_question = -1;
+
+var num_right = 0;
+var num_wrong = 0;
+
+function do_a_concept( concept_num )
+    {
+    switch( concept_num )
+        {
+	"0"	{
+		html " <pre>        0-360<br>          |  <br>   315    N    45<br>       NW | NE<br> 270--W---*---E--90<br>       SW | SE<br>    225   S   135<br>          |  <br> 	180<br> ";
+		}
+
+	"1"	{
+		html " ";
+		}
+
+	}
+    }
+
+function right_wrong( answer, right_answer, concept_num )
+    {
+    if( answer )
+        {
+	if( answer == right_answer )
+	    {
+	    html "<center>Right!</center><hr>";
+	    cur_question = next_question();
+	    num_right++;
+	    }
+	else
+	    {
+	    html "<center>Wrong!</center><hr>";
+	    do_a_concept( concept_num );
+	    html "<hr>";
+	    num_wrong++;
+	    }
+	}
+    }
+
+function setup_questions()
+    {
+    for ( var question_ctr=16; question_ctr-->0; )
+        {
+	for( var i=0; i<MUST_BE_RIGHT; i++ )
+	    { q_array.push( question_ctr ); }
+	}
+    }
+
+function next_question()
+    {
+    var q_ind = Math.floor( Math.random() * q_array.length );
+    var ind = q_array[ q_ind ];
+    q_array[ q_ind ] = q_array.pop();
+    return ind;
+    }
+
+function redraw()
+    {
+    if( cur_question < 0 )
+        {
+	cur_question = next_question();
+	}
+    switch { cur_question }
+        {
+	"0"	{
+		right_wrong( Azimuth_bearing_for_North_is, "_0_or_360_degrees", 0 );
+		Azimuth_bearing_for_North_is="";
+		}
+
+	"1"	{
+		right_wrong( _0_degrees_points, "North", 0 );
+		_0_degrees_points="";
+		}
+
+	"2"	{
+		right_wrong( Azimuth_bearing_for_East_is, "_90_degrees", 0 );
+		Azimuth_bearing_for_East_is="";
+		}
+
+	"3"	{
+		right_wrong( _90_degrees_points, "East", 0 );
+		_90_degrees_points="";
+		}
+
+	"4"	{
+		right_wrong( Azimuth_bearing_for_South_is, "_180_degrees", 0 );
+		Azimuth_bearing_for_South_is="";
+		}
+
+	"5"	{
+		right_wrong( _180_degrees_points, "South", 0 );
+		_180_degrees_points="";
+		}
+
+	"6"	{
+		right_wrong( Azimuth_bearing_for_West_is, "_270_degrees", 0 );
+		Azimuth_bearing_for_West_is="";
+		}
+
+	"7"	{
+		right_wrong( _270_degrees_points, "West", 0 );
+		_270_degrees_points="";
+		}
+
+	"8"	{
+		right_wrong( Azimuth_bearing_for_North_East_is, "_45_degrees", 0 );
+		Azimuth_bearing_for_North_East_is="";
+		}
+
+	"9"	{
+		right_wrong( _45_degrees_points, "North_East", 0 );
+		_45_degrees_points="";
+		}
+
+	"10"	{
+		right_wrong( Azimuth_bearing_for_North_West_is, "_315_degrees", 0 );
+		Azimuth_bearing_for_North_West_is="";
+		}
+
+	"11"	{
+		right_wrong( _315_degrees_points, "North_West", 0 );
+		_315_degrees_points="";
+		}
+
+	"12"	{
+		right_wrong( Azimuth_bearing_for_South_East_is, "_135_degrees", 0 );
+		Azimuth_bearing_for_South_East_is="";
+		}
+
+	"13"	{
+		right_wrong( _135_degrees_points, "South_East", 0 );
+		_135_degrees_points="";
+		}
+
+	"14"	{
+		right_wrong( Azimuth_bearing_for_South_West_is, "_225_degrees", 0 );
+		Azimuth_bearing_for_South_West_is="";
+		}
+
+	"15"	{
+		right_wrong( _225_degrees_points, "South_West", 0 );
+		_225_degrees_points="";
+		}
+
+	}
+    switch { cur_question }
+        {
+	"0"	{
+		oneof Azimuth_bearing_for_North_is "Azimuth bearing for North is" [ _0_or_360_degrees "0 or 360 degrees", _90_degrees "90 degrees", _180_degrees "180 degrees", _270_degrees "270 degrees" ] random_order checks line_per;
+		}
+
+	"1"	{
+		oneof _0_degrees_points "0 degrees points:" [ North "North", East "East", South "South", West "West" ] random_order checks line_per;
+		}
+
+	"2"	{
+		oneof Azimuth_bearing_for_East_is "Azimuth bearing for East is" [ _0_or_360_degrees "0 or 360 degrees", _90_degrees "90 degrees", _180_degrees "180 degrees", _270_degrees "270 degrees" ] random_order checks line_per;
+		}
+
+	"3"	{
+		oneof _90_degrees_points "90 degrees points:" [ North "North", East "East", South "South", West "West" ] random_order checks line_per;
+		}
+
+	"4"	{
+		oneof Azimuth_bearing_for_South_is "Azimuth bearing for South is" [ _0_or_360_degrees "0 or 360 degrees", _90_degrees "90 degrees", _180_degrees "180 degrees", _270_degrees "270 degrees" ] random_order checks line_per;
+		}
+
+	"5"	{
+		oneof _180_degrees_points "180 degrees points:" [ North "North", East "East", South "South", West "West" ] random_order checks line_per;
+		}
+
+	"6"	{
+		oneof Azimuth_bearing_for_West_is "Azimuth bearing for West is" [ _0_or_360_degrees "0 or 360 degrees", _90_degrees "90 degrees", _180_degrees "180 degrees", _270_degrees "270 degrees" ] random_order checks line_per;
+		}
+
+	"7"	{
+		oneof _270_degrees_points "270 degrees points:" [ North "North", East "East", South "South", West "West" ] random_order checks line_per;
+		}
+
+	"8"	{
+		oneof Azimuth_bearing_for_North_East_is "Azimuth bearing for North East is" [ _45_degrees "45 degrees", _135_degrees "135 degrees", _225_degrees "225 degrees", _315_degrees "315 degrees" ] random_order checks line_per;
+		}
+
+	"9"	{
+		oneof _45_degrees_points "45 degrees points:" [ North_East "North East", North_West "North West", South_East "South East", South_West "South West" ] random_order checks line_per;
+		}
+
+	"10"	{
+		oneof Azimuth_bearing_for_North_West_is "Azimuth bearing for North West is" [ _45_degrees "45 degrees", _135_degrees "135 degrees", _225_degrees "225 degrees", _315_degrees "315 degrees" ] random_order checks line_per;
+		}
+
+	"11"	{
+		oneof _315_degrees_points "315 degrees points:" [ North_East "North East", North_West "North West", South_East "South East", South_West "South West" ] random_order checks line_per;
+		}
+
+	"12"	{
+		oneof Azimuth_bearing_for_South_East_is "Azimuth bearing for South East is" [ _45_degrees "45 degrees", _135_degrees "135 degrees", _225_degrees "225 degrees", _315_degrees "315 degrees" ] random_order checks line_per;
+		}
+
+	"13"	{
+		oneof _135_degrees_points "135 degrees points:" [ North_East "North East", North_West "North West", South_East "South East", South_West "South West" ] random_order checks line_per;
+		}
+
+	"14"	{
+		oneof Azimuth_bearing_for_South_West_is "Azimuth bearing for South West is" [ _45_degrees "45 degrees", _135_degrees "135 degrees", _225_degrees "225 degrees", _315_degrees "315 degrees" ] random_order checks line_per;
+		}
+
+	"15"	{
+		oneof _225_degrees_points "225 degrees points:" [ North_East "North East", North_West "North West", South_East "South East", South_West "South West" ] random_order checks line_per;
+		}
+
+	}
+    var s = "<center><table border=1><tr><td>Right:"+num_right+"</td><td>Wrong:"+num_wrong+"</td><td>Total:16</td></tr></table></center>";
+    html { s };
+    }
+
+setup_questions();

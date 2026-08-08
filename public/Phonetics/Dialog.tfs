@@ -1,0 +1,310 @@
+var MUST_BE_RIGHT=5;
+var q_array = new Array();
+var cur_question = -1;
+
+var num_right = 0;
+var num_wrong = 0;
+
+function do_a_concept( concept_num )
+    {
+    switch( concept_num )
+        {
+	"0"	{
+		html " Phonetic codes: <pre>  Alpha    Beta     Charlie<br>  Delta    Echo     Foxtrot<br>  Golf     Hotel    Indigo<br>  Juliet   Kilo     Lima<br>  Mike     November Oscar<br>  Poppa    Quebec   Romeo<br>  Sierra   Tango    Uniform<br>  Victor   Whiskey  X-ray<br>  Yankee   Zulu </pre> ";
+		}
+
+	"1"	{
+		html " ";
+		}
+
+	}
+    }
+
+function right_wrong( answer, right_answer, concept_num )
+    {
+    if( answer )
+        {
+	if( answer == right_answer )
+	    {
+	    html "<center>Right!</center><hr>";
+	    cur_question = next_question();
+	    num_right++;
+	    }
+	else
+	    {
+	    html "<center>Wrong!</center><hr>";
+	    do_a_concept( concept_num );
+	    html "<hr>";
+	    num_wrong++;
+	    }
+	}
+    }
+
+function setup_questions()
+    {
+    for ( var question_ctr=26; question_ctr-->0; )
+        {
+	for( var i=0; i<MUST_BE_RIGHT; i++ )
+	    { q_array.push( question_ctr ); }
+	}
+    }
+
+function next_question()
+    {
+    var q_ind = Math.floor( Math.random() * q_array.length );
+    var ind = q_array[ q_ind ];
+    q_array[ q_ind ] = q_array.pop();
+    return ind;
+    }
+
+function redraw()
+    {
+    if( cur_question < 0 )
+        {
+	cur_question = next_question();
+	}
+    switch { cur_question }
+        {
+	"0"	{
+		right_wrong( Phonetic_code_for_A, "Alpha", 0 );
+		Phonetic_code_for_A="";
+		}
+
+	"1"	{
+		right_wrong( Phonetic_code_for_B, "Bravo", 0 );
+		Phonetic_code_for_B="";
+		}
+
+	"2"	{
+		right_wrong( Phonetic_code_for_C, "Charlie", 0 );
+		Phonetic_code_for_C="";
+		}
+
+	"3"	{
+		right_wrong( Phonetic_code_for_D, "Delta", 0 );
+		Phonetic_code_for_D="";
+		}
+
+	"4"	{
+		right_wrong( Phonetic_code_for_E, "Echo", 0 );
+		Phonetic_code_for_E="";
+		}
+
+	"5"	{
+		right_wrong( Phonetic_code_for_F, "Foxtrot", 0 );
+		Phonetic_code_for_F="";
+		}
+
+	"6"	{
+		right_wrong( Phonetic_code_for_G, "Golf", 0 );
+		Phonetic_code_for_G="";
+		}
+
+	"7"	{
+		right_wrong( Phonetic_code_for_H, "Hotel", 0 );
+		Phonetic_code_for_H="";
+		}
+
+	"8"	{
+		right_wrong( Phonetic_code_for_I, "Indigo", 0 );
+		Phonetic_code_for_I="";
+		}
+
+	"9"	{
+		right_wrong( Phonetic_code_for_J, "Juliet", 0 );
+		Phonetic_code_for_J="";
+		}
+
+	"10"	{
+		right_wrong( Phonetic_code_for_K, "Kilo", 0 );
+		Phonetic_code_for_K="";
+		}
+
+	"11"	{
+		right_wrong( Phonetic_code_for_L, "Lima", 0 );
+		Phonetic_code_for_L="";
+		}
+
+	"12"	{
+		right_wrong( Phonetic_code_for_M, "Mike", 0 );
+		Phonetic_code_for_M="";
+		}
+
+	"13"	{
+		right_wrong( Phonetic_code_for_N, "November", 0 );
+		Phonetic_code_for_N="";
+		}
+
+	"14"	{
+		right_wrong( Phonetic_code_for_O, "Oscar", 0 );
+		Phonetic_code_for_O="";
+		}
+
+	"15"	{
+		right_wrong( Phonetic_code_for_P, "Poppa", 0 );
+		Phonetic_code_for_P="";
+		}
+
+	"16"	{
+		right_wrong( Phonetic_code_for_Q, "Quebec", 0 );
+		Phonetic_code_for_Q="";
+		}
+
+	"17"	{
+		right_wrong( Phonetic_code_for_R, "Romeo", 0 );
+		Phonetic_code_for_R="";
+		}
+
+	"18"	{
+		right_wrong( Phonetic_code_for_S, "Sierra", 0 );
+		Phonetic_code_for_S="";
+		}
+
+	"19"	{
+		right_wrong( Phonetic_code_for_T, "Tango", 0 );
+		Phonetic_code_for_T="";
+		}
+
+	"20"	{
+		right_wrong( Phonetic_code_for_U, "Uniform", 0 );
+		Phonetic_code_for_U="";
+		}
+
+	"21"	{
+		right_wrong( Phonetic_code_for_V, "Victor", 0 );
+		Phonetic_code_for_V="";
+		}
+
+	"22"	{
+		right_wrong( Phonetic_code_for_W, "Whiskey", 0 );
+		Phonetic_code_for_W="";
+		}
+
+	"23"	{
+		right_wrong( Phonetic_code_for_X, "Xray", 0 );
+		Phonetic_code_for_X="";
+		}
+
+	"24"	{
+		right_wrong( Phonetic_code_for_Y, "Yankee", 0 );
+		Phonetic_code_for_Y="";
+		}
+
+	"25"	{
+		right_wrong( Phonetic_code_for_Z, "Zulu", 0 );
+		Phonetic_code_for_Z="";
+		}
+
+	}
+    switch { cur_question }
+        {
+	"0"	{
+		oneof Phonetic_code_for_A "Phonetic code for \"A\"" [ Alpha "Alpha", Able "Able", Azor "Azor", Adder "Adder" ] random_order checks line_per;
+		}
+
+	"1"	{
+		oneof Phonetic_code_for_B "Phonetic code for \"B\"" [ Bravo "Bravo", Baker "Baker", Blame "Blame", Borrowed "Borrowed" ] random_order checks line_per;
+		}
+
+	"2"	{
+		oneof Phonetic_code_for_C "Phonetic code for \"C\"" [ Charlie "Charlie", Carried "Carried", Carol "Carol", Crown "Crown" ] random_order checks line_per;
+		}
+
+	"3"	{
+		oneof Phonetic_code_for_D "Phonetic code for \"D\"" [ Delta "Delta", Dave "Dave", Damsel "Damsel", Darwin "Darwin" ] random_order checks line_per;
+		}
+
+	"4"	{
+		oneof Phonetic_code_for_E "Phonetic code for \"E\"" [ Echo "Echo", Edward "Edward", Elmira "Elmira", Elephant "Elephant" ] random_order checks line_per;
+		}
+
+	"5"	{
+		oneof Phonetic_code_for_F "Phonetic code for \"F\"" [ Foxtrot "Foxtrot", Fox "Fox", Fred "Fred", Found "Found" ] random_order checks line_per;
+		}
+
+	"6"	{
+		oneof Phonetic_code_for_G "Phonetic code for \"G\"" [ Golf "Golf", Gone "Gone", Galway "Galway", Gangway "Gangway" ] random_order checks line_per;
+		}
+
+	"7"	{
+		oneof Phonetic_code_for_H "Phonetic code for \"H\"" [ Hotel "Hotel", Hot "Hot", Henry "Henry", Harvey "Harvey" ] random_order checks line_per;
+		}
+
+	"8"	{
+		oneof Phonetic_code_for_I "Phonetic code for \"I\"" [ Indigo "Indigo", Icecream "Icecream", Idol "Idol", Idea "Idea" ] random_order checks line_per;
+		}
+
+	"9"	{
+		oneof Phonetic_code_for_J "Phonetic code for \"J\"" [ Juliet "Juliet", June "June", Jaguar "Jaguar", Johnny "Johnny" ] random_order checks line_per;
+		}
+
+	"10"	{
+		oneof Phonetic_code_for_K "Phonetic code for \"K\"" [ Kilo "Kilo", Kingston "Kingston", Kidder "Kidder", Kipper "Kipper" ] random_order checks line_per;
+		}
+
+	"11"	{
+		oneof Phonetic_code_for_L "Phonetic code for \"L\"" [ Lima "Lima", Ladder "Ladder", Lindsey "Lindsey", Lover "Lover" ] random_order checks line_per;
+		}
+
+	"12"	{
+		oneof Phonetic_code_for_M "Phonetic code for \"M\"" [ Mike "Mike", Mother "Mother", Molly "Molly", Mobster "Mobster" ] random_order checks line_per;
+		}
+
+	"13"	{
+		oneof Phonetic_code_for_N "Phonetic code for \"N\"" [ November "November", Nancy "Nancy", Nattily "Nattily", Nag "Nag" ] random_order checks line_per;
+		}
+
+	"14"	{
+		oneof Phonetic_code_for_O "Phonetic code for \"O\"" [ Oscar "Oscar", Oddness "Oddness", Obligate "Obligate", Object "Object" ] random_order checks line_per;
+		}
+
+	"15"	{
+		oneof Phonetic_code_for_P "Phonetic code for \"P\"" [ Poppa "Poppa", Peas "Peas", Paddle "Paddle", Pancreas "Pancreas" ] random_order checks line_per;
+		}
+
+	"16"	{
+		oneof Phonetic_code_for_Q "Phonetic code for \"Q\"" [ Quebec "Quebec", Queen "Queen", Quenton "Quenton", Quarry "Quarry" ] random_order checks line_per;
+		}
+
+	"17"	{
+		oneof Phonetic_code_for_R "Phonetic code for \"R\"" [ Romeo "Romeo", Romulus "Romulus", Renter "Renter", Rated "Rated" ] random_order checks line_per;
+		}
+
+	"18"	{
+		oneof Phonetic_code_for_S "Phonetic code for \"S\"" [ Sierra "Sierra", Salmon "Salmon", Santa "Santa", Sally "Sally" ] random_order checks line_per;
+		}
+
+	"19"	{
+		oneof Phonetic_code_for_T "Phonetic code for \"T\"" [ Tango "Tango", Tarry "Tarry", Topper "Topper", Tackle "Tackle" ] random_order checks line_per;
+		}
+
+	"20"	{
+		oneof Phonetic_code_for_U "Phonetic code for \"U\"" [ Uniform "Uniform", Unicorn "Unicorn", Ukelele "Ukelele", Uvula "Uvula" ] random_order checks line_per;
+		}
+
+	"21"	{
+		oneof Phonetic_code_for_V "Phonetic code for \"V\"" [ Victor "Victor", Vector "Vector", Velma "Velma", Vanquish "Vanquish" ] random_order checks line_per;
+		}
+
+	"22"	{
+		oneof Phonetic_code_for_W "Phonetic code for \"W\"" [ Whiskey "Whiskey", Wackey "Wackey", Worthy "Worthy", Washer "Washer" ] random_order checks line_per;
+		}
+
+	"23"	{
+		oneof Phonetic_code_for_X "Phonetic code for \"X\"" [ Xray "Xray", Xylophone "Xylophone", Xavier "Xavier", Xenia "Xenia" ] random_order checks line_per;
+		}
+
+	"24"	{
+		oneof Phonetic_code_for_Y "Phonetic code for \"Y\"" [ Yankee "Yankee", Yardstick "Yardstick", Yarmouth "Yarmouth", Yaz "Yaz" ] random_order checks line_per;
+		}
+
+	"25"	{
+		oneof Phonetic_code_for_Z "Phonetic code for \"Z\"" [ Zulu "Zulu", Zebra "Zebra", Zen "Zen", Zucker "Zucker" ] random_order checks line_per;
+		}
+
+	}
+    var s = "<center><table border=1><tr><td>Right:"+num_right+"</td><td>Wrong:"+num_wrong+"</td><td>Total:26</td></tr></table></center>";
+    html { s };
+    }
+
+setup_questions();

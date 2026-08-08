@@ -1,0 +1,16 @@
+#!/bin/sh -x
+
+myname=`echo $0 | sed -e 's/.*Bill_//'`
+
+while [ "$#" -gt 0 ] ; do
+    case "$1" in
+        *)	myname=$1			;;
+    esac
+    shift
+done
+
+cd $HOME/projects/formcollector/public/Brightsands_timeclock
+./generate_invoice.pl $myname
+
+cd $HOME/public_html
+./formcollector.cgi form=Brightsands_timeclock bill $myname

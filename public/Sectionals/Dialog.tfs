@@ -1,0 +1,278 @@
+var MUST_BE_RIGHT=5;
+var q_array = new Array();
+var cur_question = -1;
+
+var num_right = 0;
+var num_wrong = 0;
+
+function do_a_concept( concept_num )
+    {
+    switch( concept_num )
+        {
+	"0"	{
+		html "<center> Civilian hard-surfaced runway greater than 8069 feet or multiple runways<br> <img src=\"Sectionals/Civilian_hard-surfaced_runway_greater_than_8069_feet_or_multiple_runways.jpg\"><hr> Civilian hard-surfaced runways 1500 to 8069 feet<br> <img src=\"Sectionals/Civilian_hard-surfaced_runways_1500_to_8069_feet.jpg\"><hr> Civilian other than hard-surfaced runways<br> <img src=\"Sectionals/Civilian_other_than_hard-surfaced_runways.jpg\"><hr> Civilian seaplane base<br> <img src=\"Sectionals/Civilian_seaplane_base.jpg\"> </center>     ";
+		}
+
+	"1"	{
+		html " ";
+		}
+
+	"2"	{
+		html "<center> Lit obstacle 1000 AGL and higher<br> <img src=\"Sectionals/Lit_obstacle_1000_AGL_and_higher.jpg\"><hr> Lit obstacle less than 1000 AGL<br> <img src=\"Sectionals/Lit_obstacle_less_than_1000_AGL.jpg\"><hr> Unlit obstacle 1000 AGL and higher<br> <img src=\"Sectionals/Unlit_obstacle_1000_AGL_and_higher.jpg\"><hr> Unlit obstacle less than 1000 AGL<br> <img src=\"Sectionals/Unlit_obstacle_less_than_1000_AGL.jpg\"></center> ";
+		}
+
+	"3"	{
+		html " ";
+		}
+
+	"4"	{
+		html "<center> Alert area<br> <img src=\"Sectionals/Alert_area.jpg\"><hr> Military Operations area<br> <img src=\"Sectionals/Military_Operations_area.jpg\"><hr> Prohibited Restricted or Warning area<br> <img src=\"Sectionals/Prohibited_Restricted_or_Warning_area.jpg\"></center> ";
+		}
+
+	"5"	{
+		html " ";
+		}
+
+	"6"	{
+		html " With the following notation next to an object:<br> <img src=\"Sectionals/5540_MSL_650_AGL.jpg\"> A blue number not in parentheses, indicates the altitude of the top of an object with respect to mean sea level (MSL).  A blue number within parentheses indicates the altitude above the ground (AGL).  In this case, the top of the object is 5540 feet MSL or 650 feet AGL. ";
+		}
+
+	"7"	{
+		html " ";
+		}
+
+	"8"	{
+		html " With the following notation next to an object:<br> <img src=\"Sectionals/5540_MSL_650_AGL.jpg\"> A blue number not in parentheses, indicates the altitude of the top of an object with respect to mean sea level (MSL).  A blue number within parentheses indicates the altitude above the ground (AGL).  In this case, the top of the object is 5540 feet MSL or 650 feet AGL. ";
+		}
+
+	"9"	{
+		html " ";
+		}
+
+	"10"	{
+		html " A large blue number followed by a small blue digit shows the highest altitude in this section of the map in hundreds of feet above mean sea level (MSL). For instance:<br> <img src=\"Sectionals/Maximum_elevation.jpg\"><br> means that the highest tourain in the section is 12,500 feet. ";
+		}
+
+	"11"	{
+		html " ";
+		}
+
+	}
+    }
+
+function right_wrong( answer, right_answer, concept_num )
+    {
+    if( answer )
+        {
+	if( answer == right_answer )
+	    {
+	    html "<center>Right!</center><hr>";
+	    cur_question = next_question();
+	    num_right++;
+	    }
+	else
+	    {
+	    html "<center>Wrong!</center><hr>";
+	    do_a_concept( concept_num );
+	    html "<hr>";
+	    num_wrong++;
+	    }
+	}
+    }
+
+function setup_questions()
+    {
+    for ( var question_ctr=18; question_ctr-->0; )
+        {
+	for( var i=0; i<MUST_BE_RIGHT; i++ )
+	    { q_array.push( question_ctr ); }
+	}
+    }
+
+function next_question()
+    {
+    var q_ind = Math.floor( Math.random() * q_array.length );
+    var ind = q_array[ q_ind ];
+    q_array[ q_ind ] = q_array.pop();
+    return ind;
+    }
+
+function redraw()
+    {
+    if( cur_question < 0 )
+        {
+	cur_question = next_question();
+	}
+    switch { cur_question }
+        {
+	"0"	{
+		right_wrong( center_What_type_of_airport_is_this_br_img_src_Sectionals_Civilian_hard_surfaced_runway_greater_than_8069_feet_or_multiple_runways_jpg_center, "Civilian_hard_surfaced_runway_greater_than_8069_feet_or_multiple_runways", 0 );
+		center_What_type_of_airport_is_this_br_img_src_Sectionals_Civilian_hard_surfaced_runway_greater_than_8069_feet_or_multiple_runways_jpg_center="";
+		}
+
+	"1"	{
+		right_wrong( center_What_type_of_airport_is_this_br_img_src_Sectionals_Civilian_hard_surfaced_runways_1500_to_8069_feet_jpg_center, "Civilian_hard_surfaced_runways_1500_to_8069_feet", 0 );
+		center_What_type_of_airport_is_this_br_img_src_Sectionals_Civilian_hard_surfaced_runways_1500_to_8069_feet_jpg_center="";
+		}
+
+	"2"	{
+		right_wrong( center_What_type_of_airport_is_this_br_img_src_Sectionals_Civilian_other_than_hard_surfaced_runways_jpg_center, "Civilian_other_than_hard_surfaced_runways", 0 );
+		center_What_type_of_airport_is_this_br_img_src_Sectionals_Civilian_other_than_hard_surfaced_runways_jpg_center="";
+		}
+
+	"3"	{
+		right_wrong( center_What_type_of_airport_is_this_br_img_src_Sectionals_Civilian_seaplane_base_jpg_center, "Civilian_seaplane_base", 0 );
+		center_What_type_of_airport_is_this_br_img_src_Sectionals_Civilian_seaplane_base_jpg_center="";
+		}
+
+	"4"	{
+		right_wrong( center_What_is_this_br_img_src_Sectionals_Lit_obstacle_1000_AGL_and_higher_jpg_center, "Lit_obstacle_1000_AGL_and_higher", 2 );
+		center_What_is_this_br_img_src_Sectionals_Lit_obstacle_1000_AGL_and_higher_jpg_center="";
+		}
+
+	"5"	{
+		right_wrong( center_What_is_this_br_img_src_Sectionals_Lit_obstacle_less_than_1000_AGL_jpg_center, "Lit_obstacle_less_than_1000_AGL", 2 );
+		center_What_is_this_br_img_src_Sectionals_Lit_obstacle_less_than_1000_AGL_jpg_center="";
+		}
+
+	"6"	{
+		right_wrong( center_What_is_this_br_img_src_Sectionals_Unlit_obstacle_1000_AGL_and_higher_jpg_center, "Unlit_obstacle_1000_AGL_and_higher", 2 );
+		center_What_is_this_br_img_src_Sectionals_Unlit_obstacle_1000_AGL_and_higher_jpg_center="";
+		}
+
+	"7"	{
+		right_wrong( center_What_is_this_br_img_src_Sectionals_Unlit_obstacle_less_than_1000_AGL_jpg_center, "Unlit_obstacle_less_than_1000_AGL", 2 );
+		center_What_is_this_br_img_src_Sectionals_Unlit_obstacle_less_than_1000_AGL_jpg_center="";
+		}
+
+	"8"	{
+		right_wrong( center_What_is_this_br_img_src_Sectionals_Alert_area_jpg, "Alert_area", 4 );
+		center_What_is_this_br_img_src_Sectionals_Alert_area_jpg="";
+		}
+
+	"9"	{
+		right_wrong( center_What_is_this_br_img_src_Sectionals_Military_Operations_area_jpg, "Military_Operations_area", 4 );
+		center_What_is_this_br_img_src_Sectionals_Military_Operations_area_jpg="";
+		}
+
+	"10"	{
+		right_wrong( center_What_is_this_br_img_src_Sectionals_Prohibited_Restricted_or_Warning_area_jpg, "Prohibited_Restricted_or_Warning_area", 4 );
+		center_What_is_this_br_img_src_Sectionals_Prohibited_Restricted_or_Warning_area_jpg="";
+		}
+
+	"11"	{
+		right_wrong( If_the_following_appeared_next_to_an_object_br_img_src_Sectionals_5540_MSL_650_AGL_jpg_br_What_is_the_altitude_above_ground_level_AGL_of_the_top_of_the_object, "_650", 6 );
+		If_the_following_appeared_next_to_an_object_br_img_src_Sectionals_5540_MSL_650_AGL_jpg_br_What_is_the_altitude_above_ground_level_AGL_of_the_top_of_the_object="";
+		}
+
+	"12"	{
+		right_wrong( If_the_following_appeared_next_to_an_object_br_img_src_Sectionals_5540_MSL_650_AGL_jpg_br_What_is_the_altitude_above_mean_sea_level_MSL_of_the_top_of_the_object, "_5540", 6 );
+		If_the_following_appeared_next_to_an_object_br_img_src_Sectionals_5540_MSL_650_AGL_jpg_br_What_is_the_altitude_above_mean_sea_level_MSL_of_the_top_of_the_object="";
+		}
+
+	"13"	{
+		right_wrong( img_src_Sectionals_Garfield_stack_jpg_br_How_many_feet_is_the_bottom_of_Garfield_stack_above_ground_level_AGL, "_0", 8 );
+		img_src_Sectionals_Garfield_stack_jpg_br_How_many_feet_is_the_bottom_of_Garfield_stack_above_ground_level_AGL="";
+		}
+
+	"14"	{
+		right_wrong( img_src_Sectionals_Garfield_stack_jpg_br_How_many_feet_is_the_bottom_of_Garfield_stack_above_mean_sea_level_MSL, "_4890", 8 );
+		img_src_Sectionals_Garfield_stack_jpg_br_How_many_feet_is_the_bottom_of_Garfield_stack_above_mean_sea_level_MSL="";
+		}
+
+	"15"	{
+		right_wrong( img_src_Sectionals_Garfield_stack_jpg_br_How_many_feet_is_the_top_of_Garfield_stack_above_ground_level_AGL, "_650", 8 );
+		img_src_Sectionals_Garfield_stack_jpg_br_How_many_feet_is_the_top_of_Garfield_stack_above_ground_level_AGL="";
+		}
+
+	"16"	{
+		right_wrong( img_src_Sectionals_Garfield_stack_jpg_br_How_many_feet_is_the_top_of_Garfield_stack_above_mean_sea_level_MSL, "_5540", 8 );
+		img_src_Sectionals_Garfield_stack_jpg_br_How_many_feet_is_the_top_of_Garfield_stack_above_mean_sea_level_MSL="";
+		}
+
+	"17"	{
+		right_wrong( img_src_Sectionals_Maximum_elevation_jpg_br_means_that_the_highest_tourain_in_this_section_is, "_12_5_feet", 10 );
+		img_src_Sectionals_Maximum_elevation_jpg_br_means_that_the_highest_tourain_in_this_section_is="";
+		}
+
+	}
+    switch { cur_question }
+        {
+	"0"	{
+		oneof center_What_type_of_airport_is_this_br_img_src_Sectionals_Civilian_hard_surfaced_runway_greater_than_8069_feet_or_multiple_runways_jpg_center "<center>         What type of airport is this?<br> 	<img src=\"Sectionals/Civilian_hard-surfaced_runway_greater_than_8069_feet_or_multiple_runways.jpg\">     </center>" [ Civilian_hard_surfaced_runway_greater_than_8069_feet_or_multiple_runways "Civilian hard-surfaced runway greater than 8069 feet or multiple runways", Civilian_hard_surfaced_runways_1500_to_8069_feet "Civilian hard-surfaced runways 1500 to 8069 feet", Civilian_other_than_hard_surfaced_runways "Civilian other than hard-surfaced runways", Civilian_seaplane_base "Civilian seaplane base" ] random_order checks line_per;
+		}
+
+	"1"	{
+		oneof center_What_type_of_airport_is_this_br_img_src_Sectionals_Civilian_hard_surfaced_runways_1500_to_8069_feet_jpg_center "<center>         What type of airport is this?<br> 	<img src=\"Sectionals/Civilian_hard-surfaced_runways_1500_to_8069_feet.jpg\">     </center>" [ Civilian_hard_surfaced_runways_1500_to_8069_feet "Civilian hard-surfaced runways 1500 to 8069 feet", Civilian_hard_surfaced_runway_greater_than_8069_feet_or_multiple_runways "Civilian hard-surfaced runway greater than 8069 feet or multiple runways", Civilian_other_than_hard_surfaced_runways "Civilian other than hard-surfaced runways", Civilian_seaplane_base "Civilian seaplane base" ] random_order checks line_per;
+		}
+
+	"2"	{
+		oneof center_What_type_of_airport_is_this_br_img_src_Sectionals_Civilian_other_than_hard_surfaced_runways_jpg_center "<center>         What type of airport is this?<br> 	<img src=\"Sectionals/Civilian_other_than_hard-surfaced_runways.jpg\">     </center>" [ Civilian_other_than_hard_surfaced_runways "Civilian other than hard-surfaced runways", Civilian_hard_surfaced_runway_greater_than_8069_feet_or_multiple_runways "Civilian hard-surfaced runway greater than 8069 feet or multiple runways", Civilian_hard_surfaced_runways_1500_to_8069_feet "Civilian hard-surfaced runways 1500 to 8069 feet", Civilian_seaplane_base "Civilian seaplane base" ] random_order checks line_per;
+		}
+
+	"3"	{
+		oneof center_What_type_of_airport_is_this_br_img_src_Sectionals_Civilian_seaplane_base_jpg_center "<center>         What type of airport is this?<br> 	<img src=\"Sectionals/Civilian_seaplane_base.jpg\">     </center>" [ Civilian_seaplane_base "Civilian seaplane base", Civilian_hard_surfaced_runway_greater_than_8069_feet_or_multiple_runways "Civilian hard-surfaced runway greater than 8069 feet or multiple runways", Civilian_hard_surfaced_runways_1500_to_8069_feet "Civilian hard-surfaced runways 1500 to 8069 feet", Civilian_other_than_hard_surfaced_runways "Civilian other than hard-surfaced runways" ] random_order checks line_per;
+		}
+
+	"4"	{
+		oneof center_What_is_this_br_img_src_Sectionals_Lit_obstacle_1000_AGL_and_higher_jpg_center "<center> 	What is this?<br> 	<img src=\"Sectionals/Lit_obstacle_1000_AGL_and_higher.jpg\">     </center>" [ Lit_obstacle_1000_AGL_and_higher "     Lit obstacle 1000 AGL and higher", Lit_obstacle_less_than_1000_AGL "Lit obstacle less than 1000 AGL", Unlit_obstacle_1000_AGL_and_higher "Unlit obstacle 1000 AGL and higher", Unlit_obstacle_less_than_1000_AGL "Unlit obstacle less than 1000 AGL" ] random_order checks line_per;
+		}
+
+	"5"	{
+		oneof center_What_is_this_br_img_src_Sectionals_Lit_obstacle_less_than_1000_AGL_jpg_center "<center> 	What is this?<br> 	<img src=\"Sectionals/Lit_obstacle_less_than_1000_AGL.jpg\">     </center>" [ Lit_obstacle_less_than_1000_AGL "     Lit obstacle less than 1000 AGL", Lit_obstacle_1000_AGL_and_higher "Lit obstacle 1000 AGL and higher", Unlit_obstacle_1000_AGL_and_higher "Unlit obstacle 1000 AGL and higher", Unlit_obstacle_less_than_1000_AGL "Unlit obstacle less than 1000 AGL" ] random_order checks line_per;
+		}
+
+	"6"	{
+		oneof center_What_is_this_br_img_src_Sectionals_Unlit_obstacle_1000_AGL_and_higher_jpg_center "<center> 	What is this?<br> 	<img src=\"Sectionals/Unlit_obstacle_1000_AGL_and_higher.jpg\">     </center>" [ Unlit_obstacle_1000_AGL_and_higher "     Unlit obstacle 1000 AGL and higher", Lit_obstacle_1000_AGL_and_higher "Lit obstacle 1000 AGL and higher", Lit_obstacle_less_than_1000_AGL "Lit obstacle less than 1000 AGL", Unlit_obstacle_less_than_1000_AGL "Unlit obstacle less than 1000 AGL" ] random_order checks line_per;
+		}
+
+	"7"	{
+		oneof center_What_is_this_br_img_src_Sectionals_Unlit_obstacle_less_than_1000_AGL_jpg_center "<center> 	What is this?<br> 	<img src=\"Sectionals/Unlit_obstacle_less_than_1000_AGL.jpg\">     </center>" [ Unlit_obstacle_less_than_1000_AGL "     Unlit obstacle less than 1000 AGL", Lit_obstacle_1000_AGL_and_higher "Lit obstacle 1000 AGL and higher", Lit_obstacle_less_than_1000_AGL "Lit obstacle less than 1000 AGL", Unlit_obstacle_1000_AGL_and_higher "Unlit obstacle 1000 AGL and higher" ] random_order checks line_per;
+		}
+
+	"8"	{
+		oneof center_What_is_this_br_img_src_Sectionals_Alert_area_jpg "<center> What is this?<br> <img src=\"Sectionals/Alert_area.jpg\">" [ Alert_area "Alert area", Military_Operations_area "Military Operations area", Prohibited_Restricted_or_Warning_area "Prohibited Restricted or Warning area" ] random_order checks line_per;
+		}
+
+	"9"	{
+		oneof center_What_is_this_br_img_src_Sectionals_Military_Operations_area_jpg "<center> What is this?<br> <img src=\"Sectionals/Military_Operations_area.jpg\">" [ Military_Operations_area "Military Operations area", Alert_area "Alert area", Prohibited_Restricted_or_Warning_area "Prohibited Restricted or Warning area" ] random_order checks line_per;
+		}
+
+	"10"	{
+		oneof center_What_is_this_br_img_src_Sectionals_Prohibited_Restricted_or_Warning_area_jpg "<center> What is this?<br> <img src=\"Sectionals/Prohibited_Restricted_or_Warning_area.jpg\">" [ Prohibited_Restricted_or_Warning_area "Prohibited Restricted or Warning area", Alert_area "Alert area", Military_Operations_area "Military Operations area" ] random_order checks line_per;
+		}
+
+	"11"	{
+		oneof If_the_following_appeared_next_to_an_object_br_img_src_Sectionals_5540_MSL_650_AGL_jpg_br_What_is_the_altitude_above_ground_level_AGL_of_the_top_of_the_object "If the following appeared next to an object:<br>     <img src=\"Sectionals/5540_MSL_650_AGL.jpg\"><br>     What is the altitude above ground level (AGL) of the top of the object?" [ _650 "650", _5540 "5540" ] random_order checks line_per;
+		}
+
+	"12"	{
+		oneof If_the_following_appeared_next_to_an_object_br_img_src_Sectionals_5540_MSL_650_AGL_jpg_br_What_is_the_altitude_above_mean_sea_level_MSL_of_the_top_of_the_object "If the following appeared next to an object:<br>     <img src=\"Sectionals/5540_MSL_650_AGL.jpg\"><br>     What is the altitude above mean sea level (MSL) of the top of the object?" [ _5540 "5540", _650 "650" ] random_order checks line_per;
+		}
+
+	"13"	{
+		oneof img_src_Sectionals_Garfield_stack_jpg_br_How_many_feet_is_the_bottom_of_Garfield_stack_above_ground_level_AGL "<img src=\"Sectionals/Garfield_stack.jpg\"><br>     How many feet is the bottom of Garfield stack above ground level (AGL)?" [ _0 "0", _4890 "4890", _5540 "5540", _650 "650" ] random_order checks line_per;
+		}
+
+	"14"	{
+		oneof img_src_Sectionals_Garfield_stack_jpg_br_How_many_feet_is_the_bottom_of_Garfield_stack_above_mean_sea_level_MSL "<img src=\"Sectionals/Garfield_stack.jpg\"><br>     How many feet is the bottom of Garfield stack above mean sea level (MSL)?" [ _4890 "4890", _0 "0", _5540 "5540", _650 "650" ] random_order checks line_per;
+		}
+
+	"15"	{
+		oneof img_src_Sectionals_Garfield_stack_jpg_br_How_many_feet_is_the_top_of_Garfield_stack_above_ground_level_AGL "<img src=\"Sectionals/Garfield_stack.jpg\"><br>     How many feet is the top of Garfield stack above ground level (AGL)?" [ _650 "650", _0 "0", _4890 "4890", _5540 "5540" ] random_order checks line_per;
+		}
+
+	"16"	{
+		oneof img_src_Sectionals_Garfield_stack_jpg_br_How_many_feet_is_the_top_of_Garfield_stack_above_mean_sea_level_MSL "<img src=\"Sectionals/Garfield_stack.jpg\"><br>     How many feet is the top of Garfield stack above mean sea level (MSL)?" [ _5540 "5540", _0 "0", _4890 "4890", _650 "650" ] random_order checks line_per;
+		}
+
+	"17"	{
+		oneof img_src_Sectionals_Maximum_elevation_jpg_br_means_that_the_highest_tourain_in_this_section_is "<img src=\"Sectionals/Maximum_elevation.jpg\"><br>     means that the highest tourain in this section is:" [ _12_5_feet "12.5 feet", _125_feet "125 feet", _1250_feet "1250 feet", _12500_feet "12500 feet" ] random_order checks line_per;
+		}
+
+	}
+    var s = "<center><table border=1><tr><td>Right:"+num_right+"</td><td>Wrong:"+num_wrong+"</td><td>Total:18</td></tr></table></center>";
+    html { s };
+    }
+
+setup_questions();

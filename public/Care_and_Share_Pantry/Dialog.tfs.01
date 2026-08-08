@@ -1,0 +1,28 @@
+{
+section "About Me"
+    {
+    datetime Information_entered_date_and_time "Information_entered date and time" default { now }
+	help "Should be in the format:  NN/NN/NNNN NN:NN";
+    text Last_name 30 must { checkexp(this,m/./) };
+    }
+
+section "About my Situation"
+    {
+    oneof Housing other checks
+      [	Own_your_own_home, Private_rental, Unhoused, Rather_not_say ];
+
+    anyof Who_referred_you other checks
+      [	Clients_or_friends_or_family, Utilities_support, Other_food_bank ];
+    }
+
+section "Other household members"
+    {
+    list with Other_household_member
+	{
+	oneof Relationship_to_me other checks
+	  [	Friend, Partner, Ward, Prefer_not_to_say ];
+	text Last_name 30 must { checkexp(this,m/./) };
+	}
+    text Name_of_Friend 30;
+    }
+}

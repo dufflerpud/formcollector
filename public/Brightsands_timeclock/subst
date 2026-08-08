@@ -1,0 +1,31 @@
+#!/usr/bin/perl -w
+use strict;
+
+my $PROG = $0;
+$PROG =~ s+.*/++g;
+
+sub usage
+    {
+    print <<EOF;
+$_[0]
+
+Usage:  $PROG [ Workers | Projects ]
+EOF
+    exit(1);
+    }
+
+if( ! defined( $ARGV[0] ) ) { &usage("No argument specified."); }
+elsif( $ARGV[0] eq "Workers" ) { print <<EOF; }
+    angie "Angie Moore",
+    bridget "Bridget Baye",
+    chris "Christopher Caldwell",
+    cnorth "Christopher North",
+    holly "Holly Schmidt",
+    pschmidt "Peter Schmidt"
+EOF
+elsif ( $ARGV[0] eq "Projects" ) { print <<EOF; }
+    Software_development,
+    Sales_engineering,
+    Sales
+EOF
+else { &usage("Unknown argument:  $ARGV[0]"); }

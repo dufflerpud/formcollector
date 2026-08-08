@@ -1,0 +1,6 @@
+    .input_ok				{ background-color: #87cefa; }
+    .input_unanswered			{ background-color: #f0e68c; }
+    .input_abnormal			{ background-color: #f08080; }
+    .input_required			{ background-color: #f08000; }
+    .data_checked			{ background-color: #d0e5ff; }
+    .pic_selected			{ background-color: #d0e5ff; }
