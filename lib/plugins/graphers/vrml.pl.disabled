@@ -1,0 +1,913 @@
+#!/usr/bin/perl -w
+
+use strict;
+
+our %SEP;
+
+our $thisrep;
+our %reports;
+our %showing;
+
+our @aggregated_field_names;
+our @field_names;
+
+my @COLORS = ( "black", "blue", "red", "green", "purple", "yellow" );
+my @MARKS = ( "+", "*", "A".."Z", "a".."z", "0-9" );
+
+my $VRML_TEXT_SIZE	= 0.10;
+
+my %CANVAS	= ( "X"  =>     1024,
+		    "Y"=>       619 );
+my %TEXT	= ( "X"  =>     10,
+		    "Y"  =>     10,
+		    "X3" =>	$VRML_TEXT_SIZE,
+		    "Y3" =>	$VRML_TEXT_SIZE );
+my %MARGIN	= ( "X"  =>	$TEXT{X}*10,
+		    "Y"  =>	$TEXT{X}*23 );
+my %TOTAL	= ( "X"  =>	$CANVAS{X}+$MARGIN{X},
+		    "Y"  =>	$CANVAS{Y}+$MARGIN{Y} );
+
+my $PROG = $0;
+$PROG =~ s+.*/++;
+
+my @keys_to_plot;
+
+my $csind = 32;
+my %charsize = map { chr($csind++), $_ }
+    (
+    10,5,5,9,10,12,13,5,7,7,8,13,5,13,5,11,10,10,10,10,10,10,10,10,10,
+    10,5,5,12,13,12,9,13,9,10,11,10,9,8,11,11,4,8,10,7,12,11,11,10,11,10,
+    10,8,11,9,12,10,9,10,7,11,7,11,12,5,8,9,9,10,9,6,9,9,4,5,8,4,15,
+    9,9,9,9,6,8,6,9,8,11,8,8,8,7,4,7,11
+    );
+
+my $image_technology;
+
+my @POSSIBLE_AXES = ( 'X'..'Z', 'Color', 'A'..'W' );
+
+my @areas = ();
+
+my @vrml_boxes = ();
+my %vrml_points = ();
+my $num_vrml_points = 0;
+my @vrml_lines = ();
+my @vrml_line_colors = ();
+my @vrml_texts = ();
+
+my %lastkey;
+
+#########################################################################
+#	Returns the width of a string in bits.				#
+#########################################################################
+sub char_width
+    {
+    my ( $s ) = @_;
+    my $ret = 0;
+    grep( $ret += $charsize{$_}, split(//,$s) );
+    return $ret;
+    }
+
+#########################################################################
+#	Print out whatever useful data we're looking at for debugging.	#
+#########################################################################
+sub dump_debug
+    {
+    my( $msg, @ranges ) = @_;
+    my $ind;
+    $msg .= ":\n";
+    for( $ind=0; $ind<scalar(@ranges); $ind++ )
+	{
+	$msg .= join("",
+	    map {"  ${_}:".$ranges[$ind]{$_}}
+		reverse sort keys %{$ranges[$ind]} );
+	$msg .= " ORDER:" . join(" ",@{$ranges[$ind]{order}});
+	$msg .= "\n";
+	}
+    print STDERR $msg;
+    }
+
+#########################################################################
+#	Map 3-d coordinates to 2-d coordinates				#
+#########################################################################
+sub real_to_display
+    {
+    my( @old_coords ) = @_;
+    my( @new_coords ) = @old_coords;
+    if( scalar(@old_coords) == 3 )
+        {
+	@new_coords = ( $old_coords[0]     + $old_coords[1]/2.0,
+			$old_coords[1]/2.0 + $old_coords[2]     );
+	print STDERR "CANVAS{X}=$CANVAS{X} CANVAS{Y}=$CANVAS{Y} MARGIN{X}=$MARGIN{X} MARGIN{Y}=$MARGIN{Y} new_coords=[".join(",",@new_coords)."]\n";
+	return ($CANVAS{X}*$new_coords[0]+$MARGIN{X},
+		$CANVAS{Y}*3.0/2-$CANVAS{Y}*$new_coords[1] );
+	}
+    return ($CANVAS{X}*$new_coords[0]+$MARGIN{X},
+	    $CANVAS{Y}-$CANVAS{Y}*$new_coords[1] );
+    }
+
+#########################################################################
+#	Print a command line to the command file.			#
+#########################################################################
+sub ppm_command
+    {
+    print OUT join(" ",@_) . ";\n";
+    print STDERR "ppm_command(",join(" ",@_),")\n";
+    }
+
+#########################################################################
+#	Draw text (quoting correctly) and return string width.		#
+#########################################################################
+sub draw_text
+    {
+    my( $url, $str, $wp ) = @_;
+    my( $height, $angle, $lnum, $x, $y, $x3, $y3, $z3 ) =
+        ( $wp->{HGT}, $wp->{ANG}, $wp->{LINE},
+	    $wp->{X}, $wp->{Y}, $wp->{X3}, $wp->{Y3}, $wp->{Z3} );
+    &ppm_command( "text", $x, $y, $height, $angle, '"' . $str . '"' );
+    push(@areas,
+        "<area shape='circle' coords='$x,$y,$height' href='$url' />")
+        if( $url );
+    #appearance Appearance { Material { } }
+    my $args = sprintf("%04d: 2D:%5.2f,%5.2f 3D:%5.2f,%5.2f,%5.2f HGT:%5.2f ANG:%3d [%s] [%s]",
+	$wp->{LINE},
+	$wp->{X}, $wp->{Y}, $wp->{X3}, $wp->{Y3}, $wp->{Z3},
+	$wp->{HGT}, $wp->{ANG},
+	$url, $str );
+
+    push( @vrml_texts, <<EOF );
+Transform
+ {
+ #$args
+ translation $x3 $y3 $z3
+ children[Shape{geometry Text{fontStyle FontStyle{size $VRML_TEXT_SIZE}string["$str"]}}]
+ }
+EOF
+    return &char_width( $str );
+    }
+
+#########################################################################
+#	Draw line							#
+#########################################################################
+sub draw_line
+    {
+    my( $x0, $y0, $x1, $y1 ) = @_;
+    &ppm_command( "line", $x0, $y0, $x1, $y1 );
+    }
+
+#########################################################################
+#	Draw line after mapping coordinates from reality to frame.	#
+#########################################################################
+sub draw_mapped_line
+    {
+    my( @coords ) = @_;
+    if( 1 )
+        {
+	my @mcoords =
+	    ( defined( $coords[5] )
+	    ? @coords
+	    : ( @coords[0..1], 0, @coords[2..3], 0 )
+	    );
+	my $in_from = join(" ",@mcoords[0..2]);
+	$vrml_points{$in_from}=$num_vrml_points++
+	    if( ! defined($vrml_points{$in_from} ) );
+	$in_from = $vrml_points{$in_from};
+
+	my $out_from = join(" ",@mcoords[3..5]);
+	$vrml_points{$out_from}=$num_vrml_points++
+	    if( ! defined($vrml_points{$out_from} ) );
+	$out_from = $vrml_points{$out_from};
+	print STDERR "Mapped ",join(",",@mcoords[0..2])," to $in_from and ",join(",",@mcoords[3..5])," to $out_from.\n";
+	push( @vrml_lines, $in_from, $out_from, -1 );
+	push( @vrml_line_colors, 0, 0, 0 );
+	}
+    return &draw_line(
+        ( defined( $coords[4] )
+	? (&real_to_display( @coords[0..2] ), &real_to_display( @coords[3..5] ))
+	: (&real_to_display( @coords[0..1] ), &real_to_display( @coords[2..3] ))
+	) );
+    }
+
+#########################################################################
+#	Draw box							#
+#########################################################################
+sub draw_box
+    {
+    my( $url, @coords ) = @_;
+    print STDERR "draw_box(",join(",",@coords),")\n";
+    
+    my( @twod ) = 
+        ( defined($coords[4])
+	? ($coords[0],$coords[1],$coords[3],$coords[4])
+	: ($coords[0],$coords[1],$coords[2],$coords[3])
+	);
+    print STDERR "pre sorted draw_box(",join(",",@twod),")\n";
+    ( $twod[0], $twod[2] ) = sort { $a<=> $b } ( $twod[0], $twod[2] );
+    ( $twod[1], $twod[3] ) = sort { $a<=> $b } ( $twod[1], $twod[3] );
+    print STDERR "sorted draw_box(",join(",",@twod),")\n";
+    ppm_command( "filledrectangle",
+	$twod[0], $twod[1], $twod[2]-$twod[0], $twod[3]-$twod[1] );
+    push(@areas,
+        "<area shape='rect' coords='".join(",",@twod)."' href='$url' />")
+        if( $url );
+    }
+
+#########################################################################
+#	Draw rectangle after mapping coordinates from reality to frame.	#
+#########################################################################
+my $vrml_boxnum = 0;
+sub draw_mapped_box
+    {
+    my( $url, @coords ) = @_;
+    print STDERR "draw_mapped_box(",join(",",@coords),")\n";
+    if( 1 ) # $graph_type eq "vrml" )
+        {
+	my @mcoords =
+	    ( defined( $coords[5] )
+	    ? @coords
+	    : ( @coords[0..1], 0, @coords[2..3], 0 )
+	    );
+	my @diffs =
+	    (
+	    $mcoords[3]-$mcoords[0],
+	    $mcoords[4]-$mcoords[1],
+	    $mcoords[5]-$mcoords[2]
+	    );
+	push( @vrml_boxes,
+	    sprintf( "DEF box%d Transform\n { translation %.3f %.3f %.3f\n"
+		. " children\n  [\n"
+		. "  Shape { geometry Box { size %.3f %.3f %.3f } }\n  ]\n }\n",
+	    $vrml_boxnum++,
+	    $mcoords[0]+$diffs[0]/2,
+	    $mcoords[1]+$diffs[1]/2,
+	    $mcoords[2]+$diffs[2]/2,
+	    @diffs
+	    ) );
+	}
+    # else
+	{
+	return &draw_box( $url,
+	    ( defined( $coords[4] )
+	    ? (&real_to_display(@coords[0..2]), &real_to_display(@coords[3..5]))
+	    : (&real_to_display(@coords[0..1]), &real_to_display(@coords[2..3]))
+	    ) );
+	}
+    }
+
+#########################################################################
+#	Set color if we need to.					#
+#########################################################################
+my $last_color;
+sub set_color
+    {
+    my( $color ) = @_;
+    &ppm_command( "setcolor", $color )
+	if( !defined($last_color) || $last_color ne $color );
+    $last_color = $color;
+    }
+
+#########################################################################
+#	Create a file filled with ppmdraw commands.			#
+#########################################################################
+sub plot_x_vs_ys_cmds
+    {
+    my( $argp, $fname, @ranges ) = @_;
+    my $ind;
+    my %range_inds = map { $_, 0 } @POSSIBLE_AXES;
+    my %axes = ();
+    my %counts;
+    my $last_axis;
+
+    open( OUT, ">$fname" ) || die("Cannot write ${fname}:  $!");
+
+    # Create a hash of axes indexed by dimension ("X", "Y", etc.)
+    grep( push( @{$axes{$$_{axis}}}, $_ ), @ranges );
+
+    # Print out debug information.
+    grep( &dump_debug("Axis $_",@{$axes{$_}}), sort keys %axes );
+
+    # Draw the axes lines
+    &set_color( "black" );
+    if( $axes{Z} )
+        { # 3-D logic.
+	# We need to shrink the size to draw on due to offsetting of fake 3-D
+	$CANVAS{X} = $CANVAS{X} * 2 / 3;
+	$CANVAS{Y} = $CANVAS{Y} * 2 / 3;
+	&draw_mapped_line( 0, 0, 0, 1, 0, 0 );
+	&draw_mapped_line( 0, 0, 0, 0, 1, 0 );
+	&draw_mapped_line( 0, 0, 0, 0, 0, 1 );
+	}
+    else
+        { # 2-D logic
+	&draw_mapped_line( 0, 0, 1, 0 );
+	&draw_mapped_line( 0, 0, 0, 1 );
+	}
+
+    # Put labels on all of the axes
+    my $title_y = $TOTAL{Y};
+    my $title_y3 = 0;
+    foreach my $range ( @ranges )
+        {
+	my( $arg, $color, $chunks, $smooth, $type, $orderp,
+	    $countsp, $axis ) =
+	    ( $$range{var},
+		$$range{color}, $$range{chunks}, $$range{smooth},
+		$$range{type}, $$range{order}, $$range{counts},
+		$$range{axis} );
+	my $txt = &token_to_text( $arg );
+
+	my %text_pos;
+
+	$$range{min} = (@$orderp)[0];
+	$$range{max} = (@$orderp)[$#$orderp];
+
+	if( $type eq "other" )
+	    {
+	    $$range{min} = 0;
+	    $$range{max} = scalar( keys %{$countsp} );
+	    $chunks = $$range{chunks} = scalar( @$orderp );
+	    }
+
+	my $dist_between = 1.0 / $chunks;
+	my $rpos = ($range_inds{$axis}+1) / ( scalar( @{$axes{$axis}} ) + 1 );
+	my $axind = 0;
+	$axind += $dist_between/2.0 if( $type eq "other" );
+	print STDERR "AXIS $axis=".$chunks.", db=$dist_between.  axind=$axind.\n";
+	print STDERR "Bars for $arg on $axis every $dist_between.\n";
+	if( $axis eq "X" )
+	    {
+	    $title_y -= 1.5*$TEXT{Y};
+	    %text_pos =
+		(
+		"LINE"	=>__LINE__,
+		"X"	=>$MARGIN{X} + $rpos*$CANVAS{X} - $TEXT{X}*length($txt)/2,
+		"X3"	=>$rpos - $TEXT{X3}*length($txt)/2,
+		"Y"	=>$title_y,
+		"Y3"	=>$title_y3,
+		"Z3"	=>0,
+		"HGT"	=>$TEXT{Y},
+		"ANG"	=>0
+		);
+	    &set_color( "blue" );
+	    for( ; $axind<=1.0; $axind+=$dist_between )
+	        {
+		if( $axes{Z} )
+		    {
+		    &draw_mapped_line( $axind, 0, 0, $axind, 0, 1 );
+		    &draw_mapped_line( $axind, 0, 0, $axind, 1, 0 );
+		    }
+		else
+		    {
+		    &draw_mapped_line( $axind, 0, $axind, 1 );
+		    }
+		}
+	    }
+	elsif( $axis eq "Y" && $axes{Z} )
+	    {
+	    %text_pos =
+		(
+		"LINE"	=>__LINE__,
+		"X"	=> $MARGIN{X} + $rpos*$CANVAS{X}/2.0,
+		"X3"	=> 0,
+		"Y"	=> $TOTAL{Y} - $MARGIN{Y} - $CANVAS{Y} - $rpos*$CANVAS{Y}/2.0,
+		"Y3"	=> 0,
+		"Z3"	=> $rpos,
+		"HGT"	=> $TEXT{Y},
+		"ANG"	=> 30
+		);
+	    $text_pos{Y} -= $CANVAS{Y}/$chunks/2.0 if( $type eq "other" );
+	    &set_color( "green" );
+	    for( ; $axind<=1.0; $axind+=$dist_between )
+	        {
+		&draw_mapped_line( 0, $axind+0.00, 0, 0, $axind+0.00, 1 );
+		&draw_mapped_line( 0, $axind+0.00, 0, 1, $axind+0.00, 0 );
+		}
+	    }
+	elsif( ($axis eq "Y" && !$axes{Z}) || $axis eq "Z" )
+	    {
+	    %text_pos =
+		(
+		"LINE"	=>__LINE__,
+		"X"	=> $TEXT{Y}*2,
+		"X3"	=> 0,
+		"Y"	=> $TOTAL{Y} - $MARGIN{Y} - $rpos*$CANVAS{Y},
+		"Y3"	=> $rpos,
+		"Z3"	=> 0,
+		"HGT"	=> $TEXT{Y},
+		"ANG"	=> 90
+		);
+	    $text_pos{Y} -= $CANVAS{Y}/$chunks/2.0 if( $type eq "other" );
+	    &set_color( "red" );
+	    for( ; $axind<=1.0; $axind+=$dist_between )
+	        {
+		if( $axes{Z} )
+		    {
+		    &draw_mapped_line( 0, 0, $axind+0.00, 1, 0, $axind+0.00 );
+		    &draw_mapped_line( 0, 0, $axind+0.00, 0, 1, $axind+0.00 );
+		    }
+		else
+		    {
+		    &draw_mapped_line( 0, $axind+0.00, 1, $axind+0.00 );
+		    }
+		}
+	    }
+	else
+	    {
+	    $title_y -= 1.5*$TEXT{Y};
+	    %text_pos =
+		(
+		"LINE"	=>__LINE__,
+		"X"	=>$MARGIN{X},
+		"X3"	=>0,
+		"Y"	=>$title_y,
+		"Y3"	=>$title_y3,
+		"Z3"	=>0,
+		"HGT"	=>$TEXT{Y},
+		"ANG"	=>0
+		);
+	    $txt .= ":  ";
+	    }
+
+	&set_color( $color );
+	$text_pos{X} += &draw_text( "", $txt, \%text_pos );
+
+	print STDERR "axis=$axis min=$$range{min} max=$$range{max}.\n";
+	my $val;
+	for( $ind=$chunks; $ind>=0; $ind-- )
+	    {
+	    $val =
+		( $type eq "other"
+		? (@$orderp)[$ind]
+		: ($$range{min} + $ind/$chunks * ($$range{max}-$$range{min}))
+		);
+	    $val = ( ($type eq "datetime") ? &cpi_time::timestr($val) : $val );
+	    print STDERR "val=$val.\n";
+
+	    $val = &token_to_text($val);
+
+	    my $string_bit_width = &char_width($val);
+
+	    if( $axis eq "X" )
+		{
+		my ( $x, $y ) =
+		    ( $axes{Z}
+		    ? &real_to_display( $ind / $chunks, 0, 0 )
+		    : &real_to_display( $ind / $chunks, 0 )
+		    );
+		%text_pos =
+		    (
+		    "LINE"	=>__LINE__,
+		    "X"		=> $x,
+		    "X3"	=> $ind/$chunks,
+		    "Y"		=> $y + $string_bit_width,
+		    "Y3"	=> 0,
+		    "Z3"	=> 0,
+		    "HGT"	=> $TEXT{Y},
+		    "ANG"	=> 90,
+		    );
+		if( $type eq "other" )
+		    { $text_pos{X} += $CANVAS{X}/$chunks/2.0; }
+		elsif( $ind == 0 )
+		    { $text_pos{X} = $MARGIN{X} + $TEXT{Y}; }
+		}
+	    elsif( $axis eq "Y" && $axes{Z} )
+		{
+		my ( $x, $y ) = &real_to_display( 0, $ind / $chunks, 1 );
+		%text_pos =
+		    (
+		    "LINE"	=>__LINE__,
+		    "X"		=> $x - $string_bit_width, # * $TEXT{X} / 22,
+		    "X3"	=> 0,
+		    "Y"		=> $y,
+		    "Y3"	=> $ind/$chunks,
+		    "Z3"	=> 0,
+		    "HGT"	=> $TEXT{X},
+		    "ANG" => 0
+		    );
+		if( $type eq "other" )
+		    {
+		    $text_pos{X} += $CANVAS{X}/$chunks/4.0;
+		    $text_pos{Y} -= $CANVAS{Y}/$chunks/4.0;
+		    }
+#		elsif( $ind == 0 )
+#		    {
+#		    $text_pos{X} = $MARGIN{X} + $TEXT{Y}/2.0;
+#		    $text_pos{Y} = $CANVAS{Y} - $TEXT{X}/2.0;
+#		    }
+		}
+	    elsif( ($axis eq "Y" && !$axes{Z}) || $axis eq "Z" )
+	        {
+		my ( $x, $y ) =
+		    ( $axes{Z}
+		    ? &real_to_display( 0, 0, $ind / $chunks )
+		    : &real_to_display( 0, $ind / $chunks )
+		    );
+		%text_pos =
+		    (
+		    "LINE"	=>__LINE__,
+		    "X"		=> $x - $string_bit_width, # * $TEXT{X} / 22,
+		    "X3"	=> $x - $string_bit_width,
+		    "Y"		=> $y + $TEXT{Y},
+		    "Y3"	=> 0,
+		    "Z3"	=> $ind/$chunks,
+		    "HGT"	=> $TEXT{X},
+		    "ANG"	=> 0
+		    );
+		if( $type eq "other" )
+		    { $text_pos{Y} -= $CANVAS{Y}/$chunks/4.0; }
+		}
+	    else
+		{
+		print STDERR "COLORS[$ind]=[$COLORS[$ind]]\n";
+		if( $axis eq "Color" )
+		    { set_color( $COLORS[$ind] ); }
+		else # OK, we're running out of ways of showing a dimension
+		    { $text_pos{X} += &draw_text("",$MARKS[$ind],\%text_pos); }
+		$val = &token_to_text( (@$orderp)[$ind] );
+		print STDERR "Dumping($val)\n";
+		}
+	    $text_pos{X} += &draw_text( "", $val."  ", \%text_pos );
+	    }
+	$range_inds{$axis}++;
+	%counts = %$countsp if( $arg eq "Count" );
+	$last_axis = $axis;
+	}
+
+    my( $x, $y, $draw_flag );
+    my %ovals;
+	# keys %{$ycountsp}
+
+    my $max_count = 0;
+    grep( ($counts{$_}>$max_count) && ($max_count=$counts{$_}), keys %counts )
+        if( %counts );
+
+    my %rng = map {$_, ($axes{$_} ? ${$axes{$_}}[0] : undef)} @POSSIBLE_AXES;
+
+    my $jscript;
+
+    foreach my $key ( %counts ? keys %counts : @keys_to_plot )
+	{
+	print STDERR "TOL key=[$key].\n";
+	my $failed = 0;
+	my %avals;
+	my $msg;
+	my @constraints = ();
+	if( %counts )
+	    {
+	    print STDERR "Counts logic...\n";
+	    $msg = "$key counts to";
+	    my( @coords ) = split( /,/, $key );
+	    push( @coords, "" ) if( $key =~ /,$/ );
+	    print STDERR "Coords=[",join(",",@coords),"] len=",scalar(@coords),".\n";
+	    my( @tmp_ranges ) = @ranges;
+	    my $ax;
+	    foreach my $val ( @coords )
+	        {
+		my $rind = shift(@tmp_ranges);
+		print STDERR "QQQ val=[$val] axis=",$$rind{axis},".\n";
+		$ax = $$rind{axis};
+		$msg .= "($val)";
+		print STDERR "val=", $val,
+		    ", type=",$$rind{type},
+		    ", axis=",$$rind{axis},
+		    ".\n";
+		push( @constraints, $$rind{var}, $val );
+		if( $$rind{type} ne "other" )
+		    {
+		    my $over = ( ${$rng{$ax}}{max} - ${$rng{$ax}}{min} );
+		    $avals{$ax} = ( $val - ${$rng{$ax}}{min} );
+		    $avals{$ax} /= $over if( $over );
+		    print STDERR "new_avals{$ax} = $avals{$ax}.\n";
+		    }
+		else
+		    {
+		    my $ind = 0;
+		    while( ${$$rind{order}}[$ind] ne $val ) { $ind++; }
+		    $avals{$ax} =
+		        ( grep($_ eq $ax,"X","Y","Z")
+			? ($ind+0.5)/scalar(@{$$rind{order}})
+			: $ind
+			);
+		    print STDERR "count_avals{$ax} = $avals{$ax}.\n";
+		    $msg .= "[$ind]";
+		    }
+		}
+	    $max_count=1 unless( grep( $_ eq $last_axis, "X", "Y", "Z" ) );
+	    print STDERR
+		"rng{$last_axis}{order} = [",join(",",@{${$rng{$last_axis}}{order}}), "]\n";
+	    $avals{$last_axis} = $counts{$key} /
+	        ( $max_count
+		? $max_count
+		: scalar( ${${$rng{$last_axis}}{order}}[ $#{${$rng{$last_axis}}{order}} ] )
+		);
+	    my $click_to = $argp->{_click_to};
+	    $jscript =
+	        ( ($counts{$key} == 1)
+		? "javascript:submit_func(\"\",\"\",\"$lastkey{$key}\");"
+		: "javascript:submit_func(\"view\",\"$click_to\",\""
+		    . join( $SEP{FIELD}, $click_to, @constraints ) . "\");"
+		);
+	    print STDERR
+		"avals{$last_axis}=counts{$key}($counts{$key})=$avals{$last_axis}.\n$msg";
+	    }
+	else
+	    {
+	    $msg = "$key calculates to";
+	    foreach my $axis ( @POSSIBLE_AXES )
+		{
+		next if( ! defined( $axes{$axis} ) );
+		$avals{$axis} = &DBFcachen( $key, ${$rng{$axis}}{var} );
+		$avals{$axis} = &cpi_time::parsedate($avals{$axis})
+		    if( ${$rng{$axis}}{type} eq "datetime" );
+		my $m = "Axis $axis of key $key field " . ${$rng{$axis}}{var} .
+		    " was $avals{$axis}.\n";
+		print STDERR $m;
+		$avals{$axis} = ( $avals{$axis}       - ${$rng{$axis}}{min} )/
+				( ${$rng{$axis}}{max} - ${$rng{$axis}}{min} );
+		$failed=1, last if( $avals{$axis} < 0 || $avals{$axis} > 1 );
+		}
+	    }
+
+	$msg .=  join("",map{" [$_]=[$avals{$_}]"} sort keys %avals) . ".\n";
+	print STDERR $msg;
+
+	undef $draw_flag, next if( $failed );
+
+	if( %counts && ($last_axis eq "Y" || $last_axis eq "Z") )
+	    {
+	    #print STDERR map {"counts{$_}=$counts{$_}\n"} sort keys %counts;
+
+	    my $wid = 1/${$rng{X}}{chunks}/4;
+
+	    &draw_mapped_box( $jscript,
+	        ( defined($axes{Z})
+		? ( $avals{X}-$wid, $avals{Y}-$wid, 0, $avals{X}+$wid, $avals{Y}+$wid, $avals{Z} )
+		: ( $avals{X}-$wid, 0, $avals{X}+$wid, $avals{Y} )
+		) );
+	    }
+	else
+	    {
+	    print STDERR "avals{Color}=$avals{Color}.\n";
+	    &set_color($COLORS[$avals{Color}||0]);
+	    print STDERR "avals{A}=$avals{A}.\n";
+	    my( $x, $y ) = &real_to_display(
+	        ( defined( $avals{Z} )
+		? ( $avals{X}, $avals{Y}, $avals{Z} )
+		: ( $avals{X}, $avals{Y} )
+		) );
+	    &draw_text( "javascript:submit_func(\"\",\"\",\"$key\");",
+	        $MARKS[$avals{A}],
+	        $TEXT{Y}, 0,
+		$x-$TEXT{X}/2.0,$y+$TEXT{Y}/2.0,$TEXT{Y});
+	    if( 0 && $draw_flag )
+	        {
+		&set_color("black");
+		&draw_mapped_line(
+		    ( defined( $avals{Z} )
+		    ? ($ovals{X},$ovals{Y},$ovals{Z},$avals{X},$avals{Y},$avals{Z})
+		    : ($ovals{X},$ovals{Y},$avals{X},$avals{Y})
+		    ) );
+		}
+	    %ovals = %avals;
+	    $draw_flag = 1;
+	    }
+	}
+    close( OUT );
+
+    open( VRMLOUT, ">$fname.vrml" ) || die("Cannot write ${fname}.vrml:  $!");
+    print VRMLOUT <<EOF;
+#VRML V2.0 utf8
+
+Viewpoint {
+  position 20 3 0
+  orientation 0 1 0 1.57
+  description "default camera"
+} # end view
+
+Background{
+  skyColor [ 
+
+    #dark blue at north pole, white at horizon
+    0 .2 .7,
+    0 .5 1,
+    1 1 1
+  ]# end skyColor
+  # these angles mean 'evenly interpolate colors from top of sky to horizon
+  skyAngle [1.309, 1.571 ]
+
+  # Ground color works the same, except it goes from the south pole to horizon
+  groundColor [
+    0 .1 .1,
+    .2 .6 .2
+    .2 .4 .25 ,
+  ] # end groundColor
+  groundAngle [ 1.309, 1.571 ]
+
+} # end background
+EOF
+    if( @vrml_lines )
+        {
+	print VRMLOUT <<EOF;
+Shape
+ {
+ geometry IndexedLineSet
+  {
+  coord Coordinate
+   {
+   point
+    [
+EOF
+	print VRMLOUT
+	    join(",\n",
+	        sort {$vrml_points{$a}<=>$vrml_points{$b}} keys %vrml_points);
+	print VRMLOUT <<EOF;
+    ]
+   }
+  color Color
+   {
+   color [ 1.0 1.0 1.0 ]
+   }
+EOF
+	print VRMLOUT "   coordIndex [", join(",",@vrml_lines), "]\n";
+	print VRMLOUT "   colorIndex [", join(",",@vrml_line_colors), "]\n";
+	print VRMLOUT "  }\n }\n";
+	}
+    print VRMLOUT @vrml_texts if( @vrml_texts );
+    print VRMLOUT "Group { children\n[\n", @vrml_boxes;
+    print VRMLOUT @vrml_texts;
+    print VRMLOUT "] }\n";
+    close( VRMLOUT );
+    }
+
+#########################################################################
+#	Helper to setup the plot routines for plotting x vs ys.		#
+#########################################################################
+sub plot_x_vs_ys
+    {
+    my( $argp, @unsorted_ranges ) = @_;
+    my $do_count = 0;
+    my %ranges_on_axis = ();
+    my @ranges;
+    foreach my $axis ( @POSSIBLE_AXES )
+        {
+	foreach my $rangep ( @unsorted_ranges )
+	    {
+	    next if( ${$rangep}{axis} ne $axis );
+	    push( @ranges, $rangep );
+	    push( @{$ranges_on_axis{ $axis }}, $rangep );
+	    $do_count=1 if( ${$rangep}{type} eq "other" );
+	    }
+	}
+    if( $do_count )
+        {
+	my $empty_axis;
+	foreach my $try_axis ( @POSSIBLE_AXES )
+	    {
+	    last if( ! $ranges_on_axis{$empty_axis=$try_axis} );
+	    }
+	my %counts = ();
+	foreach my $key ( @keys_to_plot )
+	    {
+	    #$counts{join(",", map {&DBFcachen($key, ${$_}{var})} @ranges)}++;
+	    my $s = join(",", map {&DBFcachen($key, ${$_}{var})} @ranges);
+	    print STDERR "s=[$s]\n";
+	    $counts{ $s }++;
+	    $lastkey{$s} = $key;
+	    }
+	my @order = sort { $a <=> $b } values %counts;
+	unshift( @order, 0 ) if( $order[0] > 0 );
+	print STDERR "Creating count on axis [$empty_axis]\n";
+	push( @ranges,
+	    {
+	    "var"	=> "Count",
+	    "color"	=> "black",
+	    "chunks"	=> ( $order[$#order] < 30 ? $order[$#order] : 10 ),
+	    "smooth"	=> 50,
+	    "type"	=> "count",
+	    "counts"	=> \%counts,
+	    "order"	=> \@order,
+	    "axis"	=> $empty_axis
+	    } );
+	}
+
+    &dump_debug( "Everything", @ranges );
+
+    my $cmdfile = &cpi_file::tempfile() . ".cmds";
+    &plot_x_vs_ys_cmds( $argp, $cmdfile, @ranges );
+    my $mkjpg="ppmmake white $TOTAL{X} $TOTAL{Y} | "
+	.    "ppmdraw -scriptfile=$cmdfile | pnmtojpeg";
+    my $ret;
+    if( $image_technology eq "browser" )
+        {
+	open( INF, "$mkjpg | base64 |" )
+	    || &cpi_file::fatal("Cannot run ppmmake command:  $!");
+	$ret = join("","<img src='data:image\/jpeg;base64,\n",<INF>,"'",
+	    ( @areas
+	    ? join("\n",
+		" usemap='#areamap'>",
+		"<map name='areamap'>",@areas,"</map>")
+	    : ">" ) );
+	close( INF );
+	}
+    else
+        {
+	my $result_file = &cpi_file::tempfile() . ".jpg";
+	system( "$mkjpg > $result_file" );
+	$ret = "<img src=\""
+	    . ( $image_technology eq "e-mail" ? "cid:" : "file:" )
+	    . "$result_file\">";
+	}
+    #unlink( $cmdfile );
+    return $ret;
+    }
+
+#########################################################################
+#########################################################################
+sub generate_graph
+    {
+    my( $need_header, $argp, $overlap, @keys_to_output ) = @_;
+    #return "${form_type}:  [" .join(",",@keys_to_output)."]<br>\n";
+
+    if( ! $argp || ! $argp->{transmitter_type} )
+        { $image_technology = "browser"; }
+    else
+        { $image_technology = $argp->{transmitter_type}; }
+
+    my %axes;
+    my %seen_fields = ();
+    if( $thisrep && $reports{$thisrep} )
+        {
+	my $colorind = 0;
+	foreach my $v ( keys %{$reports{$thisrep}} )
+	    {
+	    my $axis;
+	    if( ref( $reports{$thisrep}{$v} ) eq "HASH"
+		&& ($axis=$reports{$thisrep}{$v}{"Axis"}) )
+		{
+		$seen_fields{$v} = $axis;
+		my $color = $COLORS[$colorind++];
+		my %field_values;
+		my %range =
+		    (
+		    "var"	=>$v,
+		    "color"	=>$color,
+		    "chunks"	=>10,
+		    "smooth"	=>50,
+		    "axis"	=>$axis
+		    );
+		my $num_vals = 0;
+		my $num_nums = 0;
+		my $num_datetimes = 0;
+		foreach my $key ( @keys_to_output )
+		    {
+		    my $val = &DBFcachen( $key, $v );
+		    $field_values{$val}++;
+		    $num_vals++;
+		    if( $val =~ /^[-\d\.][\d\.]+$/ )
+		        { $num_nums++; }
+		    elsif( $val =~ m=^\d+/\d+/\d\d+ \d+:\d= )
+		        { $num_datetimes++; }
+		    }
+		if( $num_vals )
+		    {
+		    $range{"counts"} = \%field_values;
+		    my @ordered_values;
+		    if( $num_nums==$num_vals )
+			{
+			$range{"type"} = "number";
+			@ordered_values = sort { $a <=> $b } keys %field_values;
+			}
+		    elsif( $num_datetimes==$num_vals )
+			{
+			$range{"type"} = "datetime";
+			@ordered_values =
+			    sort { $a <=> $b }
+				map { &cpi_time::parsedate($_) } keys %field_values;
+			}
+		    else
+			{
+			$range{"type"} = "other";
+			@ordered_values =
+			    sort { &cpi_sortable::sortable($a) cmp &cpi_sortable::sortable($b) }
+			    keys %field_values;
+			}
+		    $range{"min"} = $ordered_values[0];
+		    $range{"max"} = $ordered_values[$#ordered_values];
+		    $range{"order"} = \@ordered_values;
+		    }
+		push( @{$axes{$axis}}, \%range );
+		}
+	    }
+	}
+
+    @keys_to_plot = @keys_to_output;
+
+    my $s = "";
+    $s .= "<table class=outside_table width=100%>"
+	. "<tr class=outside_table><th colspan=1>"
+	. "XL(Resulting data)</th></tr>" if( $need_header );
+    $s .= "<tr><th class=\"noprint outside_table\" colspan=2>"
+        . &plot_x_vs_ys( $argp, map { @{$axes{$_}} } sort keys %axes )
+	. "</th></tr></table>";
+    return $s;
+    }
+1;

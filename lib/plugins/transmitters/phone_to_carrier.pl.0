@@ -1,0 +1,38 @@
+#!/usr/bin/perl -w
+
+use strict;
+
+my $PROG = $0;
+$PROG =~ s+.*/++g;
+
+sub usage
+    {
+    print STDERR <<EOF;
+$_[0]
+
+Usage:  $PROG <phone_number>
+EOF
+    exit(1);
+    }
+
+&usage("Invalid arguments")
+    if( scalar(@ARGV) != 1 || $ARGV[0] !~ /^(\d\d\d)-(\d\d\d)-(\d\d\d\d)$/ );
+
+my( $area_code, $exchange, $num_in_exchange ) = ( $1, $2, $3 );
+
+my $url = "http://www.fonefinder.net/findome.php?npa=$area_code&nxx=$exchange&thoublock=$num_in_exchange&usaquerytype=Search+by+Number";
+
+open( INF, "wget -q -O - '$url' |" ) || die("Cannot wget ${url}:  $!");
+while( $_ = <INF> )
+    {
+    #print "Processing [$_]\n";
+    if( m=<TR><TD><A[^>]*>$area_code</A><TD><A[^>]*>$exchange<TD><A[^>]*>([^<]*)<TD><A[^>]*>([^<]*)</A><TD><A[^>]*>([^<]*)</A><TD>= )
+        {
+	my( $town, $state, $carrier ) = ( $1, $2, $3 );
+	print "Carrier [$carrier] in $town, $state.\n";
+	last;
+	}
+    }
+close( INF );
+
+#Processing [<TABLE border=3 cellspacing=2 cellpadding=2 BGCOLOR='#FFFFCC'><TR bgcolor='#7093DB' ALIGN=CENTER><TH>Area<BR>Code<TH>Prefix<TH>City/Switch Name<BR>(Click for city search)<TH>State/Prov.<BR>Area Map<TH>Telephone Company<BR>Web link<TH>Telco<BR>Type<TH>Map/Zip<BR>Detail<TR><TD><A HREF='findareacode.php?areacode=207'>207</A><TD><A HREF='findome.php?npa=&nxx=319&usaquerytype=Search+by+Number'>319<TD><A HREF='findcity.php?cityname=BRUNSWICK&state=ME'>BRUNSWICK<TD><A HREF='shownpamap.php?graphic=http://fonefinder.net/images/npamap/me.gif'>Maine</A><TD>CHOICE ONE COMMUNICATIONS, INC. - ME<TD><TD><A HREF='findcity.php?cityname=BRUNSWICK&state=ME'><IMG ALT='State info' SRC='images/statemap/me.gif' BORDER=3 width=150 height=125></A><TR></TABLE><BR><H5>The Maine agency which regulates phone companies is on the web: <A HREF='http://www.state.me.us/mpuc/'>Here</A><BR></H5><center>
